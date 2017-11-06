@@ -15,3 +15,4 @@ Route::get('/', function () {
     // return \App\User::all();
     // dd(phpinfo());
 });
+Auth::routes();
