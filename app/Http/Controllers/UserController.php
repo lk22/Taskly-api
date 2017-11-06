@@ -4,11 +4,6 @@ namespace Taskly\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-
-use Taskly\Http\Resources\UserResource;
-use Taskly\Http\Resources\UserCollection;
-use Taskly\Http\Resources\UserWithTasklistsResource;
-
 use Taskly\Transformers\UserTransformer;
 use Taskly\Transformers\UsersTransformer;
 
