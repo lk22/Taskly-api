@@ -39,5 +39,8 @@ Route::get('/tasklists/{list_slug}')->name('tasklist.single.api')->uses('Tasklis
 Route::get('/tasks')->name('tasks.api')->uses('TaskController@index');
 Route::get('/tasks/{slug}')->name('task.single.api')->uses('TaskController@task');
 
+/**
+ * Placement API Endpoints
+ */
 Route::get('/placements')->name('placements.api')->uses('PlacementController@index');
 Route::get('placements/{slug}')->name('placement.single.api')->uses('PlacementController@placement');
