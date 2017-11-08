@@ -17,6 +17,12 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('/', function() {
+	return [
+		'response' => 'Success'
+	];
+});
+
 /**
  * users API Endpoints
  */
@@ -39,5 +45,8 @@ Route::get('/tasklists/{list_slug}')->name('tasklist.single.api')->uses('Tasklis
 Route::get('/tasks')->name('tasks.api')->uses('TaskController@index');
 Route::get('/tasks/{slug}')->name('task.single.api')->uses('TaskController@task');
 
+/**
+ * Placement API Endpoints
+ */
 Route::get('/placements')->name('placements.api')->uses('PlacementController@index');
 Route::get('placements/{slug}')->name('placement.single.api')->uses('PlacementController@placement');
