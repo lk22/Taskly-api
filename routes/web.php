@@ -12,7 +12,6 @@
 */
 
 Route::get('/', function () {
-    // return \App\User::all();
-    // dd(phpinfo());
+	return collect();
 });
 Auth::routes();
