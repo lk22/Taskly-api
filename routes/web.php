@@ -17,7 +17,7 @@
 // });
 
 Route::get('/', function () {
-	return collect();
+	return csrf_token();
 });
 Auth::routes();
 

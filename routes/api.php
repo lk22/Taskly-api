@@ -19,9 +19,11 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('/', function() {
 	return [
-		'response' => 'Success'
+		'response' => 'success'
 	];
-});
+})->name('home.api');
+
+Route::post('/login')->name('login.api')->uses('Auth\LoginController@login');
 
 /**
  * users API Endpoints
