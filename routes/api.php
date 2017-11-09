@@ -23,7 +23,7 @@ Route::get('/', function() {
 	];
 })->name('home.api');
 
-Route::post('/login')->name('login.api')->uses('Auth\LoginController@login');
+Route::post('/login')->name('login.api')->uses('API\PassportController@login');
 
 /**
  * users API Endpoints
