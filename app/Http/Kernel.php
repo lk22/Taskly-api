@@ -2,6 +2,8 @@
 
 namespace Taskly\Http;
 
+use Laravel\Passport\Http\Middleware\CheckClientCredentials;
+
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -35,6 +37,8 @@ class Kernel extends HttpKernel
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
             \Taskly\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+
+            \Laravel\Passport\Http\Middleware\CreateFreshApiToken::class,
             \Barryvdh\Cors\HandleCors::class,
         ],
 
@@ -42,8 +46,6 @@ class Kernel extends HttpKernel
             'throttle:60,1',
             'bindings',
             \Barryvdh\Cors\HandleCors::class,
-            \Illuminate\Session\Middleware\AuthenticateSession::class,
-            \Illuminate\Session\Middleware\StartSession::class,
         ],
     ];
 
@@ -61,5 +63,6 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \Taskly\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'client' => CheckClientCredentials::class,
     ];
 }

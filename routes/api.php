@@ -17,13 +17,23 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/', function() {
-	return [
-		'response' => 'success'
-	];
+Route::middleware('api')->get('/', function() {
+
+	if(!\Auth::check()) {
+		return [
+			'response' => 'Unauthorized'
+		];
+	} else {
+		return [
+			'response' => \Auth::check()
+		]
+	}
 })->name('home.api');
 
 Route::post('/login')->name('login.api')->uses('API\PassportController@login');
+Route::post('/register')->uses('API\PassportController@register');
+
+Route::post('/get-details')->uses('API\PassportController@getDetails');
 
 /**
  * users API Endpoints
