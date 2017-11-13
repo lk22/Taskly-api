@@ -5,6 +5,8 @@ namespace Taskly\Http\Controllers\API;
 use Illuminate\Http\Request;
 use Taskly\Http\Controllers\Controller;
 
+use Taskly\User;
+
 class PassportController extends Controller
 {
     public $statusCode = 200;
@@ -21,7 +23,8 @@ class PassportController extends Controller
     		$success['token'] = $user->createToken('auth')->accessToken;
 
     		return response()->json([
-    			'success' => $success
+    			'success' => $success,
+    			'authUser' => $user
     		], $this->statusCode);
     	}
     }
@@ -29,28 +32,30 @@ class PassportController extends Controller
     public function register(Request $request)
     {
     	$request->validate([
-    		'name' => 'required',
+    		'firstname' => 'required',
+    		'lastname' => 'required',
     		'email' => 'required',
     		'password' => 'required',
     		'c_password' => 'required|same:password'
     	]);
 
-    	if($request->fails()) {
-    		return response()->json([
-    			'error' => $request->errors()
-    		], 401);
-    	}
-
     	$input = $request->all();
 
-    	$input['password'] = bcrypt($input['password']);
+    	$user = User::create([
+    		'firstname' => $input['firstname'],
+    		'lastname' => $input['lastname'],
+    		'name' => $input['firstname'] . ' ' . $input['lastname'],
+    		'slug' => strtolower($input['firstname']) . '-' . strtolower($input['lastname']),
+    		'email' => $input['email'],
+    		'password' => bcrypt($input['password']),
+    		'remember_token' => str_random(10)
+    	]);
 
-    	$user = \User::create($input);
     	$success['token'] = $user->createToken('auth')->accessToken;
     	$success['name'] = $user->name;
 
     	return response()->json([
-    		'success' => $success
+    		'token' => $success
     	], $this->statusCode);
     }
 

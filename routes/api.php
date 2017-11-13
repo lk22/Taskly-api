@@ -17,17 +17,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::middleware('api')->get('/', function() {
-
-	if(!\Auth::check()) {
-		return [
-			'response' => 'Unauthorized'
-		];
-	} else {
-		return [
-			'response' => \Auth::check()
-		]
-	}
+Route::get('/', function() {
+	return response()->json([
+		'status' => 'success'
+	]);
 })->name('home.api');
 
 Route::post('/login')->name('login.api')->uses('API\PassportController@login');
