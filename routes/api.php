@@ -17,7 +17,7 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 });
 
-Rout::middleware('client')::get('/', function() {
+Route::get('/', function() {
 	return response()->json([
 		'status' => 'success'
 	]);
