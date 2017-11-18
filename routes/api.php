@@ -24,9 +24,9 @@ Route::get('/', function() {
 })->name('home.api');
 
 Route::post('/login')->name('login.api')->uses('UserController@login');
-Route::post('/register')->uses('API\PassportController@register');
+Route::post('/register')->name('register.api')->uses('UserController@register');
 
-Route::post('/get-details')->uses('API\PassportController@getDetails');
+// Route::post('/get-details')->uses('API\PassportController@getDetails');
 
 /**
  * users API Endpoints
@@ -36,7 +36,7 @@ Route::get('/users/tasklists')->name('users.tasklists.api')->uses('UserControlle
 Route::get('/user/{user_slug}')->name('user.single.api')->uses('UserController@user');
 Route::get('/user/{user_slug}/tasklists')->name('user.tasklists.api')->uses('UserController@userTasklists');
 Route::get('/user/{user_slug}/tasklists/tasks')->name('users.tasklists.tasks.api')->uses('UserController@userTasklistsTasks');
-
+Route::post('/user/create')->name('user.create.api')->uses('UserController@create');
 /**
  * Tasklists API Endpoints
  */

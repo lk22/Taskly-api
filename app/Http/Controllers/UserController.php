@@ -247,7 +247,7 @@ class UserController extends Controller
         $response = $http->post(URL::to('/oauth/token'), [
           'form_params' => [
             'grant_type' => 'password',
-            'client_id' => env('PASSPORT_CLIENT_ID', '1'),
+            'client_id' => env('PASSPORT_CLIENT_ID', 1),
             'client_secret' => env('PASSPORT_CLIENT_SECRET', ''),
             'username' => $request->input('email'),
             'password' => $request->input('password'),
@@ -276,5 +276,41 @@ class UserController extends Controller
 
           // giving success response in return to client
           return response()->json($successResponse);
+    }
+
+    /**
+     * |---------------------------------------------------------------
+     * |    Creating a new user resource
+     * |    @param  Request $request [description]
+     * |    @return [type]           [description]
+     * |---------------------------------------------------------------
+     */
+    public function create(Request $request)
+    {
+        $request->validate([
+            'firstname' => 'required',
+            'lastname' => 'required',
+            'email' => 'required',
+            'password' => 'required'
+        ]);
+
+        if($request->fails()) {
+            return response()->json([
+                'error' => 'something went wrong creating user resource'
+            ]);
+        }
+
+        try {
+            $this->user->create([
+                'firstname' => $request->get('firstname'),
+                'lastname' => $request->get('lastname'),
+                'name' => $request->get('firstname') . ' ' . $request->get('lastname'),
+                'slug' => strtolower($request->get('firstname')) . '-' . strtolower($request->get('lastname')),
+                'email' => $request->get('email'),
+                'password' => bcrypt($request->get('password'))
+            ]);
+        } catch (BadMethodCallException $e) {
+            return $e;
+        }
     }
 }
