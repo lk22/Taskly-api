@@ -148,7 +148,7 @@ class UserController extends Controller
         if(array_key_exists('error', $jsonResponse)) {
             return response()->json([
                 'message' => $jsonResponse['message']
-            ], 404);
+            ], 322);
         }
 
         /**

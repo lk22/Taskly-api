@@ -108,4 +108,69 @@ class TaskApiTest extends TestCase
 				]
 		      ]);
 	}
+
+	/**
+	 * @description: set_priority_to_task
+	 * @todo 
+	 * @test
+	 */
+	public function set_priority_to_task() {
+		$this->withoutExceptionHandling();
+
+		$tasklist = $this->make(Tasklist::class);
+
+		$task = $this->make(Task::class, [
+			'task_list_id' => $tasklist->id
+		]);
+
+		$this->post(route('task.priority.api', [$task->slug]), [
+			'priority' => 'High priority'
+		])->assertStatus(200);
+	}
+
+	/**
+	 * @description: check_out_task
+	 * @todo create a check for a task
+	 * @test
+	 */
+	public function tooggle_task_check() {
+		$this->withoutExceptionHandling();
+
+		$tasklist = $this->make(Tasklist::class);
+
+		$task = $this->make(Task::class, [
+			'task_list_id' => $tasklist->id,
+			'is_checked' => false
+		]);
+
+		$this->post(route('task.check.api', [$task->id]), [
+			'check' => true
+		])->assertStatus(200);
+	}
+
+	/**
+	 * @description: checkout_all_tasks
+	 * @todo checkout all tasks from tasklist
+	 * @test
+	 */
+	public function checkout_all_tasks() {
+		$this->withoutExceptionHandling();
+
+		$tasklist = $this->make(Tasklist::class);
+
+		$tasks = $this->make(Task::class, [
+			'task_list_id' => $tasklist->id,
+			'is_checked' => false
+		], rand(2, 5));
+
+		$this->post(route('task.checkAll.api'), [
+			'check' => true
+		])->assertStatus(200);
+
+		foreach($tasks as $task) {
+			$this->assertDatabaseHas('tasks', [
+				'is_checked' => true
+			]);
+		}
+	}
 }

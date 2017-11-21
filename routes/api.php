@@ -19,7 +19,7 @@ Route::get('/user', function (Request $request) {
 
 Route::get('/', function() {
 	return response()->json([
-		'status' => 'success'
+		'response' => 'success'
 	]);
 })->name('home.api');
 
@@ -49,6 +49,10 @@ Route::get('/tasklists/{list_slug}')->name('tasklist.single.api')->uses('Tasklis
  */
 Route::get('/tasks')->name('tasks.api')->uses('TaskController@index');
 Route::get('/tasks/{slug}')->name('task.single.api')->uses('TaskController@task');
+Route::post('/tasks/{slug}')->name('task.priority.api')->uses('TaskController@setPriority');
+Route::post('/tasks/{id}')->name('task.check.api')->uses('TaskController@checkTask');
+Route::post('/tasks/check-all')->name('task.checkAll.api')->uses('TaskController@checkAllTasks');
+
 
 /**
  * Placement API Endpoints

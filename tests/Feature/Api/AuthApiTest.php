@@ -4,6 +4,9 @@ namespace Tests\Feature\Api;
 
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Laravel\Passport\Passport;
+
+use Taskly\User;
 
 class AuthApiTest extends TestCase
 {
@@ -24,15 +27,29 @@ class AuthApiTest extends TestCase
     		 ]);
     }
 
-    // /**
-    //  * @description: hit_login_route
-    //  * @todo test api login route
-    //  * @test
-    //  */
+    /**
+     * @description: give_bad_request_on_authentication_error
+     * @todo test the client gets 322 code on authentication
+     * @test
+     */
+    public function give_bad_request_on_authentication_error() {
+    	$this->withoutExceptionHandling();
+    	$this->post(route('login.api'), [
+    		'username' => 'knudsenudvikling@gmail.com',
+    		'password' => bcrypt('test')
+    	])->assertStatus(322);
+    }
+
+    /**
+     * @description: hit_login_route
+     * @todo test api login route
+     * @test
+     */
     // public function hit_login_route() {
     // 	$this->withoutExceptionHandling();
+    	
     // 	$this->post(route('login.api'), [
-    // 		'email' => 'knudsenudvikling@gmail.com',
+    // 		'username' => 'knudsenudvikling@gmail.com',
     // 		'password' => bcrypt('test')
     // 	])->assertStatus(200);
 

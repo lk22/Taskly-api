@@ -64,7 +64,7 @@ class TasklistModelTest extends TestCase
      * @test
      */
     public function tasklist_model_has_many_tasks_relationship() {
-    	$tasklist = new Tasklist;
+    	$tasklist = new TaskList;
     	$tasklistHasManyTasks = $tasklist->tasks();
     	$this->assertInstanceOf(HasMany::class, $tasklistHasManyTasks);
     }
