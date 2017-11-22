@@ -36,10 +36,10 @@ class TaskController extends Controller
     public function setPriority(Request $request, $slug)
     {
         $request->validate([
-            'priority' => 'required'
+            'priority' => ''
         ]);
 
-        $task = $this->task->whereSlug($slug)->firstOrFail();
+        // dd($request->all());
 
         if(!$request->get('priority')) {
             return response()->json([
@@ -47,18 +47,15 @@ class TaskController extends Controller
             ], 422);
         }
 
-        $task->priority = $request->get('priority');
+        $this->task->whereSlug($slug)->update([
+            'priority' => $request->get('priority')
+        ]);
 
-        $task->save();
-
-        return $task;
     }
 
     public function toggleTaskCheck(Request $request, $id)
     {
-        $request->validate([ 'check' => 'boolean' ]);
-
-        $task = $this->task->whereId($id)->firstOrfail();
+        $request->validate([ 'check' => '' ]);
 
         if( !$request->get('check') ) {
             return response()->json([
@@ -66,9 +63,7 @@ class TaskController extends Controller
             ]);
         }
 
-        $task->is_checked = $request->get('check');
-
-        $task->save();
+        $this->task->whereId($id)->update(['is_checked' => $request->get('check')]);
     }
 }
 

@@ -111,7 +111,7 @@ class TaskApiTest extends TestCase
 
 	/**
 	 * @description: set_priority_to_task
-	 * @todo 
+	 * @todo
 	 * @test
 	 */
 	public function set_priority_to_task() {
@@ -120,12 +120,18 @@ class TaskApiTest extends TestCase
 		$tasklist = $this->make(Tasklist::class);
 
 		$task = $this->make(Task::class, [
-			'task_list_id' => $tasklist->id
+			'task_list_id' => $tasklist->id,
+			'priority' => 'No priority'
 		]);
 
 		$this->post(route('task.priority.api', [$task->slug]), [
 			'priority' => 'High priority'
 		])->assertStatus(200);
+
+		$this->assertDatabaseHas('tasks', [
+			'id' => $task->id,
+			'priority' => 'High priority'
+		]);
 	}
 
 	/**
@@ -144,7 +150,7 @@ class TaskApiTest extends TestCase
 		]);
 
 		$this->post(route('task.check.api', [$task->id]), [
-			'check' => true
+			'check' => 1
 		])->assertStatus(200);
 	}
 

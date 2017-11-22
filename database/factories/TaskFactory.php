@@ -17,5 +17,15 @@ $factory->define(\Taskly\Task::class, function (Faker $faker) {
 
         'name' => $faker->word(3),
         'slug' => strtolower($faker->word(3)),
+        'is_checked' => $faker->randomElement([
+            false,
+            true
+        ]),
+        'priority' => $faker->randomElement([
+            'No priority',
+            'Low priority',
+            'Medium priority',
+            'High priority'
+        ])
     ];
 });
