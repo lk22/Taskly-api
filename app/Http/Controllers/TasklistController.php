@@ -19,7 +19,7 @@ class TasklistController extends Controller
      */
     public function __construct(Tasklist $tasklist)
     {
-    	$this->tasklist = $tasklist;
+        $this->tasklist = $tasklist;
     }
 
     /**
@@ -28,7 +28,7 @@ class TasklistController extends Controller
      */
     public function index()
     {
-    	return fractal(
+        return fractal(
             $this->tasklist->all(),
             new TaskListsTransformer()
         )->toArray();
@@ -41,7 +41,7 @@ class TasklistController extends Controller
      */
     public function tasklist($list_slug)
     {
-    	return fractal(
+        return fractal(
             $this->tasklist->whereSlug($list_slug)->first(),
             new TaskListTransformer()
         )->toArray();
@@ -59,4 +59,15 @@ class TasklistController extends Controller
         )->toArray();
     }
 
+    /**
+     * triggering ascending tasklists
+     * @return [type] [description]
+     */
+    public function ascendingTasklists()
+    {
+        return fractal(
+            $this->tasklist->ascending()->with('tasks')->get(),
+            new TaskListsTransformer()
+        )->toArray();
+    }
 }

@@ -9,21 +9,21 @@ use Taskly\Task;
 
 class TaskList extends Model
 {
-	/**
-	 * allowed fields to be fillable
-	 * @var [type]
-	 */
+    /**
+     * allowed fields to be fillable
+     * @var [type]
+     */
     protected $fillable = [
-    	'name',
+        'name',
         'slug',
-    	'user_id'
+        'user_id'
     ];
 
     /**
      * fields that are hidden
      * @var array
      */
-    protected $hidden = [ 
+    protected $hidden = [
         'user_id'
     ];
 
@@ -33,7 +33,7 @@ class TaskList extends Model
      */
     public function user()
     {
-    	return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class);
     }
 
     /**
@@ -42,6 +42,26 @@ class TaskList extends Model
      */
     public function tasks()
     {
-    	return $this->hasMany(Task::class);
+        return $this->hasMany(Task::class);
+    }
+
+    /**
+     * order all the tasklists with descending order
+     * @param  [type] $query [description]
+     * @return [type]        [description]
+     */
+    public function scopeDescending($query)
+    {
+        return $query->orderBy('id', 'DESC');
+    }
+
+    /**
+     * order all the tasklists with ascending order
+     * @param  [type] $query [description]
+     * @return [type]        [description]
+     */
+    public function scopeAscending($query)
+    {
+        return $query->orderBy('id', 'ASC');
     }
 }

@@ -3,9 +3,7 @@
 namespace Taskly\Http\Controllers;
 
 use Illuminate\Http\Request;
-// use Taskly\Http\Resources\TaskResource;
-// use Taskly\Http\Resources\TaskCollection;
- 
+
 use Taskly\Transformers\TaskTransformer;
 
 use Taskly\Task;
