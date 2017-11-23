@@ -12,7 +12,7 @@ use Taskly\Task;
 class TaskModelTest extends TestCase
 {
    	use RefreshDatabase;
-
+      
    	/**
    	 * @description: task_model_has_fillable_property
    	 * @test

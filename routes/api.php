@@ -17,16 +17,19 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/', function() {
-	return response()->json([
-		'response' => 'success'
-	]);
+Route::get('/', function () {
+    return response()->json([
+        'response' => 'success'
+    ]);
 })->name('home.api');
+
 
 Route::post('/login')->name('login.api')->uses('UserController@login');
 Route::post('/register')->name('register.api')->uses('UserController@register');
 
 // Route::post('/get-details')->uses('API\PassportController@getDetails');
+
+
 
 /**
  * users API Endpoints
@@ -43,7 +46,9 @@ Route::post('/user/create')->name('user.create.api')->uses('UserController@creat
 Route::get('/tasklists')->name('tasklists.api')->uses('TasklistController@index');
 Route::get('/tasklists/tasks')->name('tasklists.tasks.api')->uses('TasklistController@tasklistsTasks');
 Route::get('/tasklists/{list_slug}')->name('tasklist.single.api')->uses('TasklistController@tasklist');
-
+Route::post('/tasklists/create-tasklist')->name('tasklist.create.api')->uses('TasklistController@create');
+Route::post('/tasklists/{slug}/update-tasklist')->name('tasklist.update.api')->uses('TasklistController@update');
+Route::post('/tasklists/{id}/delete-tasklist')->name('tasklist.delete.api')->uses('TasklistController@destroy');
 /**
  * Task API Endpoints
  */

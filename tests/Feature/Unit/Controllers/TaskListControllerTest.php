@@ -15,12 +15,25 @@ class TaskListControllerTest extends TestCase
      * description: test the tasklist sorting action
      * @test
      */
-    public function test_sorting_tasklists()
+    public function test_sorting_tasklists_ascending()
     {
         $this->make(TaskList::class, [], 2);
 
         $taskList = new Tasklist;
 
         $this->assertCount(2, $taskList->with('tasks')->ascending()->get());
+    }
+
+    /**
+     * @description sort tasklists descendingly
+     * @test
+     */
+    public function test_sorting_tasklists_descending()
+    {
+        $this->make(TaskList::class, [], 2);
+
+        $taskList = new TaskList;
+
+        $this->assertCount(2, $taskList->with('tasks')->descending()->get());
     }
 }

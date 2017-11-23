@@ -70,4 +70,69 @@ class TasklistController extends Controller
             new TaskListsTransformer()
         )->toArray();
     }
+
+    /**
+     * create new tasklist resource
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
+    public function create(Request $request)
+    {
+        $user = \Auth::user();
+        $request->validate([
+            'name' => 'required'
+        ]);
+
+        if (!$request->all()) {
+            return response()->json([
+                'error' => 'Something went wrong creating your resource'
+            ]);
+        }
+
+        try {
+            $this->tasklist->create([
+                'name' => $request->get('name'),
+                'slug' => strtolower($request->get('name')),
+                'user_id' => $user->id
+            ]);
+        } catch (BadMethodCallException $e) {
+            return $e;
+        }
+    }
+
+    /**
+     * updating existing resource
+     * @param  Request $request [description]
+     * @param  [type]  $slug    [description]
+     * @return [type]           [description]
+     */
+    public function update(Request $request, $slug)
+    {
+        $user = \Auth::user();
+
+        $tasklist = $this->tasklist->whereSlug($slug)->firstOrFail();
+
+        try {
+            $tasklist->update([
+                'name' => $request->get('name'),
+                'slug' => strtolower($request->get('name')),
+            ]);
+        } catch (BadMethodCallException $e) {
+            return $e;
+        }
+    }
+
+    /**
+     * Destroying existing resource
+     */
+    public function destroy(Request $request, $id)
+    {
+        $tasklist = $this->tasklist->whereId($id)->firstOrFail();
+
+        try {
+            $tasklist->delete();
+        } catch (BadMethodCallException $e) {
+            return $e;
+        }
+    }
 }
