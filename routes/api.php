@@ -49,15 +49,18 @@ Route::get('/tasklists/{list_slug}')->name('tasklist.single.api')->uses('Tasklis
 Route::post('/tasklists/create-tasklist')->name('tasklist.create.api')->uses('TasklistController@create');
 Route::post('/tasklists/{slug}/update-tasklist')->name('tasklist.update.api')->uses('TasklistController@update');
 Route::post('/tasklists/{id}/delete-tasklist')->name('tasklist.delete.api')->uses('TasklistController@destroy');
+
 /**
  * Task API Endpoints
  */
-Route::get('/tasks')->name('tasks.api')->uses('TaskController@index');
-Route::get('/tasks/{slug}')->name('task.single.api')->uses('TaskController@task');
-Route::post('/tasks/{slug}/set-priority')->name('task.priority.api')->uses('TaskController@setPriority');
-Route::post('/tasks/{id}')->name('task.check.api')->uses('TaskController@toggleTaskCheck');
-Route::post('/tasks/check-all')->name('task.checkAll.api')->uses('TaskController@checkAllTasks');
-
+Route::prefix('/tasklists/{list_slug}/tasks')->group(function () {
+    Route::get('/')->name('tasks.api')->uses('TaskController@index');
+    Route::get('/{slug}')->name('task.single.api')->uses('TaskController@task');
+    Route::post('/{slug}/set-priority')->name('task.priority.api')->uses('TaskController@setPriority');
+    Route::post('/{id}')->name('task.check.api')->uses('TaskController@toggleTaskCheck');
+    Route::post('/check-all')->name('task.checkAll.api')->uses('TaskController@checkAllTasks');
+    Route::post('/create-task')->name('task.create.api')->uses('TaskController@create');
+});
 
 /**
  * Placement API Endpoints

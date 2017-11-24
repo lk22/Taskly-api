@@ -3,8 +3,6 @@
 namespace Taskly\Http\Controllers;
 
 use Illuminate\Http\Request;
-// use Taskly\Http\Resources\TasklistCollection;
-// use Taskly\Http\Resources\TasklistResource;
 
 use Taskly\Transformers\TaskListTransformer;
 use Taskly\Transformers\TaskListsTransformer;
@@ -20,6 +18,7 @@ class TasklistController extends Controller
     public function __construct(Tasklist $tasklist)
     {
         $this->tasklist = $tasklist;
+        $this->authenticated = \Auth::user();
     }
 
     /**
@@ -78,7 +77,6 @@ class TasklistController extends Controller
      */
     public function create(Request $request)
     {
-        $user = \Auth::user();
         $request->validate([
             'name' => 'required'
         ]);
@@ -86,14 +84,14 @@ class TasklistController extends Controller
         if (!$request->all()) {
             return response()->json([
                 'error' => 'Something went wrong creating your resource'
-            ]);
+            ], 300);
         }
 
         try {
             $this->tasklist->create([
                 'name' => $request->get('name'),
                 'slug' => strtolower($request->get('name')),
-                'user_id' => $user->id
+                'user_id' => $this->authenticated->id
             ]);
         } catch (BadMethodCallException $e) {
             return $e;
@@ -108,8 +106,6 @@ class TasklistController extends Controller
      */
     public function update(Request $request, $slug)
     {
-        $user = \Auth::user();
-
         $tasklist = $this->tasklist->whereSlug($slug)->firstOrFail();
 
         try {
