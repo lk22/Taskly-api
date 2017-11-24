@@ -117,7 +117,7 @@ class TaskApiTest extends TestCase
     /**
      * @test
      */
-    public function create_new_task_resource()
+    public function create_new_task_resource_with_default_priority()
     {
         $this->withoutExceptionHandling();
 
@@ -128,17 +128,70 @@ class TaskApiTest extends TestCase
         $tasklist = $this->make(TaskList::class);
 
         $this->post(route('task.create.api', [$tasklist->slug]), [
-            'name' => 'Tøm Pappresser',
-            'priority' => 'High priority',
+            'name' => 'Pappresser',
         ])->assertStatus(200);
 
         $this->assertDatabaseHas('tasks', [
-            'name' => 'Tøm Pappresser',
-            'slug' => 'tøm-pappresser',
-            'priority' => 'High priority',
+            'name' => 'Pappresser',
+            'slug' =>   'pappresser',
             'task_list_id' => $tasklist->id,
         ]);
     }
+
+    /**
+     * @test
+     */
+    public function update_existing_task_resource()
+    {
+        $this->withoutExceptionHandling();
+
+        $user = $this->make(User::class);
+
+        $this->actingAs($user);
+
+        $tasklist = $this->make(TaskList::class);
+
+        $task = $this->make(Task::class, [
+            'name' => 'Pappresser',
+            'task_list_id' => $tasklist->id,
+            'user_id' => $user->id,
+            'slug' => 'pappresser'
+        ]);
+
+        $this->post(route('task.update.api', [$tasklist->slug, $task->slug]), ['name' => 'Kolonial'])->assertStatus(200);
+
+        $this->assertDatabaseHas('tasks', [
+            'name' => 'Kolonial',
+            'slug' => 'kolonial'
+        ]);
+    }
+
+    /**
+     * @test
+     */
+    public function delete_existing_task_resource()
+    {
+        $this->withoutExceptionHandling();
+
+        $user = $this->make(User::class);
+
+        $this->actingAs($user);
+
+        $tasklist = $this->make(TaskList::class);
+
+        $task = $this->make(Task::class, ['name' => 'Pappresser', 'slug' => 'pappresser', 'task_list_id' => $tasklist->id, 'user_id' => $user->id], 1);
+
+        $this->post(route('task.delete.api', [$tasklist->slug, $task->slug]))->assertStatus(200);
+
+        $this->assertDatabaseMissing('tasks', [
+            'name' => $task->name,
+            'slug' => $task->slug,
+            'task_list_id' => $tasklist->id,
+            'user_id' => $user->id
+        ]);
+    }
+
+    // @todo test client can create task with priority set
 
     /**
      * @description: set_priority_to_task

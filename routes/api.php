@@ -30,7 +30,6 @@ Route::post('/register')->name('register.api')->uses('UserController@register');
 // Route::post('/get-details')->uses('API\PassportController@getDetails');
 
 
-
 /**
  * users API Endpoints
  */
@@ -57,9 +56,11 @@ Route::prefix('/tasklists/{list_slug}/tasks')->group(function () {
     Route::get('/')->name('tasks.api')->uses('TaskController@index');
     Route::get('/{slug}')->name('task.single.api')->uses('TaskController@task');
     Route::post('/{slug}/set-priority')->name('task.priority.api')->uses('TaskController@setPriority');
-    Route::post('/{id}')->name('task.check.api')->uses('TaskController@toggleTaskCheck');
+    Route::post('/{id}/checkout-task')->name('task.check.api')->uses('TaskController@toggleTaskCheck');
     Route::post('/check-all')->name('task.checkAll.api')->uses('TaskController@checkAllTasks');
     Route::post('/create-task')->name('task.create.api')->uses('TaskController@create');
+    Route::post('/{slug}/update-task')->name('task.update.api')->uses('TaskController@update');
+    Route::post('/{slug}/delete-task')->name('task.delete.api')->uses('TaskController@delete');
 });
 
 /**

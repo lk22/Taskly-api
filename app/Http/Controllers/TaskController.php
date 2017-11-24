@@ -62,8 +62,6 @@ class TaskController extends Controller
             'priority' => ''
         ]);
 
-        // dd($request->all());
-
         if (!$request->get('priority')) {
             return response()->json([
                 'error' => 'No priority was set'
@@ -93,7 +91,6 @@ class TaskController extends Controller
         $this->task->whereId($id)->update(['is_checked' => $request->get('check')]);
     }
 
-
     /**
      * |------------------------------------------------------------------------
      * |    Create new task resource
@@ -108,18 +105,51 @@ class TaskController extends Controller
 
         $tasklist = $this->tasklist->whereSlug($list_slug)->firstOrFail();
 
-        try {
-            $this->task->create([
-                'name' => $request->get('name'),
-                'slug' => str_replace('-', ' ', strtolower($request->get('name'))),
-                'task_list_id' => $tasklist->id,
-                'user_id' => $this->authenticated->id,
-                'priority' => ($request->get('priority')) ? $request->get('priority') : 'No priority'
-            ]);
+        $this->task->create([
+            //'name' => preg_match("/^[a-zA-Z0-9ÆØÅæøå]+$/i^", $request->get('name')),
+            'name' => $request->get('name'),
+            'slug' => str_replace('-', ' ', strtolower($request->get('name'))),
+            'task_list_id' => $tasklist->id,
+            'user_id' => $this->authenticated->id,
+            'priority' => $request->get('priority')
+        ]);
+    }
 
-            dd($this->task->latest());
-        } catch (BadMethodCallException $e) {
-            return $e;
-        }
+    /**
+     * |------------------------------------------------------------------------
+     * |    Update existing task resource
+     * |------------------------------------------------------------------------
+     */
+    public function update(Request $request, $list_slug, $slug)
+    {
+        //dd($request->all());
+        $request->validate([
+            'name' => 'required',
+            'priority' => '',
+        ]);
+
+        $tasklist = $this->tasklist->whereSlug($list_slug)->firstOrFail();
+
+        $task = $this->task->whereSlug($slug)->firstOrFail();
+
+        $task->update([
+            //'name' => preg_match("/^[a-zA-Z0-9ÆØÅæøå]+$/i^", $request->get('name')),
+            'name' => $request->get('name'),
+            'slug' => str_replace('-', ' ', strtolower($request->get('name')))
+        ]);
+    }
+
+    /**
+     * |------------------------------------------------------------------------
+     * |    Update existing task resource
+     * |------------------------------------------------------------------------
+     */
+    public function delete(Request $request, $list_slug, $slug)
+    {
+        $tasklist = $this->tasklist->whereSlug($list_slug)->firstOrFail();
+
+        $task = $this->task->whereSlug($slug)->firstOrFail();
+
+        $task->delete();
     }
 }
