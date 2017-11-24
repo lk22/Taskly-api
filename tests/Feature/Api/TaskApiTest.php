@@ -178,8 +178,13 @@ class TaskApiTest extends TestCase
         $this->actingAs($user);
 
         $tasklist = $this->make(TaskList::class);
-
-        $task = $this->make(Task::class, ['name' => 'Pappresser', 'slug' => 'pappresser', 'task_list_id' => $tasklist->id, 'user_id' => $user->id], 1);
+         
+        $task = $this->make(Task::class, [
+            'name' => 'Pappresser',
+            'slug' => 'pappresser',
+             'task_list_id' => $tasklist->id,
+              'user_id' => $user->id
+          ], 1);
 
         $this->post(route('task.delete.api', [$tasklist->slug, $task->slug]))->assertStatus(200);
 
