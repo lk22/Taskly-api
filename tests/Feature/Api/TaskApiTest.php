@@ -141,6 +141,32 @@ class TaskApiTest extends TestCase
     /**
      * @test
      */
+    public function create_new_task_resource_with_custom_set_priority()
+    {
+        $this->withoutExceptionHandling();
+
+        $user = $this->make(User::class);
+
+        $this->actingAs($user);
+
+        $tasklist = $this->make(TaskList::class);
+
+        $this->post(route('task.create.api', [$tasklist->slug]), [
+            'name' => 'Pappresser',
+            'priority' => 'Medium priority'
+        ])->assertStatus(200);
+
+        $this->assertDatabaseHas('tasks', [
+            'name' => 'Pappresser',
+            'slug' => 'pappresser',
+            'task_list_id' => $tasklist->id,
+            'priority' => 'Medium priority'
+        ]);
+    }
+
+    /**
+     * @test
+     */
     public function update_existing_task_resource()
     {
         $this->withoutExceptionHandling();
@@ -178,7 +204,7 @@ class TaskApiTest extends TestCase
         $this->actingAs($user);
 
         $tasklist = $this->make(TaskList::class);
-         
+
         $task = $this->make(Task::class, [
             'name' => 'Pappresser',
             'slug' => 'pappresser',
