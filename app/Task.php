@@ -9,16 +9,17 @@ use Taskly\TaskList;
 
 class Task extends Model
 {
-	/**
-	 * column fields allowed to be fillable
-	 * @var [type]
-	 */
+    /**
+     * column fields allowed to be fillable
+     * @var [type]
+     */
     protected $fillable = [
-    	'name',
+        'name',
         'slug',
-    	'user_id',
-    	'task_list_id',
+        'user_id',
+        'task_list_id',
         'is_checked',
+        'priority'
     ];
 
     /**
@@ -26,8 +27,8 @@ class Task extends Model
      * @var [type]
      */
     protected $hidden = [
-    	'user_id',
-    	'task_list_id'
+        'user_id',
+        'task_list_id'
     ];
 
     /**
@@ -35,7 +36,7 @@ class Task extends Model
      * @var [type]
      */
     protected $casts = [
-        'is_checked' => 'boolean'
+        'is_checked' => 'boolean',
     ];
 
     /**
@@ -44,7 +45,7 @@ class Task extends Model
      */
     public function user()
     {
-    	return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class);
     }
 
     /**
@@ -53,6 +54,6 @@ class Task extends Model
      */
     public function tasklist()
     {
-    	return $this->belongsTo(TaskList::class);
+        return $this->belongsTo(TaskList::class);
     }
 }

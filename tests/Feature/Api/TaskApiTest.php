@@ -160,6 +160,7 @@ class TaskApiTest extends TestCase
             'name' => 'Pappresser',
             'slug' => 'pappresser',
             'task_list_id' => $tasklist->id,
+            'user_id' => $user->id,
             'priority' => 'Medium priority'
         ]);
     }
