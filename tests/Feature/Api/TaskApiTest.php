@@ -288,8 +288,34 @@ class TaskApiTest extends TestCase
             'is_checked' => 0
         ], 2);
 
-        $this->post(route('task.checkAll.api'), [
+        $this->post(route('task.checkAll.api', [$tasklist->slug]), [
             'check' => true
+        ])->assertStatus(200);
+
+        foreach ($tasks as $task) {
+            $this->assertDatabaseHas('tasks', [
+                'is_checked' => 1
+            ]);
+        }
+    }
+
+    /**
+     * uncheck all tasks if they allready are checked
+     * @test
+     */
+    public function uncheck_all_tasks_if_they_allready_are_checked()
+    {
+        $this->withoutExceptionHandling();
+
+        $tasklist = $this->make(Tasklist::class);
+
+        $tasks = $this->make(Task::class, [
+            'task_list_id' => $tasklist->id,
+            'is_checked' => 1
+        ], rand(1, 4));
+
+        $this->post(route('task.uncheckAll.api', [$tasklist->slug]), [
+            'check' => false
         ])->assertStatus(200);
 
         foreach ($tasks as $task) {

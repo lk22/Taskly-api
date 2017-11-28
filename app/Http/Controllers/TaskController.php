@@ -93,6 +93,38 @@ class TaskController extends Controller
 
     /**
      * |------------------------------------------------------------------------
+     * |    check all tasks
+     * |------------------------------------------------------------------------
+     */
+    public function checkAllTasks(Request $request, $list_slug)
+    {
+        $request->validate([
+            'check' => ''
+        ]);
+
+        $this->task->whereIsChecked(false)->update([
+            'is_checked' => $request->get('check')
+        ]);
+    }
+
+    /**
+     * |------------------------------------------------------------------------
+     * |    Uncheck all tasks on the tasklist
+     * |------------------------------------------------------------------------
+     */
+    public function uncheckAllTasks(Request $request, $list_slug)
+    {
+        $request->validate([
+            'check' => ''
+        ]);
+
+        $this->task->whereIsChecked(true)->update([
+            'is_checked' => $request->get('check')
+        ]);
+    }
+
+    /**
+     * |------------------------------------------------------------------------
      * |    Create new task resource
      * |------------------------------------------------------------------------
      */

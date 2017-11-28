@@ -39,6 +39,7 @@ Route::get('/user/{user_slug}')->name('user.single.api')->uses('UserController@u
 Route::get('/user/{user_slug}/tasklists')->name('user.tasklists.api')->uses('UserController@userTasklists');
 Route::get('/user/{user_slug}/tasklists/tasks')->name('users.tasklists.tasks.api')->uses('UserController@userTasklistsTasks');
 Route::post('/user/create')->name('user.create.api')->uses('UserController@create');
+
 /**
  * Tasklists API Endpoints
  */
@@ -58,6 +59,7 @@ Route::prefix('/tasklists/{list_slug}/tasks')->group(function () {
     Route::post('/{slug}/set-priority')->name('task.priority.api')->uses('TaskController@setPriority');
     Route::post('/{id}/checkout-task')->name('task.check.api')->uses('TaskController@toggleTaskCheck');
     Route::post('/check-all')->name('task.checkAll.api')->uses('TaskController@checkAllTasks');
+    Route::post('/uncheck-all')->name('task.uncheckAll.api')->uses('TaskController@uncheckALlTasks');
     Route::post('/create-task')->name('task.create.api')->uses('TaskController@create');
     Route::post('/{slug}/update-task')->name('task.update.api')->uses('TaskController@update');
     Route::post('/{slug}/delete-task')->name('task.delete.api')->uses('TaskController@delete');
