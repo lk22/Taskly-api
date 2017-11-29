@@ -8,7 +8,6 @@ use Taskly\Task;
 
 class TaskTransformer extends TransformerAbstract
 {
-
     protected $availableIncludes = [
         'user'
     ];
@@ -16,7 +15,7 @@ class TaskTransformer extends TransformerAbstract
     protected $defaultIncludes = [
         'tasklist',
         'user',
-        'placement'
+        // placement
     ];
 
     /**x++
@@ -48,10 +47,10 @@ class TaskTransformer extends TransformerAbstract
         : null;
     }
 
-    public function includePlacement(Task $task)
-    {
-        return ($task->placement)
-        ? $this->item($task->placement, app()->make(PlacementTransformer::class))
-        : null;
-    }
+    //public function includePlacement(Task $task)
+    //{
+    //    return ($task->placement)
+    //    ? $this->item($task->placement, app()->make(PlacementTransformer::class))
+    //    : null;
+    //}
 }

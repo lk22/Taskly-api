@@ -201,7 +201,7 @@ class TasklistApiTest extends TestCase
             'user_id' => $user->id
         ]);
 
-        $this->post(route('tasklist.update.api', [$tasklist->slug]), [
+        $this->put(route('tasklist.update.api', [$tasklist->slug]), [
             'name' => 'Tasklist-2'
         ])->assertStatus(200);
 
@@ -229,7 +229,7 @@ class TasklistApiTest extends TestCase
             'user_id' => $user->id
         ]);
 
-        $this->post(route('tasklist.delete.api', [$tasklist->id]))->assertStatus(200);
+        $this->delete(route('tasklist.delete.api', [$tasklist->id]))->assertStatus(200);
 
         $this->assertDatabaseMissing('task_lists', [
             'name' => $tasklist->name,

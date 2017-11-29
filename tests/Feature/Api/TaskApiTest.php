@@ -20,6 +20,7 @@ class TaskApiTest extends TestCase
     public function hit_tasks_api()
     {
         $this->withoutExceptionHandling();
+        $tasklist = $this->make(TaskList::class);
         $this->get(route('tasks.api'))
               ->assertStatus(200);
     }
@@ -33,7 +34,7 @@ class TaskApiTest extends TestCase
     {
         $this->withoutExceptionHandling();
         $tasklist = $this->make(TaskList::class);
-        $task = $this->make(Task::class);
+        $task = $this->make(Task::class, ['task_list_id' => $tasklist->id]);
         $this->get(route('task.single.api', [$task->slug]))
              ->assertStatus(200);
     }
@@ -45,6 +46,8 @@ class TaskApiTest extends TestCase
     public function assert_tasks_json_structure_from_api()
     {
         $this->withoutExceptionHandling();
+
+        $tasklist = $this->make(TaskList::class);
 
         $task = $this->make(Task::class, [
             'name' => 'task1',
@@ -70,6 +73,8 @@ class TaskApiTest extends TestCase
     public function assert_tasks_json_fragments_from_api_call()
     {
         $this->withoutExceptionHandling();
+
+        $tasklist = $this->make(TaskList::class);
 
         $task = $this->make(Task::class, [
             'name' => 'task1',
@@ -129,6 +134,8 @@ class TaskApiTest extends TestCase
 
         $this->post(route('task.create.api', [$tasklist->slug]), [
             'name' => 'Pappresser',
+            'priority' => 'No priority',
+            'work_hours' => '1 time'
         ])->assertStatus(200);
 
         $this->assertDatabaseHas('tasks', [
@@ -153,7 +160,8 @@ class TaskApiTest extends TestCase
 
         $this->post(route('task.create.api', [$tasklist->slug]), [
             'name' => 'Pappresser',
-            'priority' => 'Medium priority'
+            'priority' => 'Medium priority',
+            'work_hours' => '1 time'
         ])->assertStatus(200);
 
         $this->assertDatabaseHas('tasks', [
@@ -161,6 +169,36 @@ class TaskApiTest extends TestCase
             'slug' => 'pappresser',
             'task_list_id' => $tasklist->id,
             'user_id' => $user->id,
+            'priority' => 'Medium priority'
+        ]);
+    }
+
+    /**
+     * @test
+     * @todo: create a task with a custom set of work hours
+     */
+    public function create_task_resource_with_work_hours()
+    {
+        $this->withoutExceptionHandling();
+
+        $user = $this->make(User::class);
+
+        $this->actingAs($user);
+
+        $tasklist = $this->make(TaskList::class, [
+            'user_id' => $user->id
+        ]);
+
+        $this->post(route('task.create.api', [$tasklist->slug]), [
+            'name' => 'Pappresser',
+            'work_hours' => '3 timer',
+            'priority' => 'Medium priority'
+        ])->assertStatus(200);
+
+        $this->assertDatabaseHas('tasks', [
+            'name' => 'Pappresser',
+            'slug' => 'pappresser',
+            'work_hours' => '3 timer',
             'priority' => 'Medium priority'
         ]);
     }
@@ -185,7 +223,7 @@ class TaskApiTest extends TestCase
             'slug' => 'pappresser'
         ]);
 
-        $this->post(route('task.update.api', [$tasklist->slug, $task->slug]), ['name' => 'Kolonial'])->assertStatus(200);
+        $this->put(route('task.update.api', [$task->slug]), ['name' => 'Kolonial'])->assertStatus(200);
 
         $this->assertDatabaseHas('tasks', [
             'name' => 'Kolonial',
@@ -213,7 +251,7 @@ class TaskApiTest extends TestCase
               'user_id' => $user->id
           ], 1);
 
-        $this->post(route('task.delete.api', [$tasklist->slug, $task->slug]))->assertStatus(200);
+        $this->delete(route('task.delete.api', [$task->slug]))->assertStatus(200);
 
         $this->assertDatabaseMissing('tasks', [
             'name' => $task->name,
@@ -241,7 +279,7 @@ class TaskApiTest extends TestCase
             'priority' => 'No priority'
         ]);
 
-        $this->post(route('task.priority.api', [$task->slug]), [
+        $this->patch(route('task.priority.api', [$task->slug]), [
             'priority' => 'High priority'
         ])->assertStatus(200);
 
@@ -267,7 +305,7 @@ class TaskApiTest extends TestCase
             'is_checked' => false
         ]);
 
-        $this->post(route('task.check.api', [$task->id]), [
+        $this->patch(route('task.check.api', [$task->id]), [
             'check' => 1
         ])->assertStatus(200);
     }
@@ -288,7 +326,7 @@ class TaskApiTest extends TestCase
             'is_checked' => 0
         ], 2);
 
-        $this->post(route('task.checkAll.api', [$tasklist->slug]), [
+        $this->patch(route('task.checkAll.api'), [
             'check' => true
         ])->assertStatus(200);
 
@@ -314,7 +352,7 @@ class TaskApiTest extends TestCase
             'is_checked' => 1
         ], rand(1, 4));
 
-        $this->post(route('task.uncheckAll.api', [$tasklist->slug]), [
+        $this->patch(route('task.uncheckAll.api'), [
             'check' => false
         ])->assertStatus(200);
 
@@ -325,3 +363,7 @@ class TaskApiTest extends TestCase
         }
     }
 }
+
+/**
+ * @todo: remove tasklist->slug from all tests that requires it
+ */

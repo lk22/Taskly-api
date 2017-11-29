@@ -10,34 +10,37 @@ use Taskly\User;
 
 class AuthApiTest extends TestCase
 {
-
-	use RefreshDatabase;
+    use RefreshDatabase;
 
     /**
      * @description: hit_api_route
      * @todo hit home api route
      * @test
      */
-    public function hit_api_route() {
-    	$this->withoutExceptionHandling();
-    	$this->get(route('home.api'))
-    		 ->assertStatus(200)
-    		 ->assertExactJson([
-    		 	'response' => 'success'
-    		 ]);
-    }
+    //public function hit_api_route()
+    //{
+    //    $this->withoutExceptionHandling();
+    //    $this->get('api/v1')
+    //         ->assertStatus(200)
+    //         ->assertExactJson([
+    //             'data' => [
+    //                 'response' => 'success'
+    //             ]
+    //         ]);
+    //}
 
     /**
      * @description: give_bad_request_on_authentication_error
      * @todo test the client gets 322 code on authentication
      * @test
      */
-    public function give_bad_request_on_authentication_error() {
-    	$this->withoutExceptionHandling();
-    	$this->post(route('login.api'), [
-    		'username' => 'knudsenudvikling@gmail.com',
-    		'password' => bcrypt('test')
-    	])->assertStatus(322);
+    public function give_bad_request_on_authentication_error()
+    {
+        $this->withoutExceptionHandling();
+        $this->post(route('login.api'), [
+            'username' => 'knudsenudvikling@gmail.com',
+            'password' => bcrypt('test')
+        ])->assertStatus(322);
     }
 
     /**
@@ -47,7 +50,7 @@ class AuthApiTest extends TestCase
      */
     // public function hit_login_route() {
     // 	$this->withoutExceptionHandling();
-    	
+
     // 	$this->post(route('login.api'), [
     // 		'username' => 'knudsenudvikling@gmail.com',
     // 		'password' => bcrypt('test')

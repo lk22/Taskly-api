@@ -28,11 +28,10 @@ class TaskController extends Controller
      * |    Fetching all tasks from a tasklist
      * |------------------------------------------------------------------------
      */
-    public function index($list_slug)
+    public function index()
     {
-        $tasklist = $this->tasklist->whereSlug($list_slug)->firstOrFail();
         return fractal(
-            $this->task->whereTaskListId($tasklist->id)->get(),
+            $this->task->all(),
             new TaskTransformer()
         )->toArray();
     }
@@ -42,11 +41,10 @@ class TaskController extends Controller
      * |    Fetching a single tasks from a tasklist
      * |------------------------------------------------------------------------
      */
-    public function task($list_slug, $slug)
+    public function task($slug)
     {
-        $tasklist = $this->tasklist->whereSlug($list_slug)->firstOrFail();
         return fractal(
-            $this->task->whereSlug($slug)->whereTaskListId($tasklist->id)->first(),
+            $this->task->whereSlug($slug)->firstOrFail(),
             new TaskTransformer()
         )->toArray();
     }
@@ -56,7 +54,7 @@ class TaskController extends Controller
      * |    Set custom priority to a task
      * |------------------------------------------------------------------------
      */
-    public function setPriority(Request $request, $list_slug, $slug)
+    public function setPriority(Request $request, $slug)
     {
         $request->validate([
             'priority' => ''
@@ -78,7 +76,7 @@ class TaskController extends Controller
      * |    check/uncheck a task to be done or undone
      * |------------------------------------------------------------------------
      */
-    public function toggleTaskCheck(Request $request, $list_slug, $id)
+    public function toggleTaskCheck(Request $request, $id)
     {
         $request->validate([ 'check' => '' ]);
 
@@ -96,7 +94,7 @@ class TaskController extends Controller
      * |    check all tasks
      * |------------------------------------------------------------------------
      */
-    public function checkAllTasks(Request $request, $list_slug)
+    public function checkAllTasks(Request $request)
     {
         $request->validate([
             'check' => ''
@@ -112,7 +110,7 @@ class TaskController extends Controller
      * |    Uncheck all tasks on the tasklist
      * |------------------------------------------------------------------------
      */
-    public function uncheckAllTasks(Request $request, $list_slug)
+    public function uncheckAllTasks(Request $request)
     {
         $request->validate([
             'check' => ''
@@ -133,6 +131,7 @@ class TaskController extends Controller
         $request->validate([
             'name' => 'required',
             'priority' => '',
+            'work_hours' => 'required'
         ]);
 
         $tasklist = $this->tasklist->whereSlug($list_slug)->firstOrFail();
@@ -143,7 +142,8 @@ class TaskController extends Controller
             'slug' => str_replace('-', ' ', strtolower($request->get('name'))),
             'task_list_id' => $tasklist->id,
             'user_id' => $this->authenticated->id,
-            'priority' => $request->get('priority')
+            'priority' => $request->get('priority'),
+            'work_hours' => $request->get('work_hours')
         ]);
     }
 
@@ -152,15 +152,13 @@ class TaskController extends Controller
      * |    Update existing task resource
      * |------------------------------------------------------------------------
      */
-    public function update(Request $request, $list_slug, $slug)
+    public function update(Request $request, $slug)
     {
         //dd($request->all());
         $request->validate([
             'name' => 'required',
             'priority' => '',
         ]);
-
-        $tasklist = $this->tasklist->whereSlug($list_slug)->firstOrFail();
 
         $task = $this->task->whereSlug($slug)->firstOrFail();
 
@@ -176,10 +174,8 @@ class TaskController extends Controller
      * |    Update existing task resource
      * |------------------------------------------------------------------------
      */
-    public function delete(Request $request, $list_slug, $slug)
+    public function delete(Request $request, $slug)
     {
-        $tasklist = $this->tasklist->whereSlug($list_slug)->firstOrFail();
-
         $task = $this->task->whereSlug($slug)->firstOrFail();
 
         $task->delete();

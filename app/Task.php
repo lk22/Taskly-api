@@ -19,7 +19,8 @@ class Task extends Model
         'user_id',
         'task_list_id',
         'is_checked',
-        'priority'
+        'priority',
+        'work_hours'
     ];
 
     /**

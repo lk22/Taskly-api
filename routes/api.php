@@ -47,23 +47,27 @@ Route::get('/tasklists')->name('tasklists.api')->uses('TasklistController@index'
 Route::get('/tasklists/tasks')->name('tasklists.tasks.api')->uses('TasklistController@tasklistsTasks');
 Route::get('/tasklists/{list_slug}')->name('tasklist.single.api')->uses('TasklistController@tasklist');
 Route::post('/tasklists/create-tasklist')->name('tasklist.create.api')->uses('TasklistController@create');
-Route::post('/tasklists/{slug}/update-tasklist')->name('tasklist.update.api')->uses('TasklistController@update');
-Route::post('/tasklists/{id}/delete-tasklist')->name('tasklist.delete.api')->uses('TasklistController@destroy');
+Route::put('/tasklists/{slug}/update-tasklist')->name('tasklist.update.api')->uses('TasklistController@update');
+Route::delete('/tasklists/{id}/delete-tasklist')->name('tasklist.delete.api')->uses('TasklistController@destroy');
 
 /**
  * Task API Endpoints
  */
 Route::prefix('/tasklists/{list_slug}/tasks')->group(function () {
-    Route::get('/')->name('tasks.api')->uses('TaskController@index');
-    Route::get('/{slug}')->name('task.single.api')->uses('TaskController@task');
-    Route::post('/{slug}/set-priority')->name('task.priority.api')->uses('TaskController@setPriority');
-    Route::post('/{id}/checkout-task')->name('task.check.api')->uses('TaskController@toggleTaskCheck');
-    Route::post('/check-all')->name('task.checkAll.api')->uses('TaskController@checkAllTasks');
-    Route::post('/uncheck-all')->name('task.uncheckAll.api')->uses('TaskController@uncheckALlTasks');
     Route::post('/create-task')->name('task.create.api')->uses('TaskController@create');
-    Route::post('/{slug}/update-task')->name('task.update.api')->uses('TaskController@update');
-    Route::post('/{slug}/delete-task')->name('task.delete.api')->uses('TaskController@delete');
 });
+
+/**
+ * @todo: add tasks endpoints to be seperate API group
+ */
+ Route::get('/')->name('tasks.api')->uses('TaskController@index');
+ Route::get('/{slug}')->name('task.single.api')->uses('TaskController@task');
+ Route::patch('/{slug}/set-priority')->name('task.priority.api')->uses('TaskController@setPriority');
+ Route::patch('/{id}/checkout-task')->name('task.check.api')->uses('TaskController@toggleTaskCheck');
+ Route::patch('/check-all')->name('task.checkAll.api')->uses('TaskController@checkAllTasks');
+ Route::patch('/uncheck-all')->name('task.uncheckAll.api')->uses('TaskController@uncheckALlTasks');
+ Route::put('/{slug}/update-task')->name('task.update.api')->uses('TaskController@update');
+ Route::delete('/{slug}/delete-task')->name('task.delete.api')->uses('TaskController@delete');
 
 /**
  * Placement API Endpoints
