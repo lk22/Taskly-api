@@ -166,6 +166,7 @@ class TaskController extends Controller
         $task->update([
             //'name' => preg_match("/^[a-zA-Z0-9ÆØÅæøå]+$/i^", $request->get('name')),
             'name' => $request->get('name'),
+            'priority' => $request->get('priority'),
             'slug' => str_replace('-', ' ', strtolower($request->get('name')))
         ]);
     }

@@ -20,7 +20,9 @@ class Task extends Model
         'task_list_id',
         'is_checked',
         'priority',
-        'work_hours'
+        'work_hours',
+        'start_at',
+        'end_at'
     ];
 
     /**

@@ -8,9 +8,8 @@ use Taskly\Task;
 
 class TasksTransformer extends TransformerAbstract
 {
-
     protected $defaultIncludes = [
-        'placements'
+        //'placements'
     ];
 
     /**
@@ -24,14 +23,16 @@ class TasksTransformer extends TransformerAbstract
             'id' => (int) $task->id,
             'name' => (string) $task->name,
             'slug' => (string) $task->slug,
-            'is_checked' => (boolean) $task->is_checked
+            'is_checked' => (boolean) $task->is_checked,
+            'work_hours' => (string) $task->work_hours,
+            'priority' => (string) $task->priority
         ];
     }
 
-    public function includePlacements(Task $task)
-    {
-        return ($task->placements)
-        ? $this->collection($task->placements, app()->make(PlacementsTransformer::class))
-        : null;
-    }
+    //public function includePlacements(Task $task)
+    //{
+    //    return ($task->placements)
+    //    ? $this->collection($task->placements, app()->make(PlacementsTransformer::class))
+    //    : null;
+    //}
 }

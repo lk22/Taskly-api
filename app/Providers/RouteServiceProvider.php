@@ -4,6 +4,7 @@ namespace Taskly\Providers;
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
+
 // use Illuminate\Support\Collection
 class RouteServiceProvider extends ServiceProvider
 {

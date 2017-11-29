@@ -11,10 +11,10 @@ return [
     | to accept any value.
     |
     */
-   
-    'supportsCredentials' => false,
+
+    'supportsCredentials' => true,
     'allowedOrigins' => ['*'],
-    'allowedHeaders' => ['Content-type', 'X-Requested-With'],
+    'allowedHeaders' => ['Content-type', 'X-Requested-With', 'Authorization'],
     'allowedMethods' => ['*'],
     'exposedHeaders' => [],
     'maxAge' => 0,
