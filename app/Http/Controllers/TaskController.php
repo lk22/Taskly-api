@@ -157,7 +157,8 @@ class TaskController extends Controller
         //dd($request->all());
         $request->validate([
             'name' => 'required',
-            'priority' => '',
+            'priority' => 'required',
+            'work_hours' => 'required',
         ]);
 
         $task = $this->task->whereSlug($slug)->firstOrFail();

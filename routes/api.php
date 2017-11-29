@@ -60,6 +60,7 @@ Route::prefix('/tasklists/{list_slug}/tasks')->group(function () {
  Route::get('/')->name('tasks.api')->uses('TaskController@index');
  Route::get('/{slug}')->name('task.single.api')->uses('TaskController@task');
  Route::patch('/{slug}/set-priority')->name('task.priority.api')->uses('TaskController@setPriority');
+ Route::patch('/{slug}/set-workhour')->name('task.workhour.api')->uses('TaskController@setWorkHour');
  Route::patch('/{id}/checkout-task')->name('task.check.api')->uses('TaskController@toggleTaskCheck');
  Route::patch('/check-all')->name('task.checkAll.api')->uses('TaskController@checkAllTasks');
  Route::patch('/uncheck-all')->name('task.uncheckAll.api')->uses('TaskController@uncheckALlTasks');
