@@ -87,8 +87,6 @@ class TasklistApiTest extends TestCase
             'is_checked' => true
         ]);
 
-        // dd($tasklist->with('tasks')->get()->toArray());
-
         $this->json('GET', route('tasklists.tasks.api'))
              ->assertJsonStructure([
                 'data' => [
