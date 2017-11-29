@@ -57,9 +57,6 @@ Route::prefix('/tasklists/{list_slug}/tasks')->group(function () {
     Route::post('/create-task')->name('task.create.api')->uses('TaskController@create');
 });
 
-/**
- * @todo: add tasks endpoints to be seperate API group
- */
  Route::get('/')->name('tasks.api')->uses('TaskController@index');
  Route::get('/{slug}')->name('task.single.api')->uses('TaskController@task');
  Route::patch('/{slug}/set-priority')->name('task.priority.api')->uses('TaskController@setPriority');
