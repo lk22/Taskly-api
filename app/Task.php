@@ -42,6 +42,17 @@ class Task extends Model
         'is_checked' => 'boolean',
     ];
 
+    /** 
+     * Automatic boot function
+     */
+    protected static function boot() {
+        parent::boot();
+
+        static::deleting(function($task) {
+            $task->placements()->delete();
+        });
+    }
+
     /**
      * task belongs to user
      * @return [type] [description]

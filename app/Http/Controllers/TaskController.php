@@ -4,10 +4,21 @@ namespace Taskly\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+/**
+ * Fractal Transformers
+ */
 use Taskly\Transformers\TaskTransformer;
 
+/**
+ * Eloquent models
+*/
 use Taskly\Task;
 use Taskly\TaskList;
+
+/**
+ * App helper classes
+ */
+use Taskly\Helpers\API\API;
 
 class TaskController extends Controller
 {
@@ -30,10 +41,13 @@ class TaskController extends Controller
      */
     public function index()
     {
-        return fractal(
-            $this->task->all(),
-            new TaskTransformer()
-        )->toArray();
+        $tasks = $this->task->all();
+
+        if (!count($tasks) > 0) {
+            return API::throwResourceNotFoundException();
+        }
+
+        return fractal($tasks, new TaskTransformer())->toArray();
     }
 
     /**
@@ -43,10 +57,13 @@ class TaskController extends Controller
      */
     public function task($slug)
     {
-        return fractal(
-            $this->task->whereSlug($slug)->firstOrFail(),
-            new TaskTransformer()
-        )->toArray();
+        $task = $this->task->whereSlug($slug)->firstOrFail();
+
+        if (!count($task) > 0) {
+            API::throwResourceNotFoundException();
+        }
+
+        return fractal($task, new TaskTransformer())->toArraY();
     }
 
     /**
@@ -56,14 +73,12 @@ class TaskController extends Controller
      */
     public function setPriority(Request $request, $slug)
     {
-        $request->validate([
+        API::validate($request, [
             'priority' => ''
         ]);
 
         if (!$request->get('priority')) {
-            return response()->json([
-                'error' => 'No priority was set'
-            ], 422);
+            API::throwInputNotFoundException();
         }
 
         $this->task->whereSlug($slug)->update([
@@ -78,12 +93,10 @@ class TaskController extends Controller
      */
     public function toggleTaskCheck(Request $request, $id)
     {
-        $request->validate([ 'check' => '' ]);
+        API::validate($request, [ 'check' => '' ]);
 
         if (!$request->get('check')) {
-            return response()->json([
-                'error' => 'Task could not be checked'
-            ]);
+            API::throwInputNotFoundException();
         }
 
         $this->task->whereId($id)->update(['is_checked' => $request->get('check')]);
@@ -96,9 +109,13 @@ class TaskController extends Controller
      */
     public function checkAllTasks(Request $request)
     {
-        $request->validate([
+        API::validate($request[
             'check' => ''
         ]);
+
+        if (!$request->get('check')) {
+            API::throwInputNotFoundException();
+        }
 
         $this->task->whereIsChecked(false)->update([
             'is_checked' => $request->get('check')
@@ -112,9 +129,13 @@ class TaskController extends Controller
      */
     public function uncheckAllTasks(Request $request)
     {
-        $request->validate([
+        API::validate($request ,[
             'check' => ''
         ]);
+
+        if (!$request->get('check')) {
+            API::throwInputNotFoundException();
+        }
 
         $this->task->whereIsChecked(true)->update([
             'is_checked' => $request->get('check')
@@ -128,7 +149,7 @@ class TaskController extends Controller
      */
     public function create(Request $request, $list_slug)
     {
-        $request->validate([
+        API::validate($request, [
             'name' => 'required',
             'priority' => '',
             'work_hours' => 'required'
@@ -154,8 +175,7 @@ class TaskController extends Controller
      */
     public function update(Request $request, $slug)
     {
-        //dd($request->all());
-        $request->validate([
+        API::validate($request, [
             'name' => 'required',
             'priority' => 'required',
             'work_hours' => 'required',

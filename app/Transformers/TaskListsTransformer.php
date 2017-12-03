@@ -8,7 +8,6 @@ use Taskly\TaskList;
 
 class TaskListsTransformer extends TransformerAbstract
 {
-
     protected $defaultIncludes = [
         'tasks'
     ];
@@ -25,6 +24,7 @@ class TaskListsTransformer extends TransformerAbstract
             'name' => (string) $tasklist->name,
             'slug' => (string) $tasklist->slug,
             'tasks_count' => (int) $tasklist->tasks->count(),
+            'created_at' => (string) trans($tasklist->created_at->diffForHumans(), [], 'dk')
         ];
     }
 

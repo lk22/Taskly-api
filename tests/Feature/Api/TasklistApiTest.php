@@ -58,6 +58,7 @@ class TasklistApiTest extends TestCase
                     'id',
                     'name',
                     'slug',
+                    'created_at'
                 ]
             ]);
     }
@@ -95,6 +96,7 @@ class TasklistApiTest extends TestCase
                         'name',
                         'slug',
                         'tasks_count',
+                        'created_at',
                         'tasks' => [
                             'data' => [
                                 '*' => [

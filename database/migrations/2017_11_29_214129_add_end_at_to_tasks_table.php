@@ -14,7 +14,7 @@ class AddEndAtToTasksTable extends Migration
     public function up()
     {
         Schema::table('tasks', function (Blueprint $table) {
-            $table->timestamp('end_at');
+            $table->timestamp('end_at')->nullable();
         });
     }
 

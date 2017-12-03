@@ -24,7 +24,7 @@ class CreateTasksTable extends Migration
             $table->softDeletes();
 
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('task_list_id')->references('id')->on('task_lists');
+            $table->foreign('task_list_id')->references('id')->on('task_lists')->onDelete('cascade');
         });
     }
 

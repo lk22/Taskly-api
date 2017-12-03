@@ -14,7 +14,7 @@ class AddStartAtToTasksTable extends Migration
     public function up()
     {
         Schema::table('tasks', function (Blueprint $table) {
-            $table->timestamp('start_at');
+            $table->timestamp('start_at')->nullable();
         });
     }
 

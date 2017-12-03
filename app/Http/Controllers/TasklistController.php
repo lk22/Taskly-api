@@ -2,18 +2,35 @@
 
 namespace Taskly\Http\Controllers;
 
+/**
+ * Illuminate packages
+ */
 use Illuminate\Http\Request;
 
+/**
+ * Fractal transformers
+ */
 use Taskly\Transformers\TaskListTransformer;
 use Taskly\Transformers\TaskListsTransformer;
 
+/**
+ * Eloquent models
+ */
 use Taskly\TaskList;
+
+/**
+ * Taskly API Helper
+ * @var [type]
+ */
+use Taskly\Helpers\API\API;
 
 class TasklistController extends Controller
 {
     /**
-     * Constructor
-     * @param Tasklist $tasklist [description]
+     * |------------------------------------------------------------------------
+     * |    Constructor
+     * |    @param: \Taskly\Tasklist $tasklist
+     * |------------------------------------------------------------------------
      */
     public function __construct(Tasklist $tasklist)
     {
@@ -22,45 +39,57 @@ class TasklistController extends Controller
     }
 
     /**
-     * fetching all tasks from api
-     * @return [type] [description]
+     * |------------------------------------------------------------------------
+     * |    Fetching all tasks from a tasklists
+     * |------------------------------------------------------------------------
      */
     public function index()
     {
-        return fractal(
-            $this->tasklist->all(),
-            new TaskListsTransformer()
-        )->toArray();
+        $tasklists = $this->tasklist->all();
+
+        if (!count($tasklists) > 0) {
+            return API::throwResourceNotFoundException();
+        }
+
+        return fractal($tasklists, new TaskListsTransformer())->toArray();
     }
 
     /**
-     * fetching a specific task from a slug
-     * @param  [type] $list_slug [description]
-     * @return [type]            [description]
+     * |------------------------------------------------------------------------
+     * |   fetching a specific task from a slug
+     * |------------------------------------------------------------------------
      */
     public function tasklist($list_slug)
     {
-        return fractal(
-            $this->tasklist->whereSlug($list_slug)->first(),
-            new TaskListTransformer()
-        )->toArray();
+        $tasklist = $this->tasklist->whereSlug($list_slug)->first();
+
+        if (!count($tasklist)) {
+            return API::throwResourceNotFoundException();
+        }
+
+        return fractal($tasklist, new TaskListTransformer())->toArray();
     }
 
     /**
-     * fetch tasklists with all the expected tasks each list contains
-     * @return [type] [description]
+     * |------------------------------------------------------------------------
+     * |    fetch tasklists with all the expected tasks each list contains
+     * |------------------------------------------------------------------------
      */
     public function tasklistsTasks()
     {
-        return fractal(
-            $this->tasklist->with('tasks')->get(),
-            new TaskListsTransformer()
-        )->toArray();
+        $tasklistsWithTasks = $this->tasklist->with('tasks')->get();
+
+        if (!count($taskklistsWithTasks)) {
+            return API::throwResourceNotFoundException();
+        }
+
+        return fractal($tasklistsWithTasks, new TaskListsTransformer())->toArray();
     }
 
     /**
-     * triggering ascending tasklists
-     * @return [type] [description]
+     * |------------------------------------------------------------------------
+     * |   make a ascending order on the tasklists
+     * |------------------------------------------------------------------------
      */
     public function ascendingTasklists()
     {
@@ -71,21 +100,34 @@ class TasklistController extends Controller
     }
 
     /**
-     * create new tasklist resource
-     * @param  Request $request [description]
-     * @return [type]           [description]
+     * fetch descending ordered tasklists
+     * @return [type] [description]
+     */
+    /**
+     * |------------------------------------------------------------------------
+     * |    making descending order for tasklists resources
+     * |------------------------------------------------------------------------
+     */
+    public function descendingTasklists()
+    {
+        return fractal(
+            $this->tasklist->descending()->with('tasks')->get(),
+            new TaskListTransformer()
+        )->toArray();
+    }
+
+    /**
+     * |------------------------------------------------------------------------
+     * |    Set custom priority to a task
+     * |    @param Request $request the request Object
+     * |    @return void
+     * |------------------------------------------------------------------------
      */
     public function create(Request $request)
     {
-        $request->validate([
+        API::validate($request, [
             'name' => 'required'
         ]);
-
-        if (!$request->all()) {
-            return response()->json([
-                'error' => 'Something went wrong creating your resource'
-            ], 300);
-        }
 
         try {
             $this->tasklist->create([
@@ -99,10 +141,11 @@ class TasklistController extends Controller
     }
 
     /**
-     * updating existing resource
-     * @param  Request $request [description]
-     * @param  [type]  $slug    [description]
-     * @return [type]           [description]
+     * |------------------------------------------------------------------------
+     * |    Set custom priority to a task
+     * |    @param  Request $request \Illuminate\Http\Request
+     * |    @param  slug $slug the tasklist slug
+     * |------------------------------------------------------------------------
      */
     public function update(Request $request, $slug)
     {
@@ -119,16 +162,15 @@ class TasklistController extends Controller
     }
 
     /**
-     * Destroying existing resource
+     * |------------------------------------------------------------------------
+     * |    Destrying existing resource
+     * |    @param  Request $request \Illuminate\Http\Request
+     * |------------------------------------------------------------------------
      */
     public function destroy(Request $request, $id)
     {
         $tasklist = $this->tasklist->whereId($id)->firstOrFail();
 
-        try {
-            $tasklist->delete();
-        } catch (BadMethodCallException $e) {
-            return $e;
-        }
+        $tasklist->delete();
     }
 }

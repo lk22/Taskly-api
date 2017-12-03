@@ -28,6 +28,20 @@ class TaskList extends Model
     ];
 
     /**
+     * Automatically boot method
+     */
+    protected static function boot() {
+        parent::boot();
+        
+        /**
+         * on deleting state
+         */
+        static::deleting(function($tasklist) {
+            $tasklist->tasks()->delete();
+        });
+    }
+
+    /**
      * tasklist belongs to user
      * @return [type] [description]
      */

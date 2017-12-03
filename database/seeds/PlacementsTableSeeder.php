@@ -13,9 +13,9 @@ class PlacementsTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(Placement::class, rand(1, 10))->create([
-        	'task_id' => rand(1, 10),
-        	'city_code' => '4600'
-        ]);
+        // factory(Placement::class, rand(1, 10))->create([
+        // 	'task_id' => rand(1, 10),
+        // 	'city_code' => '4600'
+        // ]);
     }
 }

@@ -14,7 +14,6 @@ use Taskly\TaskList;
 
 class TaskListTransformer extends TransformerAbstract
 {
-
     protected $availableIncludes = [
         'tasks',
         'task',
@@ -32,27 +31,28 @@ class TaskListTransformer extends TransformerAbstract
             'id' => (int) $tasklist->id,
             'name' => (string) $tasklist->name,
             'slug' => (string) $tasklist->slug,
+            'created_at' => (string) $tasklist->created_at->diffForHumans()
         ];
     }
 
     public function includeTasks(TaskList $tasklist)
     {
         return (!$tasklist->tasks)
-        ? null 
+        ? null
         : $this->collection($tasklist->tasks, App::make(TaskTransformer::class));
     }
 
     public function includeTask(TaskList $tasklist)
     {
         return (!$tasklist->task)
-        ? null 
+        ? null
         : $this->item($tasklist->tasks, App::make(TaskTransformer::class));
     }
 
     public function includeUser(TaskList $tasklist)
     {
-        return (!$tasklist->user) 
-        ? null 
+        return (!$tasklist->user)
+        ? null
         : $this->item($tasklist->user, App::make(UserTransformer::class));
     }
 }
