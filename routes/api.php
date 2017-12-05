@@ -13,6 +13,8 @@ use Illuminate\Http\Request;
 |
 */
 
+\Auth::loginUsingId(1);
+
 Route::get('/user', function (Request $request) {
     return $request->user();
 });
@@ -23,8 +25,8 @@ Route::get('/', function () {
     ]);
 })->name('home.api');
 
-Route::get('/sql-tester', function(\Taskly\Tasklist $tasklist) {
-	$list = $tasklist->whereId(2)->whereHas('tasks', function($task) use ($tasklist) {
+Route::get('/sql-tester', function (\Taskly\Tasklist $tasklist) {
+    $list = $tasklist->whereId(2)->whereHas('tasks', function ($task) use ($tasklist) {
         $task->delete();
     })->firstOrFail();
 });

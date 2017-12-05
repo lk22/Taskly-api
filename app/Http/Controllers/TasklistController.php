@@ -135,8 +135,10 @@ class TasklistController extends Controller
                 'slug' => strtolower($request->get('name')),
                 'user_id' => $this->authenticated->id
             ]);
+
+            return API::throwActionSuccessResponse($this->tasklist->name . ' is created');
         } catch (BadMethodCallException $e) {
-            return $e;
+            return API::throwActionFailedException($e);
         }
     }
 
@@ -156,8 +158,10 @@ class TasklistController extends Controller
                 'name' => $request->get('name'),
                 'slug' => strtolower($request->get('name')),
             ]);
+
+            return API::throwActionSuccessResponse('Your Tasklist is updated from successfully');
         } catch (BadMethodCallException $e) {
-            return $e;
+            return API::throwActionFailedException($e);
         }
     }
 
@@ -170,7 +174,8 @@ class TasklistController extends Controller
     public function destroy(Request $request, $id)
     {
         $tasklist = $this->tasklist->whereId($id)->firstOrFail();
-
         $tasklist->delete();
+
+        return API::throwActionSuccessResponse('Tasklist is removed from your list');
     }
 }
