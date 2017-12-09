@@ -63,7 +63,7 @@ Route::delete('/tasklists/{id}/delete-tasklist')->name('tasklist.delete.api')->u
 /**
  * Task API Endpoints
  */
-echo "test";
+
 Route::prefix('/tasklists/{list_slug}/tasks')->group(function () {
     Route::post('/create-task')->name('task.create.api')->uses('TaskController@create');
 });
