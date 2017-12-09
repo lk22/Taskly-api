@@ -13,8 +13,15 @@ class TasklistsTableSeeder extends Seeder
      */
     public function run()
     {
+        // build specifc tasklist
+        Tasklist::create([
+            'name' => 'Netto Svanemøllen',
+            'slug' => 'netto-svanemøllen',
+            'user_id' => 1,
+        ]);
+
         factory(TaskList::class, rand(1, 10))->create([
-        	'user_id' => rand(1, 10)
+            'user_id' => rand(1, 10)
         ]);
     }
 }

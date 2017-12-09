@@ -133,7 +133,7 @@ class TasklistController extends Controller
             $this->tasklist->create([
                 'name' => $request->get('name'),
                 'slug' => strtolower($request->get('name')),
-                'user_id' => $this->authenticated->id
+                'user_id' => 1
             ]);
 
             return API::throwActionSuccessResponse($this->tasklist->name . ' is created');
