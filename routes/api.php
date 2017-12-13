@@ -25,12 +25,11 @@ Route::get('/', function () {
     ]);
 })->name('home.api');
 
-Route::get('/sql-tester', function (\Taskly\Tasklist $tasklist) {
-    $list = $tasklist->whereId(2)->whereHas('tasks', function ($task) use ($tasklist) {
-        $task->delete();
-    })->firstOrFail();
-});
-
+// Route::get('/sql-tester', function (\Taskly\Tasklist $tasklist) {
+//     $list = $tasklist->whereId(2)->whereHas('tasks', function ($task) use ($tasklist) {
+//         $task->delete();
+//     })->firstOrFail();
+// });
 
 
 // Route::post('/get-details')->uses('API\PassportController@getDetails');
@@ -44,7 +43,8 @@ Route::get('/users/tasklists')->name('users.tasklists.api')->uses('UserControlle
 Route::get('/user/{user_slug}')->name('user.single.api')->uses('UserController@user');
 Route::get('/user/{user_slug}/tasklists')->name('user.tasklists.api')->uses('UserController@userTasklists');
 Route::get('/user/{user_slug}/tasklists/tasks')->name('users.tasklists.tasks.api')->uses('UserController@userTasklistsTasks');
-Route::post('/user/create')->name('user.create.api')->uses('UserController@create');
+// Route::post('/user/create')->name('user.create.api')->uses('UserController@create');
+
 
 // user auth routes
 Route::post('/login')->name('login.api')->uses('UserController@login');
@@ -63,7 +63,6 @@ Route::delete('/tasklists/{id}/delete-tasklist')->name('tasklist.delete.api')->u
 /**
  * Task API Endpoints
  */
-
 Route::prefix('/tasklists/{list_slug}/tasks')->group(function () {
     Route::post('/create-task')->name('task.create.api')->uses('TaskController@create');
 });
