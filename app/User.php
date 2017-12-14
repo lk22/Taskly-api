@@ -22,14 +22,6 @@ class User extends Authenticatable
     ];
 
     /**
-     * define how to casts columns
-     * @var [type]
-     */
-    protected $casts = [
-        'has_company' => 'boolean'
-    ];
-
-    /**
      * The attributes that should be hidden for arrays.
      *
      * @var array
@@ -43,7 +35,8 @@ class User extends Authenticatable
      * @var [type]
      */
     protected $casts = [
-        'is_admin' => 'boolean'
+        'is_admin' => 'boolean',
+        'has_company' => 'boolean'
     ];
 
     /**

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 use Taskly\User;
 use Taskly\TaskList;
+use Taskly\Placement;
 
 class Task extends Model
 {
@@ -49,7 +50,7 @@ class Task extends Model
         parent::boot();
 
         static::deleting(function($task) {
-            $task->placements()->delete();
+            return $task->placements()->delete();
         });
     }
 
@@ -69,5 +70,10 @@ class Task extends Model
     public function tasklist()
     {
         return $this->belongsTo(TaskList::class);
+    }
+
+    public function placements()
+    {
+        return $this->hasMany(Placement::class);
     }
 }

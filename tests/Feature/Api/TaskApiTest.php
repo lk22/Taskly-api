@@ -15,6 +15,7 @@ class TaskApiTest extends TestCase
 
     public function setUp()
     {
+        parent::setUp();
         $this->withoutExceptionHandling();
     }
 
@@ -36,6 +37,7 @@ class TaskApiTest extends TestCase
      */
     public function hit_single_task_api_endpoint()
     {
+
         $tasklist = $this->make(TaskList::class);
         $task = $this->make(Task::class, ['task_list_id' => $tasklist->id]);
         $this->get(route('task.single.api', [$task->slug]))

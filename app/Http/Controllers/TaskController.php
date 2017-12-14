@@ -109,7 +109,7 @@ class TaskController extends Controller
      */
     public function checkAllTasks(Request $request)
     {
-        API::validate($request[
+        API::validate($request,[
             'check' => ''
         ]);
 

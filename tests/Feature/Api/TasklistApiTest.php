@@ -223,7 +223,7 @@ class TasklistApiTest extends TestCase
 
         $this->actingAs($user);
 
-        $tasklist = $this->make(TaskList::class, ['user_id' => $user->id], 1);
+        $tasklist = $this->make(TaskList::class, ['user_id' => $user->id]);
 
         $this->assertDatabaseHas('task_lists', [
             'name' => $tasklist->name,

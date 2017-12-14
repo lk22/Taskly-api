@@ -79,7 +79,7 @@ class TasklistController extends Controller
     {
         $tasklistsWithTasks = $this->tasklist->with('tasks')->get();
 
-        if (!count($taskklistsWithTasks)) {
+        if (!count($tasklistsWithTasks)) {
             return API::throwResourceNotFoundException();
         }
 
