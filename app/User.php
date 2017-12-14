@@ -22,6 +22,14 @@ class User extends Authenticatable
     ];
 
     /**
+     * define how to casts columns
+     * @var [type]
+     */
+    protected $casts = [
+        'has_company' => 'boolean'
+    ];
+
+    /**
      * The attributes that should be hidden for arrays.
      *
      * @var array

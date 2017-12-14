@@ -13,13 +13,17 @@ class TaskApiTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function setUp()
+    {
+        $this->withoutExceptionHandling();
+    }
+
     /**
      * @todo hit_tasks_api
      * @test
      */
     public function hit_tasks_api()
     {
-        $this->withoutExceptionHandling();
         $tasklist = $this->make(TaskList::class);
         $this->get(route('tasks.api'))
               ->assertStatus(200);
@@ -32,7 +36,6 @@ class TaskApiTest extends TestCase
      */
     public function hit_single_task_api_endpoint()
     {
-        $this->withoutExceptionHandling();
         $tasklist = $this->make(TaskList::class);
         $task = $this->make(Task::class, ['task_list_id' => $tasklist->id]);
         $this->get(route('task.single.api', [$task->slug]))
@@ -45,8 +48,6 @@ class TaskApiTest extends TestCase
      */
     public function assert_tasks_json_structure_from_api()
     {
-        $this->withoutExceptionHandling();
-
         $tasklist = $this->make(TaskList::class);
 
         $task = $this->make(Task::class, [
@@ -72,8 +73,6 @@ class TaskApiTest extends TestCase
      */
     public function assert_tasks_json_fragments_from_api_call()
     {
-        $this->withoutExceptionHandling();
-
         $tasklist = $this->make(TaskList::class);
 
         $task = $this->make(Task::class, [
@@ -98,8 +97,6 @@ class TaskApiTest extends TestCase
      */
     public function assert_exact_json_response_from_tasks_api()
     {
-        $this->withoutExceptionHandling();
-
         $task = $this->make(Task::class, [
             'name' => 'task1',
             'slug' => 'task-1',
@@ -124,8 +121,6 @@ class TaskApiTest extends TestCase
      */
     public function create_new_task_resource_with_default_priority()
     {
-        $this->withoutExceptionHandling();
-
         $user = $this->make(User::class);
 
         $this->actingAs($user);
@@ -150,8 +145,6 @@ class TaskApiTest extends TestCase
      */
     public function create_new_task_resource_with_custom_set_priority()
     {
-        $this->withoutExceptionHandling();
-
         $user = $this->make(User::class);
 
         $this->actingAs($user);
@@ -179,8 +172,6 @@ class TaskApiTest extends TestCase
      */
     public function create_task_resource_with_work_hours()
     {
-        $this->withoutExceptionHandling();
-
         $user = $this->make(User::class);
 
         $this->actingAs($user);
@@ -208,8 +199,6 @@ class TaskApiTest extends TestCase
      */
     public function update_existing_task_resource()
     {
-        $this->withoutExceptionHandling();
-
         $user = $this->make(User::class);
 
         $this->actingAs($user);
@@ -236,8 +225,6 @@ class TaskApiTest extends TestCase
      */
     public function delete_existing_task_resource()
     {
-        $this->withoutExceptionHandling();
-
         $user = $this->make(User::class);
 
         $this->actingAs($user);
@@ -270,8 +257,6 @@ class TaskApiTest extends TestCase
      */
     public function set_priority_to_task()
     {
-        $this->withoutExceptionHandling();
-
         $tasklist = $this->make(Tasklist::class);
 
         $task = $this->make(Task::class, [
@@ -296,8 +281,6 @@ class TaskApiTest extends TestCase
      */
     public function tooggle_task_check()
     {
-        $this->withoutExceptionHandling();
-
         $tasklist = $this->make(Tasklist::class);
 
         $task = $this->make(Task::class, [
@@ -317,8 +300,6 @@ class TaskApiTest extends TestCase
      */
     public function checkout_all_tasks()
     {
-        $this->withoutExceptionHandling();
-
         $tasklist = $this->make(Tasklist::class);
 
         $tasks = $this->make(Task::class, [
@@ -343,8 +324,6 @@ class TaskApiTest extends TestCase
      */
     public function uncheck_all_tasks_if_they_allready_are_checked()
     {
-        $this->withoutExceptionHandling();
-
         $tasklist = $this->make(Tasklist::class);
 
         $tasks = $this->make(Task::class, [

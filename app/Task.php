@@ -22,7 +22,7 @@ class Task extends Model
         'priority',
         'work_hours',
         'start_at',
-        'end_at'
+        'end_at',
     ];
 
     /**
@@ -42,7 +42,7 @@ class Task extends Model
         'is_checked' => 'boolean',
     ];
 
-    /** 
+    /**
      * Automatic boot function
      */
     protected static function boot() {
