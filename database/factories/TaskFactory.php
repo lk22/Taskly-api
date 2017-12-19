@@ -10,7 +10,6 @@ $factory->define(\Taskly\Task::class, function (Faker $faker) {
                 return factory(\Taskly\User::class)->create()->id;
             }
         ]),
-
         'task_list_id' => function () {
             return factory(\Taskly\TaskList::class)->create()->id;
         },
@@ -38,6 +37,9 @@ $factory->define(\Taskly\Task::class, function (Faker $faker) {
             '8 timer',
             '9 timer',
             '10 timer'
-        ])
+        ]),
+        'start_at' => \Carbon\Carbon::now()->addHours(1),
+        'end_at' => \Carbon\Carbon::now()->addHours(3),
+        'supplier' => $faker->address
     ];
 });

@@ -24,6 +24,8 @@ class Task extends Model
         'work_hours',
         'start_at',
         'end_at',
+        'supplier',
+        'location'
     ];
 
     /**
@@ -72,6 +74,10 @@ class Task extends Model
         return $this->belongsTo(TaskList::class);
     }
 
+    /**
+     * task
+     * @return [type] [description]
+     */
     public function placements()
     {
         return $this->hasMany(Placement::class);
