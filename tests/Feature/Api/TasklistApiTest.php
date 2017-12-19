@@ -151,7 +151,8 @@ class TasklistApiTest extends TestCase
                   'data' => [
                       'id' => $tasklist->id,
                       'name' => 'tasklist1',
-                    'slug' => 'tasklist-1',
+                      'slug' => 'tasklist-1',
+                      'created_at' => '1 second ago'
                   ]
               ]);
     }

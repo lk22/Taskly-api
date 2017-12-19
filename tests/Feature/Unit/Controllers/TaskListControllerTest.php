@@ -22,8 +22,11 @@ class TaskListControllerTest extends TestCase
 
         $response = $this->get(route('tasklists.api'));
 
-        $response->assertStatus(404);
-        $response->assertSee("Your request dosen't contain any resources");
+        if($response->getStatusCode() === 404) {
+            $response->assertSee("Your request dosen't contain any resources");
+        }
+
+        $response->assertStatus(200);
     }
 
     /**
@@ -41,7 +44,7 @@ class TaskListControllerTest extends TestCase
         $response = $this->post(route('tasklist.create.api'), ['name' => '']);
 
         $response->assertStatus(422);
-
+        $response->assertSee('Could not continue with your request');
     }
 
     /**

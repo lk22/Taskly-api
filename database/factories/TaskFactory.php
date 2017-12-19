@@ -40,6 +40,10 @@ $factory->define(\Taskly\Task::class, function (Faker $faker) {
         ]),
         'start_at' => \Carbon\Carbon::now()->addHours(1),
         'end_at' => \Carbon\Carbon::now()->addHours(3),
-        'supplier' => $faker->address
+        'supplier' => $faker->randomElement([
+            'Bilka',
+            'Netto',
+            'Foetex'
+        ])
     ];
 });

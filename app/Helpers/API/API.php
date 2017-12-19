@@ -42,7 +42,7 @@ class API
     {
         return Response::json([
             'response' => $exception
-        ]);
+        ], 422);
     }
 
     /**

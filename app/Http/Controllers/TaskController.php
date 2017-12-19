@@ -43,11 +43,11 @@ class TaskController extends Controller
     {
         $tasks = $this->task->all();
 
-        if (!count($tasks) > 0) {
-            return API::throwResourceNotFoundException();
+        if (count($tasks) >= 0) {
+            return fractal($tasks, new TaskTransformer())->toArray();
         }
 
-        return fractal($tasks, new TaskTransformer())->toArray();
+        return API::throwResourceNotFoundException();
     }
 
     /**
@@ -177,8 +177,8 @@ class TaskController extends Controller
     {
         API::validate($request, [
             'name' => 'required',
-            'priority' => 'required',
-            'work_hours' => 'required',
+            'priority' => '',
+            'work_hours' => 'required'
         ]);
 
         $task = $this->task->whereSlug($slug)->firstOrFail();
@@ -187,7 +187,8 @@ class TaskController extends Controller
             //'name' => preg_match("/^[a-zA-Z0-9ÆØÅæøå]+$/i^", $request->get('name')),
             'name' => $request->get('name'),
             'priority' => $request->get('priority'),
-            'slug' => str_replace('-', ' ', strtolower($request->get('name')))
+            'slug' => str_replace('-', ' ', strtolower($request->get('name'))),
+            'work_hours' => $request->get('work_hours')
         ]);
     }
 

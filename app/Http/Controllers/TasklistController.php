@@ -47,10 +47,11 @@ class TasklistController extends Controller
     {
         $tasklists = $this->tasklist->all();
 
-        if (!count($tasklists) > 0) {
-            return API::throwResourceNotFoundException();
+        if (!$tasklists) {
+            
+            return API::throwResourceNotFoundException();   
         }
-
+        
         return fractal($tasklists, new TaskListsTransformer())->toArray();
     }
 
@@ -79,11 +80,12 @@ class TasklistController extends Controller
     {
         $tasklistsWithTasks = $this->tasklist->with('tasks')->get();
 
-        if (!count($tasklistsWithTasks)) {
-            return API::throwResourceNotFoundException();
+        if (!count($tasklistsWithTasks) >= 0) {
+            
+            return fractal($tasklistsWithTasks, new TaskListsTransformer())->toArray();
         }
 
-        return fractal($tasklistsWithTasks, new TaskListsTransformer())->toArray();
+        return API::throwResourceNotFoundException();
     }
 
     /**
@@ -125,26 +127,28 @@ class TasklistController extends Controller
      */
     public function create(Request $request)
     {
-        API::validate($request, [
-            'name' => 'required'
-        ]);
+        // API::validate($request, [
+        //     'name' => 'required'
+        // ]);
 
-        try {
+        if($request->get('name')) {
             $this->tasklist->create([
                 'name' => $request->get('name'),
                 'slug' => strtolower($request->get('name')),
-                'user_id' => 1
+                'user_id' => auth()->user()->id
             ]);
+        }
 
-            return API::throwActionSuccessResponse($this->tasklist->name . ' is created');
-        } catch (BadMethodCallException $e) {
-            return API::throwActionFailedException($e);
+        if(!$request->get('name')){
+            return API::throwActionFailedException(
+                'Could not continue with your request'
+            );
         }
     }
 
     /**
      * |------------------------------------------------------------------------
-     * |    Set custom priority to a task
+     * |    Update existing tasklist resource
      * |    @param  Request $request \Illuminate\Http\Request
      * |    @param  slug $slug the tasklist slug
      * |------------------------------------------------------------------------
