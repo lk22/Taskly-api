@@ -16,7 +16,6 @@ class CreateTasksTable extends Migration
         Schema::create('tasks', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->integer('task_list_id')->unsigned();
             $table->string('name');
             $table->string('slug');
             $table->boolean('is_checked')->default(0);
@@ -24,7 +23,6 @@ class CreateTasksTable extends Migration
             $table->softDeletes();
 
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('task_list_id')->references('id')->on('task_lists')->onDelete('cascade');
         });
     }
 
@@ -37,7 +35,6 @@ class CreateTasksTable extends Migration
     {
         Schema::table('tasks', function (Blueprint $table) {
             $table->dropColumn('user_id');
-            $table->dropColumn('task_list_id');
         });
 
         Schema::dropIfExists('tasks');

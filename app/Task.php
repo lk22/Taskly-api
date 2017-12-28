@@ -5,7 +5,6 @@ namespace Taskly;
 use Illuminate\Database\Eloquent\Model;
 
 use Taskly\User;
-use Taskly\TaskList;
 use Taskly\Placement;
 
 class Task extends Model
@@ -63,15 +62,6 @@ class Task extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
-    }
-
-    /**
-     * task belongs to tasklist
-     * @return [type] [description]
-     */
-    public function tasklist()
-    {
-        return $this->belongsTo(TaskList::class);
     }
 
     /**

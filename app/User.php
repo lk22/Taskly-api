@@ -6,7 +6,7 @@ use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-use Taskly\TaskList;
+use Taskly\Task;
 
 class User extends Authenticatable
 {
@@ -43,8 +43,8 @@ class User extends Authenticatable
      * user has many tasklists
      * @return [type] [description]
      */
-    public function tasklists()
+    public function tasks()
     {
-        return $this->hasMany(TaskList::class);
+        return $this->hasMany(Task::class);
     }
 }

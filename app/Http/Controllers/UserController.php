@@ -60,10 +60,10 @@ class UserController extends Controller
      * |    @return [type] [description]
      * |------------------------------------------------------------------
      */
-    public function userTasklists($user_slug)
+    public function userTasks($user_slug)
     {
         return fractal(
-            $this->user->with('tasklists')->whereSlug($user_slug)->first(),
+            $this->user->with('tasks')->whereSlug($user_slug)->first(),
             new UserTransformer()
         )->toArray();
 
@@ -75,26 +75,11 @@ class UserController extends Controller
      * |    @return [type] [description]
      * |-------------------------------------------------------------------
      */
-    public function usersTasklists()
+    public function usersTasks()
     {
         return fractal(
-            $this->user->with('tasklists')->get(),
+            $this->user->with('tasks')->get(),
             new UsersTransformer()
-        )->toArray();
-    }
-
-    /**
-     * |-------------------------------------------------------------------
-     * |    fetch a user and the users tasklists with tasks
-     * |    @param  [type] $user_slug [description]
-     * |    @return [type]            [description]
-     * |-------------------------------------------------------------------
-     */
-    public function userTasklistsTasks($user_slug)
-    {
-        return fractal(
-            $this->user->with('tasklists.tasks')->whereSlug($user_slug)->first(),
-            new UserTransformer()
         )->toArray();
     }
 

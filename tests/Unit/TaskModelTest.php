@@ -79,16 +79,6 @@ class TaskModelTest extends TestCase
    	}
 
    	/**
-   	 * @description: task_model_has_belongs_to_tasklist_relationship
-   	 * @test
-   	 */
-   	public function task_model_has_belongs_to_tasklist_relationship() {
-   		$task = new Task;
-   		$taskBelongsToTasklistRelation = $task->tasklist();
-   		$this->assertInstanceOf(BelongsTo::class, $taskBelongsToTasklistRelation);
-   	}
-
-   	/**
    	 * @description: task_model_has_belongs_to_user_relationship
    	 * @test
    	 */

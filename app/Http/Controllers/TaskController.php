@@ -13,7 +13,6 @@ use Taskly\Transformers\TaskTransformer;
  * Eloquent models
 */
 use Taskly\Task;
-use Taskly\TaskList;
 
 /**
  * App helper classes
@@ -27,10 +26,10 @@ class TaskController extends Controller
      * |    Constructor
      * |------------------------------------------------------------------------
      */
-    public function __construct(Task $task, TaskList $tasklist)
+    public function __construct(Task $task)
     {
         $this->task = $task;
-        $this->tasklist = $tasklist;
+
         $this->authenticated = \Auth::user();
     }
 
@@ -147,7 +146,7 @@ class TaskController extends Controller
      * |    Create new task resource
      * |------------------------------------------------------------------------
      */
-    public function create(Request $request, $list_slug)
+    public function create(Request $request)
     {
         API::validate($request, [
             'name' => 'required',
@@ -155,13 +154,10 @@ class TaskController extends Controller
             'work_hours' => 'required'
         ]);
 
-        $tasklist = $this->tasklist->whereSlug($list_slug)->firstOrFail();
-
         $this->task->create([
             //'name' => preg_match("/^[a-zA-Z0-9ÆØÅæøå]+$/i^", $request->get('name')),
             'name' => $request->get('name'),
             'slug' => str_replace('-', ' ', strtolower($request->get('name'))),
-            'task_list_id' => $tasklist->id,
             'user_id' => $this->authenticated->id,
             'priority' => $request->get('priority'),
             'work_hours' => $request->get('work_hours')

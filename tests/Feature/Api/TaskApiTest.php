@@ -6,7 +6,6 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 use Taskly\User;
-use Taskly\TaskList;
 use Taskly\Task;
 
 class TaskApiTest extends TestCase
@@ -25,7 +24,6 @@ class TaskApiTest extends TestCase
      */
     public function hit_tasks_api()
     {
-        $tasklist = $this->make(TaskList::class);
         $this->get(route('tasks.api'))
               ->assertStatus(200);
     }
@@ -38,8 +36,7 @@ class TaskApiTest extends TestCase
     public function hit_single_task_api_endpoint()
     {
 
-        $tasklist = $this->make(TaskList::class);
-        $task = $this->make(Task::class, ['task_list_id' => $tasklist->id]);
+        $task = $this->make(Task::class, ['user_id' => 1]);
         $this->get(route('task.single.api', [$task->slug]))
              ->assertStatus(200);
     }
@@ -50,13 +47,11 @@ class TaskApiTest extends TestCase
      */
     public function assert_tasks_json_structure_from_api()
     {
-        $tasklist = $this->make(TaskList::class);
 
         $task = $this->make(Task::class, [
             'name' => 'task1',
             'slug' => 'task-1',
             'user_id' => 1,
-            'task_list_id' => 1
         ]);
 
         $this->json('GET', route('task.single.api', [$task->slug]))
@@ -75,13 +70,11 @@ class TaskApiTest extends TestCase
      */
     public function assert_tasks_json_fragments_from_api_call()
     {
-        $tasklist = $this->make(TaskList::class);
 
         $task = $this->make(Task::class, [
             'name' => 'task1',
             'slug' => 'task-1',
             'user_id' => 1,
-            'task_list_id' => 1,
             'is_checked' => true
         ]);
 
@@ -135,9 +128,7 @@ class TaskApiTest extends TestCase
 
         $this->actingAs($user);
 
-        $tasklist = $this->make(TaskList::class);
-
-        $this->post(route('task.create.api', [$tasklist->slug]), [
+        $this->post(route('task.create.api'), [
             'name' => 'Pappresser',
             'priority' => 'No priority',
             'work_hours' => '1 time'
@@ -146,7 +137,6 @@ class TaskApiTest extends TestCase
         $this->assertDatabaseHas('tasks', [
             'name' => 'Pappresser',
             'slug' =>   'pappresser',
-            'task_list_id' => $tasklist->id,
         ]);
     }
 
@@ -159,9 +149,7 @@ class TaskApiTest extends TestCase
 
         $this->actingAs($user);
 
-        $tasklist = $this->make(TaskList::class);
-
-        $this->post(route('task.create.api', [$tasklist->slug]), [
+        $this->post(route('task.create.api'), [
             'name' => 'Pappresser',
             'priority' => 'Medium priority',
             'work_hours' => '1 time'
@@ -170,7 +158,6 @@ class TaskApiTest extends TestCase
         $this->assertDatabaseHas('tasks', [
             'name' => 'Pappresser',
             'slug' => 'pappresser',
-            'task_list_id' => $tasklist->id,
             'user_id' => $user->id,
             'priority' => 'Medium priority'
         ]);
@@ -186,11 +173,7 @@ class TaskApiTest extends TestCase
 
         $this->actingAs($user);
 
-        $tasklist = $this->make(TaskList::class, [
-            'user_id' => $user->id
-        ]);
-
-        $this->post(route('task.create.api', [$tasklist->slug]), [
+        $this->post(route('task.create.api'), [
             'name' => 'Pappresser',
             'work_hours' => '3 timer',
             'priority' => 'Medium priority'
@@ -213,11 +196,9 @@ class TaskApiTest extends TestCase
 
         $this->actingAs($user);
 
-        $tasklist = $this->make(TaskList::class);
 
         $task = $this->make(Task::class, [
             'name' => 'Pappresser',
-            'task_list_id' => $tasklist->id,
             'user_id' => $user->id,
             'slug' => 'pappresser'
         ]);
@@ -245,13 +226,10 @@ class TaskApiTest extends TestCase
 
         $this->actingAs($user);
 
-        $tasklist = $this->make(TaskList::class);
-
         $task = $this->make(Task::class, [
             'name' => 'Pappresser',
             'slug' => 'pappresser',
-             'task_list_id' => $tasklist->id,
-              'user_id' => $user->id
+            'user_id' => $user->id
           ], 1);
 
         $this->delete(route('task.delete.api', [$task->slug]))->assertStatus(200);
@@ -259,7 +237,6 @@ class TaskApiTest extends TestCase
         $this->assertDatabaseMissing('tasks', [
             'name' => $task->name,
             'slug' => $task->slug,
-            'task_list_id' => $tasklist->id,
             'user_id' => $user->id
         ]);
     }
@@ -273,10 +250,13 @@ class TaskApiTest extends TestCase
      */
     public function set_priority_to_task()
     {
-        $tasklist = $this->make(Tasklist::class);
+
+        $user = $this->make(User::class);
+
+        $this->actingAs($user);
 
         $task = $this->make(Task::class, [
-            'task_list_id' => $tasklist->id,
+            'user_id' => $user->id,
             'priority' => 'No priority'
         ]);
 
@@ -297,10 +277,13 @@ class TaskApiTest extends TestCase
      */
     public function tooggle_task_check()
     {
-        $tasklist = $this->make(Tasklist::class);
+
+        $user = $this->make(User::class);
+
+        $this->actingAs($user);
 
         $task = $this->make(Task::class, [
-            'task_list_id' => $tasklist->id,
+            'user_id' => $user->id,
             'is_checked' => false
         ]);
 
@@ -316,10 +299,13 @@ class TaskApiTest extends TestCase
      */
     public function checkout_all_tasks()
     {
-        $tasklist = $this->make(Tasklist::class);
+
+        $user = $this->make(User::class);
+
+        $this->actingAs($user);
 
         $tasks = $this->make(Task::class, [
-            'task_list_id' => $tasklist->id,
+            'user_id' => $user->id,
             'is_checked' => 0
         ], 2);
 
@@ -340,10 +326,13 @@ class TaskApiTest extends TestCase
      */
     public function uncheck_all_tasks_if_they_allready_are_checked()
     {
-        $tasklist = $this->make(Tasklist::class);
+
+        $user = $this->make(User::class);
+
+        $this->actingAs($user);
 
         $tasks = $this->make(Task::class, [
-            'task_list_id' => $tasklist->id,
+            'user_id' => $user->id,
             'is_checked' => 1
         ], rand(1, 4));
 
@@ -358,7 +347,3 @@ class TaskApiTest extends TestCase
         }
     }
 }
-
-/**
- * @todo: remove tasklist->slug from all tests that requires it
- */

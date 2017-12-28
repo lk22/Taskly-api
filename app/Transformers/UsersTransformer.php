@@ -10,7 +10,7 @@ class UsersTransformer extends TransformerAbstract
 {
 
     protected $defaultIncludes = [
-        'tasklists'
+        'tasks'
     ];
 
     /**
@@ -30,10 +30,10 @@ class UsersTransformer extends TransformerAbstract
         ];
     }
 
-    public function includeTasklists(User $user)
+    public function includeTasks(User $user)
     {
-        return ($user->tasklists)
-        ? $this->collection($user->tasklists, app()->make(TaskListsTransformer::class))
+        return ($user->tasks)
+        ? $this->collection($user->tasks, app()->make(TasksTransformer::class))
         : null;
     }
 }

@@ -91,9 +91,9 @@ class UserModelTest extends TestCase
      * @description: user_model_has_many_tasklists_relationship
      * @test
      */
-    public function user_model_has_many_tasklists_relationship() {
+    public function user_model_has_many_tasks_relationship() {
     	$user = new User;
-    	$userHasManyTasklistsRelationship = $user->tasklists();
-    	$this->assertInstanceOf(HasMany::class, $userHasManyTasklistsRelationship);
+    	$userHasManyTasksRelationship = $user->tasks();
+    	$this->assertInstanceOf(HasMany::class, $userHasManyTasksRelationship);
     }
 }

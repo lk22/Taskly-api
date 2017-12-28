@@ -30,15 +30,6 @@ class TasksTableTest extends TestCase
     }
 
     /**
-     * @description: tasks_table_has_list_id
-     * @test
-     */
-    public function tasks_table_has_list_id() {
-    	$tasksTableHasListId = Schema::hasColumn('tasks', 'task_list_id');
-    	$this->assertTrue($tasksTableHasListId);
-    }
-
-    /**
      * @description: tasks_table_has_user_id
      * @test
      */
