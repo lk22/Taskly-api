@@ -19,11 +19,11 @@ class AddCompaniesTable extends Migration
             $table->string('company_name');
             $table->string('company_type');
             $table->string('company_address');
-            $table->string('comapny_registration_nr');
+            $table->string('company_registration_nr')->nullable();
             $table->string('company_phone_nr');
             $table->string('company_bank_account_nr');
-            $table->string('company_bank_registration_nr');
-            $table->string('company_iban_nr', 40);
+            $table->string('company_bank_registration_nr')->nullable();
+            $table->string('company_iban_nr');
             $table->string('company_swift_address');
             $table->timestamps();
 

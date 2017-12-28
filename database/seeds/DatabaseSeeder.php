@@ -7,7 +7,7 @@ class DatabaseSeeder extends Seeder
 
 	protected $defaultSeeders = [
 		UsersTableSeeder::class,
-		TasklistsTableSeeder::class,
+		CompaniesTableSeeder::class,
 		TasksTableSeeder::class,
 		PlacementsTableSeeder::class
 	];
@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
 	protected $defaultTables = [
 		'users',
 		'tasks',
-		'task_lists',
+        'companies',
 		'placements',
 	];
 

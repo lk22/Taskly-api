@@ -10,7 +10,8 @@ class UsersTransformer extends TransformerAbstract
 {
 
     protected $defaultIncludes = [
-        'tasks'
+        'tasks',
+        'company'
     ];
 
     /**
@@ -34,6 +35,13 @@ class UsersTransformer extends TransformerAbstract
     {
         return ($user->tasks)
         ? $this->collection($user->tasks, app()->make(TasksTransformer::class))
+        : null;
+    }
+
+    public function includeCompany(User $user)
+    {
+        return ($user->companies)
+        ? $this->collection($user->companies, app()->make(CompanyTransformer::class))
         : null;
     }
 }

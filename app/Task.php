@@ -17,7 +17,6 @@ class Task extends Model
         'name',
         'slug',
         'user_id',
-        'task_list_id',
         'is_checked',
         'priority',
         'work_hours',
@@ -33,7 +32,6 @@ class Task extends Model
      */
     protected $hidden = [
         'user_id',
-        'task_list_id'
     ];
 
     /**
