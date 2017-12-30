@@ -60,8 +60,8 @@ Route::get('/', function () {
 		 ->uses('UserController@userTasks');
 
 // user auth routes
-// Route::post('/login')->name('login.api')->uses('UserController@login');
-// Route::post('/register')->name('register.api')->uses('UserController@register');
+Route::post('/login')->name('login.api')->uses('UserController@login');
+Route::post('/register')->name('register.api')->uses('UserController@register');
 
 /**
  * Tasks API Endpoints

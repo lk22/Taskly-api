@@ -5,6 +5,8 @@ namespace Taskly\Helpers\API;
 use \Response;
 use Illuminate\Http\Request;
 
+use Exception;
+
 /**
 * API Helper class for development mode
 */

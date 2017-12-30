@@ -32,15 +32,6 @@ class TaskModelTest extends TestCase
    	}
 
    	/**
-   	 * @description: task_model_fillable_property_has_list_id
-   	 * @test
-   	 */
-   	public function task_model_fillable_property_has_list_id() {
-   		$task = new Task;
-   		$this->assertAttributeContains('task_list_id', 'fillable', $task);
-   	}
-
-   	/**
    	 * @description: task_model_fillable_property_has_user_list
    	 * @test
    	 */
@@ -67,15 +58,6 @@ class TaskModelTest extends TestCase
    	public function task_model_hidden_property_has_user_id() {
    		$task = new Task;
    		$this->assertAttributeContains('user_id', 'hidden', $task);
-   	}
-
-   	/**
-   	 * @description: task_model_hidden_property_has_list_id
-   	 * @test
-   	 */
-   	public function task_model_hidden_property_has_list_id() {
-   		$task = new Task;
-   		$this->assertAttributeContains('task_list_id', 'hidden', $task);
    	}
 
    	/**
