@@ -26,9 +26,13 @@ class API
     /**
      * validation helper for requests
      */
-    public static function validate(Request $request, $rules = [])
+    public static function validate($request, $rules = [])
     {
-        $request->validate($rules);
+        if($request instanceOF Request){
+             $request->validate($rules);
+        }
+
+        return new Exception('Could not validate request', 1);
     }
 
     public static function throwActionSuccessResponse($response)

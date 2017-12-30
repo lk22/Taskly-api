@@ -196,7 +196,6 @@ class TaskApiTest extends TestCase
 
         $this->actingAs($user);
 
-
         $task = $this->make(Task::class, [
             'name' => 'Pappresser',
             'user_id' => $user->id,

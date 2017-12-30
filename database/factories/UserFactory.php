@@ -17,12 +17,12 @@ $factory->define(Taskly\User::class, function (Faker $faker) {
     static $password;
 
     return [
-    	'firstname' => $faker->firstname,
-    	'lastname' => $faker->lastname,
-    	'name' => $faker->firstname . ' ' . $faker->lastname,
-    	'slug' => strtolower($faker->firstname) . '-' . strtolower($faker->lastname),
-    	'email' => $faker->unique()->safeEmail,
-    	'password' => $password ?: $password = bcrypt('secret'),
-    	'is_admin' => $faker->randomElement([true, false])
+    	'firstname'        => $faker->firstname,
+    	'lastname'         => $faker->lastname,
+    	'name'             => $faker->firstname . ' ' . $faker->lastname,
+    	'slug'             => strtolower($faker->firstname) . '-' . strtolower($faker->lastname),
+    	'email'            => $faker->unique()->safeEmail,
+    	'password'         => $password ?: $password = bcrypt('secret'),
+    	'is_admin'         => $faker->randomElement([true, false])
     ];
 });

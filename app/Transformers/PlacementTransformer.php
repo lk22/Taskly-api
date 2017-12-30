@@ -22,11 +22,11 @@ class PlacementTransformer extends TransformerAbstract
     public function transform(Placement $placement)
     {
         return [
-            'id' => (int) $placement->id,
-            'name' => (string) $placement->name,
-            'streetname' => (string) $placement->streetname,
-            'city_code' => (string) $placement->city_code,
-            'city' => (string) $placement->city
+            'id'            => (int) $placement->id,
+            'name'          => (string) $placement->name,
+            'streetname'    => (string) $placement->streetname,
+            'city_code'     => (string) $placement->city_code,
+            'city'          => (string) $placement->city
         ];
     }
 
