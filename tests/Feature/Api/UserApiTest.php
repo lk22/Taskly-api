@@ -61,7 +61,7 @@ class UserApiTest extends TestCase
      * @todo test client to hit endpoint to show a user with tasklists with tasks in it
      * @test
      */
-    public function hit_users_tasks_tasks_api_endpoint() {
+    public function hit_users_tasks_api_endpoint() {
         $this->withoutExceptionHandling();
 
         $user = $this->make(User::class, [
@@ -115,39 +115,6 @@ class UserApiTest extends TestCase
     }
 
     /**
-     * @description: assert_users_tasklists_json_structure
-     * @todo test the json structure for a users tasklist
-     * @test
-     */
-    public function assert_users_tasklists_json_structure() {
-        $this->withoutExceptionHandling();
-
-        $user = $this->make(User::class, [
-            'firstname' => 'Leo',
-            'lastname' => 'Knudsen',
-            'name' => 'Leo Knudsen',
-            'slug' => 'leo-knudsen',
-            'email' => 'knudsenudvikling@gmail.com',
-            'password' => bcrypt('test'),
-            'is_admin' => true
-        ]);
-
-        $this->json('GET', route('users.tasks.api'))
-             ->assertJsonStructure([
-                'data' => [
-                    '*' => [
-                        'id',
-                        'firstname',
-                        'lastname',
-                        'fullname',
-                        'email',
-                        'is_admin',
-                    ]
-                ]
-             ]);
-    }
-
-    /**
      * @description: assert_user_companies_json_structure
      * @todo 
      * @test
@@ -164,6 +131,8 @@ class UserApiTest extends TestCase
             'password' => bcrypt('test'),
             'is_admin' => true
         ]);
+
+       // $this->json('GET', )
     }
 
     /**

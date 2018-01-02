@@ -26,8 +26,7 @@ class UsersTransformer extends TransformerAbstract
             'firstname'     => (string) $user->firstname,
             'lastname'      => (string) $user->lastname,
             'fullname'      => (string) $user->firstname . ' ' . $user->lastname,
-            'email'         => (string) $user->email,
-            'is_admin'      => (boolean) $user->is_admin
+            'email'         => (string) $user->email
         ];
     }
 
