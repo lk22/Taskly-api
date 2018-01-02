@@ -61,7 +61,7 @@ class UserApiTest extends TestCase
      * @todo test client to hit endpoint to show a user with tasklists with tasks in it
      * @test
      */
-    public function hit_users_tasks_api_endpoint() {
+    public function assert_response_from_users_tasks_api_endpoint() {
         $this->withoutExceptionHandling();
 
         $user = $this->make(User::class, [
@@ -107,7 +107,7 @@ class UserApiTest extends TestCase
                 'data' => [
                     'firstname',
                     'lastname',
-                    'name',
+                    'fullname',
                     'slug',
                     'email',
                 ]
@@ -132,7 +132,6 @@ class UserApiTest extends TestCase
             'is_admin' => true
         ]);
 
-       // $this->json('GET', )
     }
 
     /**
@@ -168,13 +167,30 @@ class UserApiTest extends TestCase
                         'lastname',
                         'fullname',
                         'email',
+                        'companies' => [
+                            'data' => [
+                                '*' => [
+                                    'company_name',
+                                    'company_type',
+                                    'company_address',
+                                    'company_registration_nr',
+                                    'company_phone_nr'
+                                ]
+                            ]
+                        ],
                         'tasks' => [
                             'data' => [
                                 '*' => [
                                     'id',
                                     'name',
                                     'slug',
-                                    'is_checked'
+                                    'is_checked',
+                                    'work_hours',
+                                    'priority',
+                                    'start_at',
+                                    'end_at',
+                                    'deadline',
+                                    'supplier'
                                 ]
                             ]
                         ]
@@ -210,39 +226,4 @@ class UserApiTest extends TestCase
                 'email' => 'knudsenudvikling@gmail.com',
              ]);
     }
-
-    /**
-     * @description: assert_exact_json_from_users_api
-     * @todo assert the correct json from api
-     * @test
-     */
-    // public function assert_exact_json_from_users_api_without_tasks() {
-    //     $this->withoutExceptionHandling();
-
-    //     $user = $this->make(User::class, [
-    //         'firstname' => 'Leo',
-    //         'lastname' => 'Knudsen',
-    //         'slug' => 'leo-knudsen',
-    //         'email' => 'knudsenudvikling@gmail.com',
-    //         'is_admin' => true
-    //     ]);
-
-    //     $this->json('GET', route('user.single.api', [$user->slug]))
-    //          ->assertExactJson([
-    //             'data' => [
-    //                 'email' => 'knudsenudvikling@gmail.com',
-    //                 'firstname' => 'Leo',
-    //                 'fullname' => 'Leo Knudsen',
-    //                 'id' => $user->id,
-    //                 'is_admin' => true,
-    //                 'lastname' => 'Knudsen',
-    //                 'slug' => 'leo-knudsen',
-    //                 'tasks' => [
-    //                     'data' => [
-    //                         '*' => []
-    //                     ]
-    //                 ]
-    //             ]
-    //          ]);
-    // }
 }
