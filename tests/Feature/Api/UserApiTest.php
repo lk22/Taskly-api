@@ -168,7 +168,6 @@ class UserApiTest extends TestCase
                         'lastname',
                         'fullname',
                         'email',
-                        'is_admin',
                         'tasks' => [
                             'data' => [
                                 '*' => [
