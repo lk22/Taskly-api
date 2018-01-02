@@ -107,9 +107,9 @@ class UserApiTest extends TestCase
                 'data' => [
                     'firstname',
                     'lastname',
+                    'name',
                     'slug',
                     'email',
-                    'is_admin'
                 ]
         ]);
     }
@@ -208,7 +208,6 @@ class UserApiTest extends TestCase
                 'fullname' => 'Leo Knudsen',
                 'slug' => 'leo-knudsen',
                 'email' => 'knudsenudvikling@gmail.com',
-                'is_admin' => true
              ]);
     }
 
