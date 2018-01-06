@@ -49,6 +49,10 @@ class User extends Authenticatable
         return $this->hasMany(Task::class);
     }
 
+    /**
+     * user has many companies
+     * @return [type] [description]
+     */
     public function companies()
     {
         return $this->hasMany(Company::class);

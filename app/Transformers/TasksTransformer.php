@@ -8,10 +8,7 @@ use Taskly\Task;
 
 class TasksTransformer extends TransformerAbstract
 {
-    protected $defaultIncludes = [
-        //'placements'
-    ];
-
+    
     /**
      * A Fractal transformer.
      *
@@ -32,11 +29,4 @@ class TasksTransformer extends TransformerAbstract
             'supplier'      => (string) $task->supplier,
         ];
     }
-
-    //public function includePlacements(Task $task)
-    //{
-    //    return ($task->placements)
-    //    ? $this->collection($task->placements, app()->make(PlacementsTransformer::class))
-    //    : null;
-    //}
 }

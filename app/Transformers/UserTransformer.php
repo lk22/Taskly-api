@@ -12,7 +12,7 @@ class UserTransformer extends TransformerAbstract
 {
 
     protected $defaultIncludes = [
-        'tasklists'
+        'tasks'
     ];
 
     /**
@@ -29,14 +29,22 @@ class UserTransformer extends TransformerAbstract
             'fullname'      => (string) $user->firstname . ' ' . $user->lastname,
             'slug'          => (string) $user->slug,
             'email'         => (string) $user->email,
-            'is_admin'      => (boolean) $user->is_admin,
+            'company'       => (object) $user->companies,
+            'tasks'         => (object) $user->tasks
         ];
     }
 
-    public function includeTasklists(User $user)
+    public function includeTasks(User $user)
     {
         return ($user->tasklists)
-        ? $this->collection($user->tasklists, app()->make(TaskListsTransformer::class))
+        ? $this->collection($user->tasklists, app()->make(TasksTransformer::class))
+        : null;
+    }
+
+    public function includeCompanies(User $user)
+    {
+        return ($user->companies)
+        ? $this->collection($user->companies, app()->make(CompanyTransformer::class))
         : null;
     }
 }

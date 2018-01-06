@@ -44,20 +44,10 @@ Route::get('/', function () {
 		 ->name('users.api')
 		 ->uses('UserController@index');
 
-	// all users tasks
-	Route::get('/users/tasks')
-		 ->name('users.tasks.api')
-		 ->uses('UserController@usersTasks');
-
 	// single user
 	Route::get('/user/{user_slug}')
 		 ->name('user.single.api')
 		 ->uses('UserController@user');
-
-	// single users task
-	Route::get('/user/{user_slug}/tasks')
-		 ->name('user.tasks.api')
-		 ->uses('UserController@userTasks');
 
 // user auth routes
 Route::post('/login')->name('login.api')->uses('UserController@login');
@@ -116,9 +106,3 @@ Route::post('/register')->name('register.api')->uses('UserController@register');
 	Route::delete('/tasks/{slug}/delete-task')
 		 ->name('task.delete.api')
 		 ->uses('TaskController@delete');
-
-// /**
-//  * Placement API Endpoints
-//  */
-Route::get('/placements')->name('placements.api')->uses('PlacementController@index');
-Route::get('placements/{slug}')->name('placement.single.api')->uses('PlacementController@placement');

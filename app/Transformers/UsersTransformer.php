@@ -30,6 +30,11 @@ class UsersTransformer extends TransformerAbstract
         ];
     }
 
+    /**
+     * include companies data to the user transformation
+     * @param  User   $user [description]
+     * @return [type]       [description]
+     */
     public function includeCompanies(User $user)
     {
         return ($user->companies)
@@ -37,6 +42,11 @@ class UsersTransformer extends TransformerAbstract
         : null;
     }
 
+    /**
+     * include users tasks to the user transformation
+     * @param  User   $user [description]
+     * @return [type]       [description]
+     */
     public function includeTasks(User $user)
     {
         return ($user->tasks)

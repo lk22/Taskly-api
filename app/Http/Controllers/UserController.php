@@ -55,35 +55,6 @@ class UserController extends Controller
     }
 
     /**
-     * |------------------------------------------------------------------
-     * |    fetch user with tasklists
-     * |    @return [type] [description]
-     * |------------------------------------------------------------------
-     */
-    public function userTasks($user_slug)
-    {
-        return fractal(
-            $this->user->with('tasks')->whereSlug($user_slug)->first(),
-            new UserTransformer()
-        )->toArray();
-
-    }
-
-    /**
-     * |-------------------------------------------------------------------
-     * |    fetch users with tasklists
-     * |    @return [type] [description]
-     * |-------------------------------------------------------------------
-     */
-    public function usersTasks()
-    {
-        return fractal(
-            $this->user->with('tasks')->get(),
-            new UsersTransformer()
-        )->toArray();
-    }
-
-    /**
      * |--------------------------------------------------------------------
      * |    giver user access to API
      * |    @param  Request $request [description]

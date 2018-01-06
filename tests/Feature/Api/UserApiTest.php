@@ -46,45 +46,6 @@ class UserApiTest extends TestCase
     }
 
     /**
-     * @description: hit_users_tasklists_api_endpoint
-     * @todo test client to hit endpoint to show a user with a tasklist
-     * @test
-     */
-    public function hit_users_tasks_api_endpoint() {
-        $this->withoutExceptionHandling();
-        $this->get(route('users.tasks.api'))
-             ->assertStatus(200);
-    }
-
-    /**
-     * @description: hit_users_tasklists_tasks_api_endpoint
-     * @todo test client to hit endpoint to show a user with tasklists with tasks in it
-     * @test
-     */
-    public function assert_response_from_users_tasks_api_endpoint() {
-        $this->withoutExceptionHandling();
-
-        $user = $this->make(User::class, [
-            'firstname' => 'Leo',
-            'lastname' => 'Knudsen',
-            'name' => 'Leo Knudsen',
-            'slug' => 'leo-knudsen',
-            'email' => 'knudsenudvikling@gmail.com',
-            'password' => bcrypt('test'),
-            'is_admin' => true
-        ]);
-
-        $task = $this->make(Task::class, [
-            'name' => 'task1',
-            'slug' => 'task-1',
-            'user_id' => $user->id
-        ]);
-
-        $this->get(route('users.tasks.api', [$user->slug]))
-             ->assertStatus(200);
-    }
-
-    /**
      * @description: get_single_user_from_api
      * @todo test json structure for a user
      * @test
@@ -110,6 +71,29 @@ class UserApiTest extends TestCase
                     'fullname',
                     'slug',
                     'email',
+                    'company' => [
+                            '*' => [
+                                'company_name',
+                                'company_type',
+                                'company_address',
+                                'company_registration_nr',
+                                'company_phone_nr'
+                            ]
+                        ],
+                        'tasks' => [
+                            '*' => [
+                                'id',
+                                'name',
+                                'slug',
+                                'is_checked',
+                                'work_hours',
+                                'priority',
+                                'start_at',
+                                'end_at',
+                                'deadline',
+                                'supplier'
+                            ]
+                        ]
                 ]
         ]);
     }
@@ -132,71 +116,6 @@ class UserApiTest extends TestCase
             'is_admin' => true
         ]);
 
-    }
-
-    /**
-     * @description: assert_users_tasks_json_structure
-     * @todo test json structure for users, tasklists, tasks
-     * @test
-     */
-    public function assert_users_tasks_json_structure() {
-        $this->withoutExceptionHandling();
-
-        $user = $this->make(User::class, [
-            'firstname' => 'Leo',
-            'lastname' => 'Knudsen',
-            'name' => 'Leo Knudsen',
-            'slug' => 'leo-knudsen',
-            'email' => 'knudsenudvikling@gmail.com',
-            'password' => bcrypt('test'),
-            'is_admin' => true
-        ]);
-
-        $task = $this->make(Task::class, [
-            'name' => 'task1',
-            'slug' => 'task-1',
-            'user_id' => $user->id,
-        ], 2);
-
-        $this->json('GET', route('users.tasks.api', [$user->slug]))
-             ->assertJsonStructure([
-                'data' => [
-                    '*' => [
-                        'id',
-                        'firstname',
-                        'lastname',
-                        'fullname',
-                        'email',
-                        'companies' => [
-                            'data' => [
-                                '*' => [
-                                    'company_name',
-                                    'company_type',
-                                    'company_address',
-                                    'company_registration_nr',
-                                    'company_phone_nr'
-                                ]
-                            ]
-                        ],
-                        'tasks' => [
-                            'data' => [
-                                '*' => [
-                                    'id',
-                                    'name',
-                                    'slug',
-                                    'is_checked',
-                                    'work_hours',
-                                    'priority',
-                                    'start_at',
-                                    'end_at',
-                                    'deadline',
-                                    'supplier'
-                                ]
-                            ]
-                        ]
-                    ]
-                ]
-             ]);
     }
 
     /**
