@@ -8,35 +8,7 @@
 require('./bootstrap');
 
 // window.Vue = require('vue');
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-
-Vue.use(VueRouter)
-
-import Home from '~/views/Home.vue'
-import Authenticate from '~/views/Authenticate.vue'
-import Register from '~/views/Register.vue'
-
-const router = new VueRouter({
-	mode: 'history',
-	routes: [
-		{
-			path: '/',
-			name: 'home',
-			component: Home
-		},
-		{
-			path: '/auth',
-			name: 'authentication',
-			component: Authenticate
-		},
-		{
-			path: '/register',
-			name: 'registration',
-			component: Register
-		}
-	]
-})
+import Router from './Router'
 
 
 /**
@@ -45,10 +17,10 @@ const router = new VueRouter({
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
+//Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
 const app = new Vue({
     el: '#app',
-    components: { Home }
-    router
+    components: { Home },
+    Router
 });
