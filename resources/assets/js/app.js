@@ -13,6 +13,32 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
+import Home from '~/views/Home.vue'
+import Authenticate from '~/views/Authenticate.vue'
+import Register from '~/views/Register.vue'
+
+const router = new VueRouter({
+	mode: 'history',
+	routes: [
+		{
+			path: '/',
+			name: 'home',
+			component: Home
+		},
+		{
+			path: '/auth',
+			name: 'authentication',
+			component: Authenticate
+		},
+		{
+			path: '/register',
+			name: 'registration',
+			component: Register
+		}
+	]
+})
+
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -23,6 +49,6 @@ Vue.component('example-component', require('./components/ExampleComponent.vue'))
 
 const app = new Vue({
     el: '#app',
-    //components: { App }
-    //router
+    components: { Home }
+    router
 });

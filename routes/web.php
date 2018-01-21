@@ -16,8 +16,9 @@
 // 	return view('welcome');
 // });
 
-Route::get('/', function () {
-	return csrf_token();
-});
-Auth::routes();
+// Route::get('/', function () {
+// 	return csrf_token();
+// });
+//Auth::routes();
 
+Route::get('/{any}', 'SpaController@index')->where('any', '.*');
