@@ -1,16 +1,10 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
 
-Vue.use(VueRouter)
-
-import Home from './views/Home.vue'
 import Authenticate from './views/Authenticate.vue'
 import Register from './views/Register.vue'
 
-export const router = new VueRouter({
+const Router = {
 	mode: 'history',
 	routes: [
-
 		// authentication route
 		{
 			path: '/auth',
@@ -46,4 +40,6 @@ export const router = new VueRouter({
 		// 	]
 		// },
 	]
-})
+}
+
+export default Router

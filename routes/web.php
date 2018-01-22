@@ -19,6 +19,7 @@
 // Route::get('/', function () {
 // 	return csrf_token();
 // });
-//Auth::routes();
+// Auth::routes();
+Route::post('login', 'LoginController@login');
 
 Route::get('/{any}', 'SpaController@index')->where('any', '.*');
