@@ -1,17 +1,13 @@
 <template>
-    <div id="taskly-app">
-        <h1>Vue Router Demo App</h1>
-
-        <p>
-            <router-link :to="{ name: 'home' }">Home</router-link> |
-            <router-link :to="{ name: 'hello' }">Hello World</router-link>
-        </p>
-
-        <div class="container">
-            <router-view></router-view>
-        </div>
-    </div>
+    <div id="taskly-home">
+		<Header />
+	</div>
 </template>
+
 <script>
-    export default {}
+    import Header from './../components/homepage/Header'
+
+    export default {
+        components: { Header }
+    }
 </script>

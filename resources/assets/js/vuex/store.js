@@ -3,11 +3,11 @@ import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 
 // vuex store modules
-import auth from './store/auth.js'
+import auth from './store/auth'
 
 const plugins = []
 
-const store = () => new Vuex.Store({
+export const store = () => new Vuex.Store({
 
 	// differen Vuex state modules
 	modules: {
@@ -26,5 +26,3 @@ const store = () => new Vuex.Store({
 		})
 	],
 });
-
-export default store

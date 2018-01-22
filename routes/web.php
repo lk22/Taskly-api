@@ -23,3 +23,5 @@
 Route::post('login', 'LoginController@login');
 
 Route::get('/{any}', 'SpaController@index')->where('any', '.*');
+
+Route::get('/app/dashboard/{any}', 'SpaController@app')->where('any', '.*');
