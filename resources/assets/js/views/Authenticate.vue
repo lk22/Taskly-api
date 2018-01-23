@@ -6,27 +6,18 @@
 		<!-- auth container -->
 		<div class="auth__container">
 			
-			<!-- signup container -->
-			<div class="col-md-6 auth__container--signup">
-				
-				<h3 class="signup-heading text-center">
-					Sign up your new account
-				</h3>
-
-				<!-- Signup form components -->
-				<SignupForm></SignupForm>
-
-			</div> <!-- signup conatiner end -->
-			
-			<!-- login container -->
-			<div class="col-md-6 auth__container--login">
+			<!-- signin container -->
+			<div class="auth__container--signin">
 
 				<!-- heading -->
-				<h3 class="text-center login__heading">
-					Or sign in to your existing account
+				<h3 class="text-center signin__heading">
+					Sign in to your account
 				</h3>
+
+				<!-- Authentication form -->
+				<AuthForm></AuthForm>
 			
-			</div> <!-- login container end -->
+			</div> <!-- signin container end -->
 		</div> <!-- auth container end -->
 	</div> <!-- authentication wrapper end -->
 </template>
@@ -37,16 +28,17 @@
 	 */
 	import Header from './../components/homepage/Header'
 	import SignupForm from './../components/auth/Signup-form'
+	import AuthForm from './../components/auth/Auth-form.vue'
 
 	export default {
-		components: {Header, SignupForm}
+		components: {Header, SignupForm, AuthForm}
 	}
 </script>
 
 <style lang="scss">
 	// auth wrapper
 	.taskly-auth{
-		min-height: 800px;
+		min-height: 700px;
 		width: 100%; 
 		background-image: url('./../../images/workspace-820315_1920.jpg');
 		background-size: cover;
@@ -54,21 +46,22 @@
 		// auth container wrapper
 		.auth__container{
 			min-height:550px;
-			width: 80%;
+			width: 65%;
 			background: #fff;
 			margin: 0px auto;
 			margin-top: 2rem;
-
-			// styles to define on both containers
-			.auth__container--signup, .auth__container--login{
-				padding: 1.5rem;
-			}
+			
+			// if mobile size
+			@media screen and (min-width: 400px) and (max-width: 992px){
+				width: 100%; 
+			} 
 
 			// login container specific
-			.auth__container--login{
+			.auth__container--signin{
+				padding: 1.5rem;
 				min-height: 550px;
-				background: #809ed3;
-				color: #fff; 
+				background: #fff;
+				color: #000; 
 			}
 		}
 	}

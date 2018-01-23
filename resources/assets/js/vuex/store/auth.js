@@ -44,14 +44,14 @@ const auth = new Vuex.Store({
 		/**
 		 * Authenticate the user
 		 */
-		login(context, {
+		async login(context, {
 			username, 	// the given username
 			password 	// the given password
 		}) {
 
 			// send the post request with the given credentials
 
-				Axios.post('/login', {
+				const data = await Axios.post('/login', {
 					username,
 					password
 				})
@@ -85,7 +85,7 @@ const auth = new Vuex.Store({
 		/**
 		 * Register new user
 		 */
-		register(context, {
+		async register(context, {
 			email,				// users email
 			username,			// users name
 			password,			// users password
@@ -96,7 +96,7 @@ const auth = new Vuex.Store({
 
 			// send request
 
-				Axios.post('/register', {
+				const data await Axios.post('/register', {
 					email,
 					username,
 					password,
