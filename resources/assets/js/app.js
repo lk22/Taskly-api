@@ -25,24 +25,12 @@ Vue.use(VueRouter)
 Vue.use(Vuex)
 
 // define the routers
-const homerouter = new VueRouter({
+const router = new VueRouter({
 	mode: 'history',
 	routes: [
-		{
-			path: '/',
-			name: 'home',
-			compoennt: Home
-		},
-		{
-			path: '/auth',
-		    name: 'authentication',
-		    component: Authenticate
-		},
-		{
-			path: '/signup',
-			name: 'registration',
-			component: Register
-		}
+		{ path: '/', 			name: 'home', 		component: require('./views/Home') },
+		{ path: '/auth', 		name: 'auth', 		component: require('./views/Authenticate') },
+		{ path: '/register', 	name: 'signup', 	component: require('./views/Register') }
 	]
 })
 // const app_router = new VueRouter(AppRouter)
@@ -58,8 +46,7 @@ const homerouter = new VueRouter({
 //homepage instance
 const home = new Vue({
   el: '#home',
-  homerouter,
-  render: h => h(Home)
+  router,
 })
 
 // const app = new Vue({

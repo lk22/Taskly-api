@@ -1,6 +1,9 @@
 <template>
     <div id="taskly-home">
-		<Header />
+		<Header/>
+		<div class="container">
+
+		</div>
 	</div>
 </template>
 
