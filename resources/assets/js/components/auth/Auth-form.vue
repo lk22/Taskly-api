@@ -61,6 +61,11 @@
 
 					</div> <!-- auth field end -->
 
+					<!-- not having a account button -->
+					<div class="form-group not-having-account">
+						<p><a href="/register">Not having a account</a> ?</p>
+					</div>
+
 					<!-- 
 						auth notification
 						only shows on error
@@ -84,6 +89,7 @@
 				error: false,
 				username: '',
 				password: '',
+
 			}
 		},
 
@@ -96,6 +102,13 @@
 	               	this.username === '' && this.password
 				) {
 					this.error = true
+					let seconds = 10
+
+					setTimeout(() => {
+						seconds--
+						if(seconds === 0)
+							this.error = false
+					}, 10000)
 				}
 			}
 		},

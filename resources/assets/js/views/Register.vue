@@ -111,7 +111,7 @@
 <style lang="scss">
 	// auth wrapper
 	.taskly-register{
-		min-height: 700px;
+		height: 800px;
 		width: 100%; 
 		background-image: url('./../../images/workspace-820315_1920.jpg');
 		background-size: cover;

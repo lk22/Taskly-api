@@ -117,7 +117,7 @@
 						<div class="alert alert-danger register-warning">
 							<p>{{ msg }}</p>
 						</div>
-					</div>
+					</div> <!-- notification component end -->
 				</div> <!-- field group end -->
 			</form> <!-- form end -->
 		</div><!-- signup form container end -->
@@ -145,21 +145,33 @@
 			register(e) {
 				e.preventDefault()
 
+				// check if the credentials is correctly
 				if(
-				   this.name.firstname === '' ||
+				   this.name.firstname === '' || 
 				   this.name.lastname === '' ||
-				   this.name.firstname && this.name.lastname === '' ||
+				   this.name.firstname && this.name.firstname < 1 && this.name.lastname === '' && this.name.lastname < 1 ||
 				   this.name.firstname && this.name.lastname && this.email === '' ||
-				   this.name.firstname && this.name.lastname && this.email && this.password === ''
+				   this.name.firstname && this.name.lastname && this.email && this.password === '' ||
+				   this.name.firstname && this.name.lastname && this.email && this.password && this.password < 8
 				) {
 					this.error = true
-				} else {
-					if(!this.password === this.confirm_password){
-						this.password_confirmed = false
-					} else {
+
+					// if the confirmed passsword is the same as the password
+					if(this.confirm_password === this.password){
 						this.password_confirmed = true
 					}
+
+					// if the confirmation password not is the same as the password
+					if(!this.confirm_password === this.password) {
+						this.password_confirmed = false
+					}
+				} 
+
+				// if the password is confirmed
+				if(this.password_confirmed) {
+					// make api call
 				}
+				
 			}
 		},
 
@@ -167,15 +179,12 @@
 			msg(){
 				if(this.error) {
 
-					if(!this.email === indexOf('@')) {
-						return 'Email is not valid, enter a valid email to register with'
+					if(this.password_confirmed === false){
+						return 'The password is not exactly the same as u have been givin please try again,'
 					}
 
 					return 'The information you have been givin is not valid please try again'
 				}
-
-				if(this.password_confirmed === false)
-					return 'The password is not exactly the same as u have been givin please try again,'
 			}
 		}
 	}
