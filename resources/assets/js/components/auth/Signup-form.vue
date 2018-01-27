@@ -141,6 +141,10 @@
 			}
 		},
 
+		mounted() {
+			console.log("Signup form component mounted")
+		},
+
 		methods:{
 			register(e) {
 				e.preventDefault()
@@ -170,8 +174,8 @@
 				// if the password is confirmed
 				if(this.password_confirmed) {
 					// make api call
+					console.log('Registration confirmed!')
 				}
-				
 			}
 		},
 
@@ -189,8 +193,6 @@
 		}
 	}
 </script>
-
-
 
 <style lang="scss">
 	// signup container

@@ -54,6 +54,11 @@ class UserController extends Controller
         )->toArray();
     }
 
+    public function auth()
+    {
+        return auth()->user();
+    }
+
     /**
      * |--------------------------------------------------------------------
      * |    giver user access to API

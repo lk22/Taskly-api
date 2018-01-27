@@ -1,4 +1,4 @@
-import vuex from 'vuex'
+
 import Axios from 'axios'
 
 const types = {
@@ -6,7 +6,7 @@ const types = {
 	REGISTER: 		'REGISTER'
 };
 
-const auth = new Vuex.Store({
+const auth = {
 
 	/**
 	 * Defining default state
@@ -34,6 +34,25 @@ const auth = new Vuex.Store({
 			return state.data.name
 		}
 
+	},
+
+	/**
+	 * Mutators
+	 */
+	mutations: {
+		/**
+		 * Authentication mutator
+		 */
+		[types.AUTHENTICATE](state, user) {
+			state.authUser = user
+		},
+
+		/**
+		 * Registration mutator
+		 */
+		[types.REGISTER](state, user) {
+			state.authUser = user
+		}
 	},
 
 	/**
@@ -96,7 +115,7 @@ const auth = new Vuex.Store({
 
 			// send request
 
-				const data await Axios.post('/register', {
+				const data = await Axios.post('/register', {
 					email,
 					username,
 					password,
@@ -127,28 +146,9 @@ const auth = new Vuex.Store({
 	},
 
 	/**
-	 * Mutators
-	 */
-	mutations: {
-		/**
-		 * Authentication mutator
-		 */
-		[types.AUTHENTICATE](state, user) {
-			state.authUser = user
-		},
-
-		/**
-		 * Registration mutator
-		 */
-		[types.REGISTER](state, user) {
-			state.authUser = user
-		}
-	},
-
-	/**
 	 * namespacing
 	 */
 	namespaced: true
-})
+}
 
 export default auth

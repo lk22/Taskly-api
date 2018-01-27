@@ -7,10 +7,14 @@
 
 require('./bootstrap');
 
+// babel polyfills
+require("babel-core/register");
+require("babel-polyfill");
+
 // window.Vue = require('vue');
 import Vue from 'vue'
-import VueRouter from 'vue-router'
 import Vuex from 'vuex'
+import VueRouter from 'vue-router'
 
 // layouts
 import App from './views/App.vue'
@@ -20,9 +24,15 @@ import Home from './views/Home.vue'
 import Authenticate from './views/Authenticate.vue'
 import Register from './views/Register.vue'
 
-// bind vue router and vuex package
+// main store
+import Store from './vuex'
+
+// bind vue packages
 Vue.use(VueRouter)
 Vue.use(Vuex)
+
+// enable Vue.JS Developer tools
+Vue.config.devtools = true
 
 // define the routers
 const router = new VueRouter({
@@ -32,8 +42,15 @@ const router = new VueRouter({
 		{ path: '/auth', 		name: 'auth', 		component: require('./views/Authenticate') },
 		{ path: '/register', 	name: 'signup', 	component: require('./views/Register') }
 	]
-})
-// const app_router = new VueRouter(AppRouter)
+}) 
+
+// const router = new VueRouter({
+// 	mode: 'history',
+// 	routes: [
+// 		{ path: '/app/dashboard',	name: 'home-dashboard', component: require('./views/App') },
+// 		{ path: '/app/dashboard/tasks', name: 'dasboard-tasks', component: require('./views/App-tasks') } 
+// 	]
+// })
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -47,9 +64,12 @@ const router = new VueRouter({
 const home = new Vue({
   el: '#home',
   router,
+  Store
 })
 
 // const app = new Vue({
 //     el: '#app',
 //     components: { App },
+//     router,
+//     Store
 // });

@@ -11,6 +11,8 @@
 |
 */
 
+\Auth::loginUsingId(1);
+
 
 // Route::get('/', function () {
 // 	return view('welcome');
@@ -19,8 +21,7 @@
 // Route::get('/', function () {
 // 	return csrf_token();
 // });
-// Auth::routes();
-Route::post('login', 'LoginController@login');
+Auth::routes();
 
 Route::get('/{any}', 'SpaController@index')->where('any', '.*');
 

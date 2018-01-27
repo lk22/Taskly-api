@@ -83,14 +83,21 @@
 </template>
 
 <script>
+	import axios from 'axios'
+	import Store from './../../vuex'
+
 	export default {
 		data(){
 			return {
 				error: false,
 				username: '',
 				password: '',
-
+				success: false
 			}
+		},
+
+		mounted() {
+			console.log('Authentication component mounted')
 		},
 
 		methods: {
@@ -104,11 +111,35 @@
 					this.error = true
 					let seconds = 10
 
-					setTimeout(() => {
+					setInterval(() => {
 						seconds--
-						if(seconds === 0)
+						if(seconds = 0)
 							this.error = false
 					}, 10000)
+				} 
+
+				// if both username and password is set
+				if (this.username && this.password) {
+
+					// make api call
+					Store.dispatch('auth/login', {
+
+						// credentials to associate with the request
+						username: this.username,
+						password: this.password
+					
+					}).then(() => {
+
+						this.success = true
+
+						// setInterval(() => {
+						// 	this.$router.replace({path: '/app/dashboard/tasklists'})
+						// }, 3000)
+
+						// naviagte to app routes
+						this.$router.replace({path: '/app/dashboard/tasklists'})
+					})
+
 				}
 			}
 		},

@@ -8,5 +8,8 @@
     </div>
 </template>
 <script>
-    export default {}
+	import Sidebar from './../components/app/Sidebar'
+    export default {
+    	components: { Sidebar }
+    }
 </script>

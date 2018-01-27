@@ -1,4 +1,5 @@
 // packages
+import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 
@@ -7,7 +8,9 @@ import auth from './store/auth'
 
 const plugins = []
 
-export const store = () => new Vuex.Store({
+Vue.use(Vuex)
+
+const Store = new Vuex.Store({
 
 	// differen Vuex state modules
 	modules: {
@@ -26,3 +29,5 @@ export const store = () => new Vuex.Store({
 		})
 	],
 });
+
+export default Store

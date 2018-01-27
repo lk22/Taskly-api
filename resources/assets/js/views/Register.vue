@@ -104,7 +104,10 @@
 	import AuthForm from './../components/auth/Auth-form.vue'
 
 	export default {
-		components: {Header, SignupForm, AuthForm}
+		components: {Header, SignupForm, AuthForm},
+		mounted() {
+			console.log("User registration page mounted")
+		}
 	}
 </script>
 
