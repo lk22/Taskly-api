@@ -19,7 +19,7 @@
 					</li>
 
 					<li class="nav__navigation--item">
-						<a class="item__link" href="/register">Sign up</a>
+						<a class="item__link" href="/signup">Sign up</a>
 					</li>
 				</ul>
 			</div>

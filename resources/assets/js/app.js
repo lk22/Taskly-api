@@ -38,19 +38,27 @@ Vue.config.devtools = true
 const router = new VueRouter({
 	mode: 'history',
 	routes: [
-		{ path: '/', 			name: 'home', 		component: require('./views/Home') },
-		{ path: '/auth', 		name: 'auth', 		component: require('./views/Authenticate') },
-		{ path: '/register', 	name: 'signup', 	component: require('./views/Register') }
+		// homepages routes
+		{ path: '/', 				name: 'home', 		component: require('./views/Home') },
+		{ path: '/auth', 			name: 'auth', 		component: require('./views/Authenticate') },
+		{ path: '/signup', 		name: 'signup', 	component: require('./views/Register') },
+		
+		// dashboard routes
+		{ path: '/app/dashboard',  	name: 'home-dashboard', 	component: require('./views/App'), children: [
+			{ path: '/tasks', 		name: 'dashboard-tasks', 	component: require('./views/App-tasks') },
+
+			// user settings routes
+			{ path: '/user/:slug/settings', name: 'authenticated-user', 	component: require('./views/user/Settings'), children: [
+				
+				// profile settings route
+				{ path: '/profile', 		name: 'user-profile-settings', 	component: require('./views/user/Profile') },
+
+				// company settings route
+				{ path: '/company:company', name: 'user-company-settings', 	component: require('./views/user/Company') }
+			]}
+		]}
 	]
 }) 
-
-// const router = new VueRouter({
-// 	mode: 'history',
-// 	routes: [
-// 		{ path: '/app/dashboard',	name: 'home-dashboard', component: require('./views/App') },
-// 		{ path: '/app/dashboard/tasks', name: 'dasboard-tasks', component: require('./views/App-tasks') } 
-// 	]
-// })
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -58,7 +66,6 @@ const router = new VueRouter({
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-//Vue.component('example-component', require('./components/ExampleComponent.vue'));
 
 //homepage instance
 const home = new Vue({

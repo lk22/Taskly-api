@@ -1,9 +1,12 @@
 <template>
     <div id="taskly-app">
-        <h1>Vue Router Demo App</h1>
-
-
-        <div class="container">
+		<div class="col-md-1 app-sidebar">
+            <Sidebar />
+        </div>
+        <div class="col-md-11 app-content">
+            <div class="container-fluid app-content">
+            	
+            </div>
         </div>
     </div>
 </template>
