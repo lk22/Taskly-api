@@ -49,6 +49,13 @@ Route::get('/', function () {
 		 ->name('user.single.api')
 		 ->uses('UserController@user');
 
+	/**
+	 * Authenticated user
+	 */
+	Route::get('/auth')
+		 ->name('user.auth.api')
+		 ->uses('UserController@auth');
+
 // user auth routes
 Route::post('/login')->name('login.api')->uses('UserController@login');
 Route::post('/register')->name('register.api')->uses('UserController@register');

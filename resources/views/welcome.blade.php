@@ -68,9 +68,9 @@
     </head>
     <body>
         <div id="home">
-            <Header></Header>
+{{--             <Header></Header>
 
-            <router-view></router-view>
+            <router-view></router-view> --}}
         </div>
 
         <script src="{{ mix('js/app.js') }}"></script>

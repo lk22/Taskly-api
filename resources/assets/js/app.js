@@ -15,10 +15,10 @@ require("babel-polyfill");
 import Vue from 'vue'
 import Vuex from 'vuex'
 import VueRouter from 'vue-router'
+import axios from 'axios'
 
 // layouts
-import App from './views/App.vue'
-import Home from './views/Home.vue'
+// import App from './views/App'
 
 // views
 import Authenticate from './views/Authenticate.vue'
@@ -39,22 +39,22 @@ const router = new VueRouter({
 	mode: 'history',
 	routes: [
 		// homepages routes
-		{ path: '/', 				name: 'home', 		component: require('./views/Home') },
-		{ path: '/auth', 			name: 'auth', 		component: require('./views/Authenticate') },
-		{ path: '/signup', 		name: 'signup', 	component: require('./views/Register') },
+		// { path: '/', 				name: 'home', 		component: require('./views/Home') },
+		// { path: '/auth', 			name: 'auth', 		component: require('./views/Authenticate') },
+		// { path: '/signup', 			name: 'signup', 	component: require('./views/Register') },
 		
 		// dashboard routes
-		{ path: '/app/dashboard',  	name: 'home-dashboard', 	component: require('./views/App'), children: [
-			{ path: '/tasks', 		name: 'dashboard-tasks', 	component: require('./views/App-tasks') },
+		{ path: '/app/dashboard/',  name: 'home-dashboard',	component: require('./views/App'), children: [
+			{ path: '/app/dashboard/tasks', name: 'dashboard-tasks', component: require('./views/App-tasks') },
 
 			// user settings routes
-			{ path: '/user/:slug/settings', name: 'authenticated-user', 	component: require('./views/user/Settings'), children: [
+			{ path: '/app/dashboard/user/:slug/settings', name: 'authenticated-user', component: require('./views/user/Settings'), children: [
 				
 				// profile settings route
-				{ path: '/profile', 		name: 'user-profile-settings', 	component: require('./views/user/Profile') },
+				{ path: '/app/dashboard/user/:slug/settings/profile', 	name: 'user-profile-settings', component: require('./views/user/Profile') },
 
 				// company settings route
-				{ path: '/company:company', name: 'user-company-settings', 	component: require('./views/user/Company') }
+				{ path: '/app/dashboard/user/:slug/settings/company/:company', name: 'user-company-settings', component: require('./views/user/Company') }
 			]}
 		]}
 	]
@@ -66,17 +66,8 @@ const router = new VueRouter({
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-
-//homepage instance
-const home = new Vue({
-  el: '#home',
-  router,
-  Store
-})
-
-// const app = new Vue({
-//     el: '#app',
-//     components: { App },
-//     router,
-//     Store
-// });
+const app = new Vue({
+    el: '#app',
+    router,
+    Store
+});

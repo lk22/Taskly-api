@@ -1,22 +1,20 @@
-<script>
-    export default {}
-</script>
-
 <template>
 	<div>
 		<div id="sidebar" class="sidebar">
 			<div class="sidebar__inner">
 				<div class="sidebar__link">
-					<i class="fa fa-bars"></i>
+					<router-link :to="{name: 'dashboard-tasks'}"><i class="fa fa-bars"></i></router-link>
 				</div>
-				<div class="sidebar__link">
+				<!-- <div class="sidebar__link">
 					<i class="fa fa-file-excel-o"></i>
+					<a href="/app/dashboard/?export=excel">Export excel</a>
 				</div>
 				<div class="sidebar__link">
 					<i class="fa fa-file-pdf-o"></i>
-				</div>
+					<a href="/app/dashboard/?export=pdf">Export pdf</a>
+				</div> -->
 				<div class="sidebar__link">
-					<i class="fa fa-cog"></i>
+					<router-link :to="{name: 'authenticated-user'}"><i class="fa fa-cog"></i></router-link>
 				</div>
 				<div class="bottom">
 					<i class="fa fa-user"></i>
