@@ -3,8 +3,8 @@
 		<div class="head__inner">
 			<div class="inner--content">
 				<div class="content__row row">
-					<div class="row--heading col-md-3 col-lg-3">
-						<slot name="auth">Michael Hansen</slot> - {{ page }}
+					<div class="row--heading hidden-xs hidden-sm col-md-3 col-lg-3">
+						{{fullname}} - {{ page }}
 					</div>
 
 					<div class="row--searchBar col-md-6 col-lg-6">
@@ -12,7 +12,7 @@
 					</div>
 
 					<div class="row--create-button col-md-3 col-lg-3">
-						<slot name="create-task-button"></slot>
+						<slot></slot>
 					</div>
 				</div>
 			</div>
@@ -21,13 +21,54 @@
 </template>
 
 <script>
-	
 	export default {
 		props: {
 			page:{
 				type: String,
 				required: true
 			}
+		},
+
+		computed: {
+			fullname() {
+				return this.$store.getter['auth/fullName']
+			}
 		}
 	}
 </script>
+
+<style lang="scss">
+	
+	#app-head {
+		font-family: 'Raleway';
+		height: 100px;
+		width: 100%;
+		margin-left: -30px;
+		
+		.head__inner{
+			padding-top: 3rem;
+			border-bottom: 1px solid #eee;
+			padding-left:15px;
+			padding-right: 15px;
+			height:70px;
+			
+			.inner--content{
+				.content__row{
+					.row--heading{
+						color: #00b0eb;
+					}
+
+					.row--create-button{
+						.btn {
+							border-color: #00b0eb; 
+							background: transparent;
+							color: #00b0eb;
+							margin-top: -10px;
+						}
+					}
+				}
+			}
+		}
+	}
+
+</style>

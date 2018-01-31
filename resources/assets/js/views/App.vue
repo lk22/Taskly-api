@@ -1,23 +1,10 @@
 <template>
-    <div id="app">
+    <div id="app" class="dashboard">
 		<div class="col-md-1 app-sidebar">
             <Sidebar />
         </div>
-        <div class="col-md-11 app-content">
+        <div class="col-md-11 dashboard__content">
             <div class="container-fluid app-content">
-                <div class="row">
-                    <Header page="tasks">
-                        <slot name="auth">{{ auth }}</slot>
-                        <slot name="create-task-button">
-                            <button 
-                                class="create-task-btn btn btn-primary" 
-                                @click="task.create.creating = true"
-                            >
-                                Create new task
-                            </button>
-                        </slot>
-                    </Header>
-                </div>
             	<router-view></router-view>
             </div>
         </div>
@@ -37,9 +24,7 @@
             }
         },
         mounted() {
-            axios.get('/api/v1/auth').then((response) => {
-                console.log(response.data.name)
-            })
+            this.$store.dispatch('auth/getAuth', null)
         }
     }
 </script>

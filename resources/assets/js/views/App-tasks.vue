@@ -1,5 +1,15 @@
 <template>
     <div id="app-tasks">
+        <div class="row">
+            <Header page="tasks">
+                <button 
+                    class="create-task-btn btn btn-primary" 
+                    @click="task.create.creating = true"
+                >
+                    Create new task
+                </button>
+            </Header>
+        </div>
         <div class="tasks__create--container" v-if="task.create.creating === true">
                 
                 <!-- form component -->
@@ -16,7 +26,8 @@
                         <div class="form-group work_hours-field col-md-1 col-lg-1">
                             <label for="work_hours">Work hours</label>
 
-                            <input 
+                            <input
+                                v-model="task.create.work_hours"
                                 type="number" 
                                 class="form-control" 
                                 name="work_hours"
@@ -31,6 +42,7 @@
                                 <label for="weekday">Week day</label>
 
                                 <input 
+                                    v-model="task.create.week_day"
                                     type="text" 
                                     name="week_day" 
                                     class="form-control"
@@ -42,6 +54,7 @@
                                 <label for="week">Week</label>
 
                                 <input 
+                                    v-model="task.create.week"
                                     type="number"
                                     name="week"
                                     class="form-control"
@@ -58,7 +71,8 @@
                                 <option value="{{ location.id }}">{{ location.name }}</option>
                             </select> -->
 
-                            <input 
+                            <input
+                                v-model="task.create.location"
                                 type="text"
                                 name="location"
                                 class="form-control"
@@ -70,6 +84,7 @@
                             <label for="supplier">Supplier</label>
 
                             <input 
+                                v-model="task.create.supplier"
                                 type="text"
                                 name="supplier"
                                 class="form-control"
@@ -81,6 +96,7 @@
                             <label for="weekeend">Weekend / Evening</label>
 
                             <input 
+                                v-model="task.create.weekend"
                                 type="checkbox"
                                 name="weekend"
                                 class="form-control"
@@ -91,13 +107,25 @@
                         <div class="form-group comment-field col-md-3 col-lg-3">
                             <label for="comment">Comment</label>
 
-                            <textarea 
+                            <textarea
+                                v-model="task.create.comment"
                                 name="comment" 
                                 id="comment" 
                                 cols="20" 
                                 rows="5"
                                 class="form-control"
                             ></textarea>
+                        </div>
+
+                        <div class="row submit">
+                            
+                            <!-- submit button -->
+                            <div class="form-group">
+                                <button
+                                    @click="createTask"
+                                    class="submit-task-btn btn btn-primary"
+                                ></button>
+                            </div>
                         </div>
                     </div>
                 </form>
@@ -115,7 +143,7 @@
             return {
                 task: {
                     create: {
-                        creating:       true,  // if user wants to create a new tasks
+                        show:           true,  // if user wants to create a new tasks
                         week_hours:     '',     // defining work hours
                         week_day:       '',     // defining week day of the task
                         week:           '',     // defining week number of the task

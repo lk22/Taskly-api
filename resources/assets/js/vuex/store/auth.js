@@ -3,7 +3,8 @@ import Axios from 'axios'
 
 const types = {
 	AUTHENTICATE:   'AUTHENTICATE',
-	REGISTER: 		'REGISTER'
+	REGISTER: 		'REGISTER',
+	FETCH_AUTH: 	'FETCH_AUTH'
 };
 
 const auth = {
@@ -30,8 +31,8 @@ const auth = {
 		},
 
 		// get the authenticated users full name
-		getFullName: state => {
-			return state.data.name
+		fullName: state => {
+			return state.authUser.name
 		}
 
 	},
@@ -52,13 +53,37 @@ const auth = {
 		 */
 		[types.REGISTER](state, user) {
 			state.authUser = user
+		},
+
+		// fetching authenticated user
+		[types.FETCH_AUTH](state, user) {
+			state.authUser = user
 		}
+
+
 	},
 
 	/**
 	 * Defining Actions for the authenticated user
 	 */
 	actions: {
+
+		/**
+		 * fetch auth
+		 */
+		async getAuth(context) {
+
+			const data = await Axios.get('/api/v1/auth').then((auth) => {
+				console.log(auth.data)
+
+				const user = auth.data
+
+				context.commit(types.FETCH_AUTH, user);
+			}).catch((exception) => {
+
+			})
+
+		},
 
 		/**
 		 * Authenticate the user

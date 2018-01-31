@@ -30,15 +30,23 @@
 		width: 100%; 
 		border-right: 1px solid #809ed3;
 		background: #fff;
-		padding:none;
+		padding:0px;
+		
+		@media screen and(max-width: 400px) {
+			min-height: 100px;
+		}
 
 		.sidebar__inner{
 			padding: 1.5rem;
 
 			.sidebar__link{
-				color: #00b0eb;
+				
 				padding-top: 1.5rem;
 				padding-left: 0.5rem;
+			
+				a{
+					color: #00B0EB; 
+				}
 			}
 
 			.bottom{
