@@ -10,26 +10,6 @@
 
     <title>Taskly || {{ auth()->user()->name }}</title>
 
-    <script>
-    	<?php 
-
-        	$auth = auth()->user();
-        	$env = app()->environment();
-        	$csrf = csrf_token();
-
-        	$js_vars = [
-        		'auth' => $auth,
-        		'env'  => $env,
-        		'csrf' => $csrf
-        	];
-
-        	$js_variables = array_merge($js_vars, (isset($js_variables)) ? $js_variables : []);
-
-    		echo 'var Taskly = ' . json_encode($js_variables) . ';';
-
-    	?> 
-    	console.log("Taskly ", Taskly);
-    </script>
 </head>
 <body>
     <div id="app">
