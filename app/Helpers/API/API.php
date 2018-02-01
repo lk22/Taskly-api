@@ -20,7 +20,7 @@ class API
      */
     public static function queryString($query)
     {
-        if (app()->environment() === 'development') {
+        if (app()->environment() === 'local') {
             return $query->toSql();
         }
     }
