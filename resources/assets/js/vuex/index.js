@@ -10,13 +10,13 @@ const plugins = []
 
 Vue.use(Vuex)
 
-const debug = process.env.NODE_ENV !== 'production'
+// const debug = process.env.NODE_ENV !== 'production'
 
-const Store = new Vuex.Store({
+const store = new Vuex.Store({
 
 	// differen Vuex state modules
 	modules: {
-		auth,
+		auth, 
 	},
 
 	// Vuex plugins to use
@@ -32,4 +32,4 @@ const Store = new Vuex.Store({
 	],
 });
 
-export default Store
+export default store

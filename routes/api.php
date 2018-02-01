@@ -13,7 +13,9 @@ use Illuminate\Http\Request;
 |
 */
 
-//Auth::loginUsingId(1);
+// user auth routes
+Route::post('/login')->name('login.api')->uses('UserController@login');
+Route::post('/register')->name('register.api')->uses('UserController@register');
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -31,8 +33,6 @@ Route::get('/', function () {
 //     })->firstOrFail();
 // });
 
-
-// Route::post('/get-details')->uses('API\PassportController@getDetails');
 
 
 /**
@@ -56,9 +56,6 @@ Route::get('/', function () {
 		 ->name('user.auth.api')
 		 ->uses('UserController@auth');
 
-// user auth routes
-Route::post('/login')->name('login.api')->uses('UserController@login');
-Route::post('/register')->name('register.api')->uses('UserController@register');
 
 /**
  * Tasks API Endpoints

@@ -17,19 +17,15 @@ import Vuex from 'vuex'
 import VueRouter from 'vue-router'
 import axios from 'axios'
 
-// layouts
-// import App from './views/App'
-
 // views
 import Authenticate from './views/Authenticate.vue'
 import Register from './views/Register.vue'
 
 // main store
-import Store from './vuex'
+import store from './vuex'
 
 // bind vue packages
 Vue.use(VueRouter)
-Vue.use(Vuex)
 
 // enable Vue.JS Developer tools
 Vue.config.devtools = true
@@ -50,7 +46,7 @@ const router = new VueRouter({
 			// user settings routes
 			{ path: '/app/dashboard/user/:slug/settings', name: 'authenticated-user', component: require('./views/user/Settings'), children: [
 				
-				// profile settings route
+				// profile settings route 
 				{ path: '/app/dashboard/user/:slug/settings/profile', 	name: 'user-profile-settings', component: require('./views/user/Profile') },
 
 				// company settings route
@@ -69,5 +65,6 @@ const router = new VueRouter({
 const app = new Vue({
     el: '#app',
     router,
-    Store
+    store,
+    data: Taskly
 });

@@ -14,6 +14,7 @@
 	import Sidebar from './../components/app/Sidebar'
     import Header from './../components/app/Header'
     import axios from 'axios'
+    
     export default {
     	components: { Sidebar, Header },
         computed: {
@@ -21,10 +22,14 @@
                 axios.get('api/v1/auth').then((response) => {
                     return response.data
                 })
-            }
+            },
         },
         mounted() {
-            this.$store.dispatch('auth/getAuth', null)
+            // axios.get('/api/v1/auth').then((auth) => {
+            //     console.log(auth.data)
+            // })
+            // return this.$store.getters['auth/getAuth']
+            // console.log("Taskly in vue instance " + Taskly);
         }
     }
 </script>

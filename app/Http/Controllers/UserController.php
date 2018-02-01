@@ -68,6 +68,9 @@ class UserController extends Controller
      */
     public function login(Request $request)
     {
+
+
+
         /**
          * Validating request
          */
@@ -92,13 +95,14 @@ class UserController extends Controller
          * adding oauth/token endpoint to Routes group
          * @var [type]
          */
-        $proxy = Request::create('oauth/token', 'POST');
+        $proxy = Request::create('/oauth/token', 'POST');
 
         /**
          * Dispatch the creationg of the route creation
          * @var [type]
          */
         $response = Route::dispatch($proxy);
+
 
         /**
          * casting the content to JSON

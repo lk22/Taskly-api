@@ -122,9 +122,10 @@
                             <!-- submit button -->
                             <div class="form-group">
                                 <button
-                                    @click="createTask"
                                     class="submit-task-btn btn btn-primary"
-                                ></button>
+                                >
+                                    Create
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -143,7 +144,7 @@
             return {
                 task: {
                     create: {
-                        show:           true,  // if user wants to create a new tasks
+                        creating:       false,  // if user wants to create a new tasks
                         week_hours:     '',     // defining work hours
                         week_day:       '',     // defining week day of the task
                         week:           '',     // defining week number of the task

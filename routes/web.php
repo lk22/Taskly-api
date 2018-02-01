@@ -11,9 +11,9 @@
 |
 */
 
-\Auth::loginUsingId(1);
+// \Auth::loginUsingId(1);
 
-Auth::routes();
+// Auth::routes();
 
 // Route::get('/{any}', 'SpaController@index')->where('any', '.*');
 

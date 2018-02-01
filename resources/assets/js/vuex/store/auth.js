@@ -32,7 +32,7 @@ const auth = {
 
 		// get the authenticated users full name
 		fullName: state => {
-			return state.authUser.name
+			return state.data.name
 		}
 
 	},
@@ -78,7 +78,9 @@ const auth = {
 
 				const user = auth.data
 
-				context.commit(types.FETCH_AUTH, user);
+				context.commit(types.FETCH_AUTH, {
+					...user
+				});
 			}).catch((exception) => {
 
 			})

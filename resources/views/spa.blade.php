@@ -9,34 +9,27 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
     <title>Taskly || {{ auth()->user()->name }}</title>
-    <style>
 
+    <script>
+    	<?php 
 
-		#home .app-sidebar #sidebar{
-			min-height: 800px;
-			width: 100%; 
-			border-right: 1px solid #809ed3;
-			background: #fff;
-			padding:none;
-		}
+        	$auth = auth()->user();
+        	$env = app()->environment();
+        	$csrf = csrf_token();
 
-		#home .app-sidebar #sidebar .sidebar__inner{
-			padding: 1.5rem;
-		}
+        	$js_vars = [
+        		'auth' => $auth,
+        		'env'  => $env,
+        		'csrf' => $csrf
+        	];
 
-		#home .app-sidebar #sidebar .sidebar__inner .sidebar__link{
-			color: #00b0eb;
-			padding-top: 1.5rem;
-			padding-left: 0.5rem;
-		}
+        	$js_variables = array_merge($js_vars, (isset($js_variables)) ? $js_variables : []);
 
-		#home .app-sidebar #sidebar .sidebar__inner .bottom{
-			position: absolute;
-				bottom: 10px;
-				left: 2.5rem;
-				color: #00B0EB;
-		}
-    </style>
+    		echo 'var Taskly = ' . json_encode($js_variables) . ';';
+
+    	?> 
+    	console.log("Taskly ", Taskly);
+    </script>
 </head>
 <body>
     <div id="app">
@@ -45,5 +38,6 @@
 
     <script src="{{ mix('js/app.js') }}"></script>
     <script src="https://use.fontawesome.com/5964f513fc.js"></script>
+
 </body>
 </html>
