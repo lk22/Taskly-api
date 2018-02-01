@@ -1,7 +1,7 @@
 <template>
 	<!-- authentication wrapper -->
 	<div class="taskly-auth">
-		<Header/>
+
 		<!-- auth container -->
 		<div class="auth__container">
 			
@@ -30,7 +30,7 @@
 	import AuthForm from './../components/auth/Auth-form.vue'
 
 	export default {
-		components: {Header, SignupForm, AuthForm},
+		components: {SignupForm, AuthForm},
 		mounted() { console.log("User authentication page mounted") }
 	}
 </script>
@@ -42,6 +42,8 @@
 		width: 100%; 
 		background-image: url('./../../images/workspace-820315_1920.jpg');
 		background-size: cover;
+		padding-top:2rem;
+		
 		
 		// auth container wrapper
 		.auth__container{

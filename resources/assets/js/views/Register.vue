@@ -1,7 +1,6 @@
 <template>
 	<!-- authentication wrapper -->
 	<div class="taskly-register">
-		<Header/>
 		
 		<!-- auth container -->
 		<div class="register__container">
@@ -118,6 +117,7 @@
 		width: 100%; 
 		background-image: url('./../../images/workspace-820315_1920.jpg');
 		background-size: cover;
+		padding-top:2rem;
 		
 		// auth container wrapper
 		.register__container{

@@ -44,6 +44,7 @@
 		width: 100%;
 		background: #809ed3;
 		color: #fff;
+		font-family: 'Raleway';
 		
 		// brand container
 		.brand{

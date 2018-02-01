@@ -10,7 +10,7 @@ const plugins = []
 
 Vue.use(Vuex)
 
-// const debug = process.env.NODE_ENV !== 'production'
+const debug = process.env.NODE_ENV !== 'production'
 
 const store = new Vuex.Store({
 

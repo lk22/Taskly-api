@@ -30,14 +30,17 @@ Vue.use(VueRouter)
 // enable Vue.JS Developer tools
 Vue.config.devtools = true
 
-// define the routers
+// define the routers 
 const router = new VueRouter({
 	mode: 'history',
 	routes: [
 		// homepages routes
-		// { path: '/', 				name: 'home', 		component: require('./views/Home') },
-		// { path: '/auth', 			name: 'auth', 		component: require('./views/Authenticate') },
-		// { path: '/signup', 			name: 'signup', 	component: require('./views/Register') },
+		{ path: '/', 					name: 'home', 		component: require('./views/Home'), 
+
+		children: [
+			{ path: '/auth', 			name: 'auth', 		component: require('./views/Authenticate') },
+			{ path: '/signup', 			name: 'signup', 	component: require('./views/Register') },
+		]},
 		
 		// dashboard routes
 		{ path: '/app/dashboard/',  name: 'home-dashboard',	component: require('./views/App'), children: [
@@ -66,5 +69,4 @@ const app = new Vue({
     el: '#app',
     router,
     store,
-    data: Taskly
 });

@@ -17,4 +17,4 @@
 
 // Route::get('/{any}', 'SpaController@index')->where('any', '.*');
 
-Route::get('/app/dashboard{any}/', 'SpaController@app')->where('any', '.*');
+Route::get('/{any}', 'SpaController@app')->where('any', '.*');

@@ -4,7 +4,7 @@
 			<div class="inner--content">
 				<div class="content__row row">
 					<div class="row--heading hidden-xs hidden-sm col-md-3 col-lg-3">
-						{{ Taskly.auth.firstname }} {{ Taskly.auth.lastname }} - {{ page }}
+						Michael Hansen - {{ page }}
 					</div>
 
 					<div class="row--searchBar col-md-6 col-lg-6">

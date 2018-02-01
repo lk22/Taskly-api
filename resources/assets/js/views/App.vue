@@ -25,11 +25,7 @@
             },
         },
         mounted() {
-            // axios.get('/api/v1/auth').then((auth) => {
-            //     console.log(auth.data)
-            // })
-            // return this.$store.getters['auth/getAuth']
-            // console.log("Taskly in vue instance " + Taskly);
+            
         }
     }
 </script>
