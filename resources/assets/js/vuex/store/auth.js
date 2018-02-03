@@ -148,7 +148,23 @@ const auth = {
 				company_address: 	company_address
 			}).then( (response) => {
 
+
 				console.log(response)
+
+				Axios.post('/register', {
+					email,
+					username,
+					password,
+					confirm_password
+				}).then( (response) => {
+
+				console.log(response)
+				
+				const user = response.data.registratedUser
+
+				context.commit(types.REGISTER, {
+					...user
+				})
 
 				const user = response.data.registratedUser
 

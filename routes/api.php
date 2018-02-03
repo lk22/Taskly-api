@@ -32,16 +32,12 @@ use Illuminate\Http\Request;
 	    	return $request->user();
 		});
 
-
-
 		/**
 		 * Authenticated user
 		 */
 		Route::get('/auth')
 			 ->name('user.auth.api')
 			 ->uses('UserController@auth');
-
-		
 
 	/**
 	 * Tasks API Endpoints
@@ -96,5 +92,3 @@ use Illuminate\Http\Request;
 		Route::delete('/tasks/{slug}/delete-task')
 			 ->name('task.delete.api')
 			 ->uses('TaskController@delete');
-
-	
