@@ -161,7 +161,7 @@ class UserController extends Controller
         /**
          * check for failing request
          */
-        if (
+        if ( 
             $validator->fails() || 
             $company_validation->falis()
         ) {
@@ -216,7 +216,7 @@ class UserController extends Controller
             ],
             'user' => $profile,
           ];
-          
+
           // giving success response in return to client
           return response()->json($successResponse);
     }
