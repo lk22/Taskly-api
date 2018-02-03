@@ -146,7 +146,6 @@ const auth = {
 				.then( (response) => {
 
 					console.log(response)
-
 					const user = response.data.registratedUser
 
 					context.commit(types.REGISTER, {
