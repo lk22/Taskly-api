@@ -2,10 +2,10 @@
 	<!-- authentication wrapper -->
 	<div class="taskly-auth">
 
-		<!-- auth container -->
+		<!-- authentication container -->
 		<div class="auth__container">
 			
-			<!-- signin container -->
+			<!-- sign in container -->
 			<div class="auth__container--signin">
 
 				<!-- heading -->
@@ -16,8 +16,8 @@
 				<!-- Authentication form -->
 				<AuthForm></AuthForm>
 			
-			</div> <!-- signin container end -->
-		</div> <!-- auth container end -->
+			</div> <!-- sign in container end -->
+		</div> <!-- authentication container end -->
 	</div> <!-- authentication wrapper end -->
 </template>
 
@@ -36,7 +36,7 @@
 </script>
 
 <style lang="scss">
-	// auth wrapper
+	// authentication wrapper
 	.taskly-auth{
 		height: 800px;
 		width: 100%; 
@@ -45,7 +45,7 @@
 		padding-top:2rem;
 		
 		
-		// auth container wrapper
+		// authentication container wrapper
 		.auth__container{
 			min-height:550px;
 			width: 65%;

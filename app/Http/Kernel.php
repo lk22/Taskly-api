@@ -38,7 +38,6 @@ class Kernel extends HttpKernel
             \Taskly\Http\Middleware\VerifyCsrfToken::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \Laravel\Passport\Http\Middleware\CreateFreshApiToken::class,
-            \Barryvdh\Cors\HandleCors::class,
         ],
 
         'api' => [
@@ -63,5 +62,6 @@ class Kernel extends HttpKernel
         'guest' => \Taskly\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'client' => CheckClientCredentials::class,
+        'auth:client' => \Taskly\Http\Middleware\EnforeJson::class
     ];
 }

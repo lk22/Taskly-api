@@ -5,7 +5,9 @@
 
 			<!-- brand -->
 			<div class="col-md-3 brand">
-				<h1 class="navbar-brand">{{ brand }}</h1>
+				<h1 class="navbar-brand">
+					<router-link :to="{name: 'home'}">{{ brand }}</router-link>
+				</h1>
 			</div>
 
 			<div class="col-md-3 col-md-offset-6 header-nav">
@@ -15,11 +17,11 @@
 					</li>
 
 					<li class="nav__navigation--item">
-						<a class="item__link" href="/auth">Sign in</a>
+						<router-link class="item__link" :to="{name: 'auth'}">Sign in</router-link>
 					</li>
 
 					<li class="nav__navigation--item">
-						<a class="item__link" href="/signup">Sign up</a>
+						<router-link class="item__link" :to="{name: 'signup'}">Sign up</router-link>
 					</li>
 				</ul>
 			</div>
@@ -51,8 +53,9 @@
 
 			// the brand
 			.navbar-brand{
-				font-size: 30px;
+				font-size: 22px;
 				line-height: 0.2;
+				a{color:#fff;}
 			}
 		}
 

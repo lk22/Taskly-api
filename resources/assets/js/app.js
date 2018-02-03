@@ -13,51 +13,18 @@ require("babel-polyfill");
 
 // window.Vue = require('vue');
 import Vue from 'vue'
-import Vuex from 'vuex'
-import VueRouter from 'vue-router'
-import axios from 'axios'
+import request from './helpers/Request'
 
 // views
 import Authenticate from './views/Authenticate.vue'
 import Register from './views/Register.vue'
 
 // main store
-import store from './vuex'
-
-// bind vue packages
-Vue.use(VueRouter)
+import store from './vuex/store'
+import router from './router'
 
 // enable Vue.JS Developer tools
 Vue.config.devtools = true
-
-// define the routers 
-const router = new VueRouter({
-	mode: 'history',
-	routes: [
-		// homepages routes
-		{ path: '/', 					name: 'home', 		component: require('./views/Home'), 
-
-		children: [
-			{ path: '/auth', 			name: 'auth', 		component: require('./views/Authenticate') },
-			{ path: '/signup', 			name: 'signup', 	component: require('./views/Register') },
-		]},
-		
-		// dashboard routes
-		{ path: '/app/dashboard/',  name: 'home-dashboard',	component: require('./views/App'), children: [
-			{ path: '/app/dashboard/tasks', name: 'dashboard-tasks', component: require('./views/App-tasks') },
-
-			// user settings routes
-			{ path: '/app/dashboard/user/:slug/settings', name: 'authenticated-user', component: require('./views/user/Settings'), children: [
-				
-				// profile settings route 
-				{ path: '/app/dashboard/user/:slug/settings/profile', 	name: 'user-profile-settings', component: require('./views/user/Profile') },
-
-				// company settings route
-				{ path: '/app/dashboard/user/:slug/settings/company/:company', name: 'user-company-settings', component: require('./views/user/Company') }
-			]}
-		]}
-	]
-}) 
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

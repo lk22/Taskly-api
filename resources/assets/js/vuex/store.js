@@ -2,6 +2,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
+import * as Cookies from 'js-cookie'
 
 // vuex store modules
 import auth from './store/auth'
@@ -16,20 +17,17 @@ const store = new Vuex.Store({
 
 	// differen Vuex state modules
 	modules: {
-		auth, 
+		auth,
 	},
-
-	// Vuex plugins to use
 	plugins: [
-
-		// persist the current state
 		createPersistedState({
 			key: 'taskly',
 			paths: [
-				auth,
+				'auth'
 			]
 		})
 	],
+
 });
 
 export default store

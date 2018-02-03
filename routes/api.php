@@ -13,100 +13,88 @@ use Illuminate\Http\Request;
 |
 */
 
-// user auth routes
-Route::post('/login')->name('login.api')->uses('UserController@login');
-Route::post('/register')->name('register.api')->uses('UserController@register');
+	// user authentication routes
+	Route::post('/login')->name('login.api')->uses('UserController@login');
+	Route::post('/register')->name('register.api')->uses('UserController@register');
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-});
-
-Route::get('/', function () {
-    return response()->json([
-        'response' => 'success'
-    ]);
-})->name('home.api');
-
-// Route::get('/sql-tester', function (\Taskly\Tasklist $tasklist) {
-//     $list = $tasklist->whereId(2)->whereHas('tasks', function ($task) use ($tasklist) {
-//         $task->delete();
-//     })->firstOrFail();
-// });
-
-
-
-/**
- * users API Endpoints
- */
-
-	// all users
-	Route::get('/users')
-		 ->name('users.api')
-		 ->uses('UserController@index');
-
-	// single user
-	Route::get('/user/{user_slug}')
-		 ->name('user.single.api')
-		 ->uses('UserController@user');
+	Route::get('/', function () {
+	    return response()->json([
+	        'response' => 'success'
+		]);
+	});
 
 	/**
-	 * Authenticated user
+	 * users API Endpoints
 	 */
-	Route::get('/auth')
-		 ->name('user.auth.api')
-		 ->uses('UserController@auth');
+
+		// all users 
+		Route::get('/user', function (Request $request) {
+	    	return $request->user();
+		});
 
 
-/**
- * Tasks API Endpoints
- */
 
-	// all tasks
-	Route::get('/tasks')
-		 ->name('tasks.api')
-		 ->uses('TaskController@index');
+		/**
+		 * Authenticated user
+		 */
+		Route::get('/auth')
+			 ->name('user.auth.api')
+			 ->uses('UserController@auth');
 
-	// single task
-	Route::get('/tasks/{slug}')
-		 ->name('task.single.api')
-		 ->uses('TaskController@task');
+		
 
-	// create a task
-	Route::post('/create-task')
-		 ->name('task.create.api')
-		 ->uses('TaskController@create');
+	/**
+	 * Tasks API Endpoints
+	 */
 
-	// update priority
-	Route::patch('/tasks/{slug}/set-priority')
-		 ->name('task.priority.api')
-		 ->uses('TaskController@setPriority');
+		// all tasks
+		Route::get('/tasks')
+			 ->name('tasks.api')
+			 ->uses('TaskController@index');
 
-	// update work hours
-	Route::patch('/tasks/{slug}/set-workhour')
-		 ->name('task.workhour.api')
-		 ->uses('TaskController@setWorkHour');
+		// single task
+		Route::get('/tasks/{slug}')
+			 ->name('task.single.api')
+			 ->uses('TaskController@task');
 
-	// checkout the task
-	Route::patch('/tasks/{id}/checkout-task')
-		 ->name('task.check.api')
-		 ->uses('TaskController@toggleTaskCheck');
+		// create a task
+		Route::post('/create-task')
+			 ->name('task.create.api')
+			 ->uses('TaskController@create');
 
-	// check all tasks
-	Route::patch('/tasks/check-all')
-		 ->name('task.checkAll.api')
-		 ->uses('TaskController@checkAllTasks');
+		// update priority
+		Route::patch('/tasks/{slug}/set-priority')
+			 ->name('task.priority.api')
+			 ->uses('TaskController@setPriority');
 
-	// uncheck all the tasks
-	Route::patch('/tasks/uncheck-all')
-		 ->name('task.uncheckAll.api')
-		 ->uses('TaskController@uncheckALlTasks');
+		// update work hours
+		Route::patch('/tasks/{slug}/set-workhour')
+			 ->name('task.workhour.api')
+			 ->uses('TaskController@setWorkHour');
 
-	// update the task
-	Route::put('/tasks/{slug}/update-task')
-		 ->name('task.update.api')
-		 ->uses('TaskController@update');
+		// checkout the task
+		Route::patch('/tasks/{id}/checkout-task')
+			 ->name('task.check.api')
+			 ->uses('TaskController@toggleTaskCheck');
 
-	// delete the task
-	Route::delete('/tasks/{slug}/delete-task')
-		 ->name('task.delete.api')
-		 ->uses('TaskController@delete');
+		// check all tasks
+		Route::patch('/tasks/check-all')
+			 ->name('task.checkAll.api')
+			 ->uses('TaskController@checkAllTasks');
+
+		// uncheck all the tasks
+		Route::patch('/tasks/uncheck-all')
+			 ->name('task.uncheckAll.api')
+			 ->uses('TaskController@uncheckALlTasks');
+
+		// update the task
+		Route::put('/tasks/{slug}/update-task')
+			 ->name('task.update.api')
+			 ->uses('TaskController@update');
+
+		// delete the task
+		Route::delete('/tasks/{slug}/delete-task')
+			 ->name('task.delete.api')
+			 ->uses('TaskController@delete');
+
+	

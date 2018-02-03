@@ -12,10 +12,10 @@
     <script src="https://use.fontawesome.com/5964f513fc.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
-    @if(auth()->check())
-        <title>{{ config('APP_NAME') }} || {{ auth()->user()->name }}</title>
-    @else
-        <title>{{ config('APP_NAME') }}|| Official</title>
+    @if( auth()->user() )
+        <title>Taskly || Home - {{ auth()->user()->name }}</title>
+    @else 
+        <title>Taskly || Home</title>
     @endif
 </head>
 <body>

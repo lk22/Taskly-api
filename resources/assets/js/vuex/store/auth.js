@@ -1,5 +1,5 @@
+import axios from 'axios'
 
-import Axios from 'axios'
 
 const types = {
 	AUTHENTICATE:   'AUTHENTICATE',
@@ -14,9 +14,8 @@ const auth = {
 	 * @type {Object}
 	 */
 	state: {
-		authUser: 	null,
-		registered: null,
-		data: 		{}
+		authenticated: 	{},
+		registered: 	null,
 	},
 
 	/**
@@ -27,12 +26,12 @@ const auth = {
 
 		// get the authenticated user
 		getAuth: state => {
-			return state.authUser
+			return state.authenticated.auth
 		},
 
 		// get the authenticated users full name
 		fullName: state => {
-			return state.data.name
+			return state.authenticated.auth.firstname + ' ' + state.authenticated.auth.lastname 
 		}
 
 	},
@@ -45,21 +44,15 @@ const auth = {
 		 * Authentication mutator
 		 */
 		[types.AUTHENTICATE](state, user) {
-			state.authUser = user
+			state.authenticated = user
 		},
 
 		/**
 		 * Registration mutator
 		 */
 		[types.REGISTER](state, user) {
-			state.authUser = user
+			state.registered = user
 		},
-
-		// fetching authenticated user
-		[types.FETCH_AUTH](state, user) {
-			state.authUser = user
-		}
-
 
 	},
 
@@ -71,9 +64,9 @@ const auth = {
 		/**
 		 * fetch auth
 		 */
-		async getAuth(context) {
+		getAuth(context) {
 
-			const data = await Axios.get('/api/v1/auth').then((auth) => {
+			Axios.get('/api/v1/auth').then((auth) => {
 				console.log(auth.data)
 
 				const user = auth.data
@@ -90,42 +83,42 @@ const auth = {
 		/**
 		 * Authenticate the user
 		 */
-		async login(context, {
+		login(context, {
 			username, 	// the given username
 			password 	// the given password
 		}) {
 
 			// send the post request with the given credentials
 
-				const data = await Axios.post('/login', {
-					username,
-					password
+			axios.post('/api/v1/login', {
+				username,
+				password
+			}).then( (response)  => {
+
+				// log the response from call
+				console.log(response)
+
+				const auth = response.data.user.data;
+				const token = response.data.token.data.access_token;
+
+				console.log(auth)
+
+				// commit action
+				context.commit(types.AUTHENTICATE, {
+					auth,
+					token
 				})
 
-			// then commit the action to mutator
+				if(!window.localStorage.getItem('access_token' && !window.localStorage.getItem('authenticated'))){
+					window.localStorage.setItem('access_token', token)
+					window.localStorage.setItem('authenticated', auth)
+				}
 
-				.then( (response)  => {
+				console.log(window.localStorage)
 
-					// log the response from call
-					console.log(response)
-
-					const auth = response.data.authUser;
-
-					// commit action
-					context.commit(types.AUTHENTICATE, {
-						...auth
-					})
-
-					// extend call
-					return Promise.resolve();
-				})
-
-			// or catch the error from response
-
-				.catch( (error) => {
-					console.log(error)
-				})
-
+				// extend call
+				return Promise.resolve();
+			});
 		},
 
 		/**
@@ -159,6 +152,8 @@ const auth = {
 					context.commit(types.REGISTER, {
 						...user
 					})
+
+
 
 					return Promise.resolve();
 

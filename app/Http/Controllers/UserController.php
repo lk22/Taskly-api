@@ -26,40 +26,6 @@ class UserController extends Controller
     }
 
     /**
-     * |-----------------------------------------------------------------
-     * |    get all users
-     * |    @return [type] [description]
-     * |-----------------------------------------------------------------
-     */
-    public function index()
-    {
-        return fractal(
-            $this->user->all(),
-            new UsersTransformer()
-        )->toArray();
-    }
-
-    /**
-     * |------------------------------------------------------------------
-     * |    get single user from slug
-     * |    @param  [type] $user_slug [description]
-     * |    @return [type]            [description]
-     * |------------------------------------------------------------------
-     */
-    public function user($user_slug)
-    {
-    	return fractal(
-            $this->user->whereSlug($user_slug)->first(),
-            new UserTransformer()
-        )->toArray();
-    }
-
-    public function auth()
-    {
-        return auth()->user();
-    }
-
-    /**
      * |--------------------------------------------------------------------
      * |    giver user access to API
      * |    @param  Request $request [description]
@@ -68,8 +34,6 @@ class UserController extends Controller
      */
     public function login(Request $request)
     {
-
-
 
         /**
          * Validating request
@@ -238,6 +202,8 @@ class UserController extends Controller
             ],
             'user' => $profile,
           ];
+
+
 
           // giving success response in return to client
           return response()->json($successResponse);

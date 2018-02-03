@@ -131,6 +131,8 @@
                     </div>
                 </form>
             </div>
+
+        <!-- users tasks list -->
     </div>
 </template>
 

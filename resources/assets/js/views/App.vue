@@ -17,15 +17,5 @@
     
     export default {
     	components: { Sidebar, Header },
-        computed: {
-            auth() {
-                axios.get('api/v1/auth').then((response) => {
-                    return response.data
-                })
-            },
-        },
-        mounted() {
-            
-        }
     }
 </script>

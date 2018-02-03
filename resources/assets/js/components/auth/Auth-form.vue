@@ -63,15 +63,21 @@
 
 					<!-- not having a account button -->
 					<div class="form-group not-having-account">
-						<p><a href="/register">Not having a account</a> ?</p>
+						<p><router-link :to="{ name: 'signup'}">Not having an account</router-link> ?</p>
 					</div>
 
 					<!-- 
 						auth notification
 						only shows on error
 					 -->
-					<div class="authentication-notification" v-show="error">
+					<div class="authentication-notification" v-if="error">
 						<div class="alert alert-danger auth-warning">
+							<p>{{ msg }}</p>
+						</div>
+					</div>
+
+					<div class="authentication-notification" v-if="success">
+						<div class="alert alert-success auth-warning">
 							<p>{{ msg }}</p>
 						</div>
 					</div>
@@ -84,7 +90,6 @@
 
 <script>
 	import axios from 'axios'
-	import Store from './../../vuex'
 
 	export default {
 		data(){
@@ -113,31 +118,33 @@
 
 					setInterval(() => {
 						seconds--
-						if(seconds = 0)
+						if(seconds === 0){
 							this.error = false
-					}, 10000)
+							clearInterval()
+						}
+					}, 1000)
 				} 
 
 				// if both username and password is set
 				if (this.username && this.password) {
-
-					// make api call
-					Store.dispatch('auth/login', {
-
-						// credentials to associate with the request
+					
+					this.$store.dispatch('auth/login', {
 						username: this.username,
 						password: this.password
-					
 					}).then(() => {
-
+						
 						this.success = true
+						
+						let count = 10;
+						setInterval(() => {
+							count--
 
-						// setInterval(() => {
-						// 	this.$router.replace({path: '/app/dashboard/tasklists'})
-						// }, 3000)
-
-						// naviagte to app routes
-						this.$router.replace({path: '/app/dashboard/tasklists'})
+							if(count === 0){
+								this.$router.replace({
+									'path': '/app/dashboard/tasks'
+								})
+							}
+						}, 1000)
 					})
 
 				}
@@ -148,6 +155,9 @@
 			msg(){
 				if(this.error)
 					return 'Your credentials seems to be entered wrong try again'
+
+				if(this.success)
+					return 'Authentication success hold on.'
 			}
 		}
 	}

@@ -13,8 +13,4 @@
 
 // \Auth::loginUsingId(1);
 
-// Auth::routes();
-
-// Route::get('/{any}', 'SpaController@index')->where('any', '.*');
-
 Route::get('/{any}', 'SpaController@app')->where('any', '.*');
