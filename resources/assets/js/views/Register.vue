@@ -18,7 +18,7 @@
 			</div> <!-- signup conatiner end -->
 			
 			<!-- signin container -->
-			<div class="col-md-6 register__container--signin">
+			<div class="col-md-6 register__container--signin hidden-xs hidden-sm">
 
 				<!-- heading -->
 				<h3 class="text-center signin__heading">
@@ -53,6 +53,7 @@
 										placeholder="Enter your username here"
 										class="form-control"
 										name="username"
+										v-model="username"
 									>
 								</div> <!-- username field end -->
 
@@ -68,6 +69,7 @@
 										placeholder="Enter your password here"
 										class="form-control"
 										name="password"
+										v-model="password"
 									>
 
 								</div> <!-- password field end -->
@@ -80,15 +82,24 @@
 										type="submit"
 										class="btn btn-primary auth-btn"
 										value="Sign in"
+										@click="authenticate"
 									>
-
 								</div> <!-- auth field end -->
-
 							</div> <!-- field group end -->
 						</form> <!-- signin form end -->
 					</div> <!-- signin form container end -->
+
+					<!-- signin message container -->
+					<div class="signin-error-container" v-if="error">
+						<div class="alert alert-danger">{{ msg }} <i class="fa fa-times-circle"></i> </div>
+					</div>
+
+					<!-- success message container -->
+					<div class="signin-success-container" v-if="success">
+						<div class="alert alert-success">{{ msg }} <i class="fas fa-circle-notch"></i></div>
+					</div>
+
 				</div><!-- signin container end -->
-			
 			</div> <!-- signin container end -->
 		</div> <!-- auth container end -->
 	</div> <!-- authentication wrapper end -->
@@ -104,8 +115,76 @@
 
 	export default {
 		components: {Header, SignupForm, AuthForm},
+
+		data() {
+			return {
+				success: false,
+				error: false,
+				username: '',
+				password: ''
+			}
+		},
+
 		mounted() {
 			console.log("User registration page mounted")
+		},
+
+		methods: {
+			authenticate(e){
+				e.preventDefault()
+				if (
+					this.username === '' && this.password === '' ||
+	               	this.username && this.password === '' ||
+	               	this.username === '' && this.password
+				) {
+
+					console.log("failed")
+					this.error = true
+					let seconds = 10
+
+					setInterval(() => {
+						seconds--
+						if(seconds === 0){
+							this.error = false
+							clearInterval()
+						}
+					}, 1000)
+				} 
+
+				// if both username and password is set
+				if (this.username && this.password) {
+					
+					this.$store.dispatch('auth/login', {
+						username: this.username,
+						password: this.password
+					}).then(() => {
+						
+						this.success = true
+						
+						let count = 10;
+						setInterval(() => {
+							count--
+
+							if(count === 0){
+								this.$router.replace({
+									'path': '/app/dashboard/tasks'
+								})
+							}
+						}, 1000)
+					})
+
+				}
+			}
+		},
+
+		computed: {
+			msg() {
+				if(this.error)
+					return 'Your credentials seems to be entered wrong try again'
+
+				if(this.success)
+					return 'Authentication success hold on.'
+			},
 		}
 	}
 </script>
@@ -113,7 +192,7 @@
 <style lang="scss">
 	// auth wrapper
 	.taskly-register{
-		height: 800px;
+		min-height: 800px;
 		width: 100%; 
 		background-image: url('./../../images/workspace-820315_1920.jpg');
 		background-size: cover;
@@ -121,7 +200,7 @@
 		
 		// auth container wrapper
 		.register__container{
-			min-height:550px;
+			min-height:630px;
 			width: 80%;
 			background: #fff;
 			margin: 0px auto;
@@ -134,7 +213,7 @@
 
 			// login container specific
 			.register__container--signin{
-				min-height: 550px;
+				min-height: 630px;
 				background: #809ed3;
 				color: #fff; 
 				

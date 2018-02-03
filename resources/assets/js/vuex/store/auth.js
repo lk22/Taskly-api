@@ -124,46 +124,41 @@ const auth = {
 		/**
 		 * Register new user
 		 */
-		async register(context, {
+		register(context, {
+			firstname,			// users firstname
+			lastname,			// users name
 			email,				// users email
-			username,			// users name
-			password,			// users password
-			confirm_password	// password confirmation
-			// has_company: false,	// if the user has a company
-			// company_name: '',	// the company name while the above check is true (has_company)
+			password, 			// users password
+			confirm_password,	// password confirmation
+			has_company,		// if the user has a company
+			company_name,		// the company name while the above check is true (has_company)
+			company_type, 		// the company type
+			company_address,	// the company address
 		}) {
 
 			// send request
+			axios.post('/api/v1/register', {
+				firstname: 			firstname,
+				lastname: 			lastname,
+				password: 			password,
+				confirm_password: 	confirm_password,
+				has_company: 		has_company,
+				company_name: 		company_name,
+				company_type: 		company_type,
+				company_address: 	company_address
+			}).then( (response) => {
 
-				const data = await Axios.post('/register', {
-					email,
-					username,
-					password,
-					confirm_password
+				console.log(response)
+
+				const user = response.data.registratedUser
+
+				context.commit(types.REGISTER, {
+					...user
 				})
 
-				// then fetch the response
-				.then( (response) => {
+				return Promise.resolve();
 
-					console.log(response)
-
-					const user = response.data.registratedUser
-
-					context.commit(types.REGISTER, {
-						...user
-					})
-
-
-
-					return Promise.resolve();
-
-				})
-
-				// or catch error
-				.catch( (error) => {
-					console.log(error)
-				})
-
+			})
 		}
 	},
 
