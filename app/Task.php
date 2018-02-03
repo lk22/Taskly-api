@@ -45,13 +45,13 @@ class Task extends Model
     /**
      * Automatic boot function
      */
-    protected static function boot() {
-        parent::boot();
+    // protected static function boot() {
+    //     parent::boot();
 
-        static::deleting(function($task) {
-            return $task->placements()->delete();
-        });
-    }
+    //     static::deleting(function($task) {
+    //         return $task->placements()->delete();
+    //     });
+    // }
 
     /**
      * task belongs to user

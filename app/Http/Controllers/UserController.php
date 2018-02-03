@@ -140,17 +140,31 @@ class UserController extends Controller
          * @var [type]
          */
         $validator = $request->validate([
-            'firstname' => 'required',
-            'lastname' => 'required',
-            'email' => 'required|email|unique:users',
-            'password' => 'required',
-            'c_password' => 'required|same:password'
+            'firstname'     => 'required',
+            'lastname'      => 'required',
+            'email'         => 'required|email|unique:users',
+            'password'      => 'required',
+            'c_password'    => 'required|same:password',
+            'has_company'   => '',
         ]);
+
+        if($request->get('has_company')) {
+            $company_validation = $request->validate([
+                'company_name'              => 'required',
+                'company_type'              => 'required',
+                'company_address'           => '',
+                'company_registration_nr'   => 'required',
+                'company_phone_nr'          => '',
+            ]);
+        }
 
         /**
          * check for failing request
          */
-        if ($validator->fails()) {
+        if (
+            $validator->fails() || 
+            $company_validation->falis()
+        ) {
             return response()->json([
                 'error' => 'Something went wrong with your request'
             ]);
@@ -202,46 +216,8 @@ class UserController extends Controller
             ],
             'user' => $profile,
           ];
-
-
-
+          
           // giving success response in return to client
           return response()->json($successResponse);
-    }
-
-    /**
-     * |---------------------------------------------------------------
-     * |    Creating a new user resource
-     * |    @param  Request $request [description]
-     * |    @return [type]           [description]
-     * |---------------------------------------------------------------
-     */
-    public function create(Request $request)
-    {
-        $request->validate([
-            'firstname' => 'required',
-            'lastname' => 'required',
-            'email' => 'required',
-            'password' => 'required'
-        ]);
-
-        if($request->fails()) {
-            return response()->json([
-                'error' => 'something went wrong creating user resource'
-            ]);
-        }
-
-        try {
-            $this->user->create([
-                'firstname' => $request->get('firstname'),
-                'lastname' => $request->get('lastname'),
-                'name' => $request->get('firstname') . ' ' . $request->get('lastname'),
-                'slug' => strtolower($request->get('firstname')) . '-' . strtolower($request->get('lastname')),
-                'email' => $request->get('email'),
-                'password' => bcrypt($request->get('password'))
-            ]);
-        } catch (BadMethodCallException $e) {
-            return $e;
-        }
     }
 }
