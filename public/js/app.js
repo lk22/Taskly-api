@@ -14678,10 +14678,180 @@ exports.default = store;
 
 /***/ }),
 /* 104 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-throw new Error("Module build failed: SyntaxError: Unexpected token, expected , (179:1)\n\n\u001b[0m \u001b[90m 177 | \u001b[39m\t\t\t})\n \u001b[90m 178 | \u001b[39m\t\t}\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 179 | \u001b[39m\t}\u001b[33m,\u001b[39m\n \u001b[90m     | \u001b[39m\t\u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 180 | \u001b[39m\n \u001b[90m 181 | \u001b[39m\t\u001b[90m/**\u001b[39m\n \u001b[90m 182 | \u001b[39m\u001b[90m\t * namespacing\u001b[39m\u001b[0m\n");
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _mutations;
+
+var _axios = __webpack_require__(51);
+
+var _axios2 = _interopRequireDefault(_axios);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var types = {
+	AUTHENTICATE: 'AUTHENTICATE',
+	REGISTER: 'REGISTER',
+	FETCH_AUTH: 'FETCH_AUTH'
+};
+
+var auth = {
+
+	/**
+  * Defining default state
+  * @type {Object}
+  */
+	state: {
+		authenticated: {},
+		registered: null
+	},
+
+	/**
+  * Getter functions
+  * @type {Object}
+  */
+	getters: {
+
+		// get the authenticated user
+		getAuth: function getAuth(state) {
+			return state.authenticated.auth;
+		},
+
+		// get the authenticated users full name
+		fullName: function fullName(state) {
+			return state.authenticated.auth.firstname + ' ' + state.authenticated.auth.lastname;
+		}
+
+	},
+
+	/**
+  * Mutators
+  */
+	mutations: (_mutations = {}, _defineProperty(_mutations, types.AUTHENTICATE, function (state, user) {
+		state.authenticated = user;
+	}), _defineProperty(_mutations, types.REGISTER, function (state, user) {
+		state.registered = user;
+	}), _mutations),
+
+	/**
+  * Defining Actions for the authenticated user
+  */
+	actions: {
+
+		/**
+   * fetch auth
+   */
+		getAuth: function getAuth(context) {
+
+			Axios.get('/api/v1/auth').then(function (auth) {
+				console.log(auth.data);
+
+				var user = auth.data;
+
+				context.commit(types.FETCH_AUTH, _extends({}, user));
+			}).catch(function (exception) {});
+		},
+
+
+		/**
+   * Authenticate the user
+   */
+		login: function login(context, _ref) {
+			var username = _ref.username,
+			    password = _ref.password;
+
+
+			// send the post request with the given credentials
+
+			_axios2.default.post('/api/v1/login', {
+				username: username,
+				password: password
+			}).then(function (response) {
+
+				// log the response from call
+				console.log(response);
+
+				var auth = response.data.user.data;
+				var token = response.data.token.data.access_token;
+
+				console.log(auth);
+
+				// commit action
+				context.commit(types.AUTHENTICATE, {
+					auth: auth,
+					token: token
+				});
+
+				if (!window.localStorage.getItem('access_token' && !window.localStorage.getItem('authenticated'))) {
+					window.localStorage.setItem('access_token', token);
+					window.localStorage.setItem('authenticated', auth);
+				}
+
+				console.log(window.localStorage);
+
+				// extend call
+				return Promise.resolve();
+			});
+		},
+
+
+		/**
+   * Register new user
+   */
+		register: function register(context, _ref2) {
+			var firstname = _ref2.firstname,
+			    lastname = _ref2.lastname,
+			    email = _ref2.email,
+			    password = _ref2.password,
+			    confirm_password = _ref2.confirm_password,
+			    has_company = _ref2.has_company,
+			    company_name = _ref2.company_name,
+			    company_type = _ref2.company_type,
+			    company_address = _ref2.company_address;
+
+
+			// send request
+			_axios2.default.post('/api/v1/register', {
+				firstname: firstname,
+				lastname: lastname,
+				password: password,
+				confirm_password: confirm_password,
+				has_company: has_company,
+				company_name: company_name,
+				company_type: company_type,
+				company_address: company_address
+			}).then(function (response) {
+
+				console.log(response);
+
+				var user = response.data.registratedUser;
+
+				context.commit(types.REGISTER, {
+					user: user
+				});
+
+				return Promise.resolve();
+			});
+		}
+	},
+
+	/**
+  * namespacing
+  */
+	namespaced: true
+};
+
+exports.default = auth;
 
 /***/ }),
 /* 105 */

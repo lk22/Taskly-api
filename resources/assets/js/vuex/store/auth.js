@@ -151,25 +151,10 @@ const auth = {
 
 				console.log(response)
 
-				Axios.post('/register', {
-					email,
-					username,
-					password,
-					confirm_password
-				}).then( (response) => {
-
-				console.log(response)
-				
 				const user = response.data.registratedUser
 
 				context.commit(types.REGISTER, {
-					...user
-				})
-
-				const user = response.data.registratedUser
-
-				context.commit(types.REGISTER, {
-					...user
+					user
 				})
 
 				return Promise.resolve();
