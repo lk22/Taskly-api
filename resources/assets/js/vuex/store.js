@@ -15,7 +15,7 @@ const debug = process.env.NODE_ENV !== 'production'
 
 const store = new Vuex.Store({
 
-	// differen Vuex state modules
+	// different Vuex state modules
 	modules: {
 		auth,
 	},

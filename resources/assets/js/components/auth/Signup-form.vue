@@ -130,7 +130,7 @@
 								placeholder="Enter company name here." 
 								class="form-control"
 								name="company_name"
-								v-model="comapny_name"
+								v-model="company_name"
 							>
 						</div>
 
@@ -152,7 +152,7 @@
 								placeholder="Enter company name here." 
 								class="form-control"
 								name="company_address"
-								v-model="comapny_address"
+								v-model="company_address"
 							>
 						</div>
 					</div>
@@ -226,6 +226,7 @@
 				} else {
 					// if the confirmed passsword is the same as the password
 					if(this.confirm_password === this.password){
+						console.log("password confirmed")
 						this.password_confirmed = true
 					}
 
@@ -238,9 +239,9 @@
 
 				// if the user in the proccess has a company
 				if( this.has_company ) {
-
+					console.log("company registered")
 					// validate the users company 
-					this.validateCompany()
+					this.confirmCompany()
 				}
 
 				// if the password is confirmed
@@ -252,6 +253,7 @@
 						lastname:  			this.lastname,
 						email: 				this.email,
 						password: 			this.password,
+						confirm_password: 	this.confirm_password,
 						has_company: 		this.has_company,
 						company_name: 		this.company_name,
 						company_type: 		this.company_type,
@@ -271,7 +273,7 @@
 			 * |
 			 * |--------------------------------------------------------
 			 */	
-			validateCompany(){
+			confirmompany(){
 				if(
 					this.company_name === '' ||
 					this.company_type === '' ||

@@ -140,6 +140,7 @@ const auth = {
 			axios.post('/api/v1/register', {
 				firstname: 			firstname,
 				lastname: 			lastname,
+				email: 				email,
 				password: 			password,
 				confirm_password: 	confirm_password,
 				has_company: 		has_company,
@@ -147,7 +148,6 @@ const auth = {
 				company_type: 		company_type,
 				company_address: 	company_address
 			}).then( (response) => {
-
 
 				console.log(response)
 

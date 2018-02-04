@@ -136,6 +136,9 @@ class UserController extends Controller
      */
     public function register(Request $request)
     {
+
+        // dd($request->all());
+
         /**
          * Validating request input
          * @var [type]
@@ -149,23 +152,18 @@ class UserController extends Controller
             'has_company'       => ''
         ]);
 
-        if($request->get('has_company')) {
+        if($request->input('has_company')) {
             $company_validation = $request->validate([
                 'company_name'              => 'required',
                 'company_type'              => 'required',
                 'company_address'           => '',
-                'company_registration_nr'   => 'required',
-                'company_phone_nr'          => '',
             ]);
         }
 
         /**
          * check for failing request
          */
-        if ( 
-            $validator->fails() || 
-            $company_validation->falis()
-        ) {
+        if ($validator->fails() || $company_validation->falis()) {
             return response()->json([
                 'error' => 'Something went wrong with your request'
             ]);
