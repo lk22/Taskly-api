@@ -6,6 +6,7 @@ import * as Cookies from 'js-cookie'
 
 // vuex store modules
 import auth from './store/auth'
+import task from './store/task'
 
 const plugins = []
 
@@ -18,12 +19,14 @@ const store = new Vuex.Store({
 	// different Vuex state modules
 	modules: {
 		auth,
+		task
 	},
 	plugins: [
 		createPersistedState({
 			key: 'taskly',
 			paths: [
-				'auth'
+				'auth',
+				'task'
 			]
 		})
 	],

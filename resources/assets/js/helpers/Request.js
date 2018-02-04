@@ -1,8 +1,6 @@
 import axios from 'axios'
 import store from './../vuex/store'
 
-console.log(store.state.auth.authenticated.token)
-
 /**
  * |-------------------------------------------
  * |	Create Request instance

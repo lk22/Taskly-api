@@ -14699,15 +14699,17 @@ var _auth = __webpack_require__(105);
 
 var _auth2 = _interopRequireDefault(_auth);
 
+var _task = __webpack_require__(435);
+
+var _task2 = _interopRequireDefault(_task);
+
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var plugins = [];
-
 // vuex store modules
 // packages
-
+var plugins = [];
 
 _vue2.default.use(_vuex2.default);
 
@@ -14717,11 +14719,12 @@ var store = new _vuex2.default.Store({
 
 	// different Vuex state modules
 	modules: {
-		auth: _auth2.default
+		auth: _auth2.default,
+		task: _task2.default
 	},
 	plugins: [(0, _vuexPersistedstate2.default)({
 		key: 'taskly',
-		paths: ['auth']
+		paths: ['auth', 'task']
 	})]
 
 });
@@ -16508,8 +16511,6 @@ var _store = __webpack_require__(104);
 var _store2 = _interopRequireDefault(_store);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-console.log(_store2.default.state.auth.authenticated.token);
 
 /**
  * |-------------------------------------------
@@ -59537,6 +59538,121 @@ module.exports = function (regExp, replace) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 427 */,
+/* 428 */,
+/* 429 */,
+/* 430 */,
+/* 431 */,
+/* 432 */,
+/* 433 */,
+/* 434 */,
+/* 435 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _types = __webpack_require__(436);
+
+var _types2 = _interopRequireDefault(_types);
+
+var _mutations = __webpack_require__(438);
+
+var _mutations2 = _interopRequireDefault(_mutations);
+
+var _getters = __webpack_require__(439);
+
+var _getters2 = _interopRequireDefault(_getters);
+
+var _state = __webpack_require__(437);
+
+var _state2 = _interopRequireDefault(_state);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var task = {
+	state: _state2.default,
+	mutations: _mutations2.default,
+	getters: _getters2.default,
+	namespaced: true
+};
+// import the actions here
+exports.default = task;
+
+/***/ }),
+/* 436 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+var types = {
+	GET_TASKS: 'GET_TASKS',
+	CREATE_NEW_TASK: 'CREATE_NEW_TASK',
+	COMPLETE_TASK: 'COMPLETE_TASK',
+	COMPLETE_ALL_TASKS: 'COMPLETE_ALL_TASKS',
+	UPDATE_TASK: 'UPDATE_TASK',
+	DELETE_TASK: 'DELETE_TASK',
+	SET_PRIORITY: 'SET_PRIORITY',
+	SET_DEADLINE: 'SET_DEADLINE',
+	APPLY_COMMENT: 'APPLY_COMMENT'
+};
+
+exports.default = types;
+
+/***/ }),
+/* 437 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+var state = {
+	items: [],
+	task: {},
+	latestTask: {}
+};
+
+exports.default = state;
+
+/***/ }),
+/* 438 */
+/***/ (function(module, exports) {
+
+throw new Error("Module build failed: SyntaxError: Unexpected token (15:1)\n\n\u001b[0m \u001b[90m 13 | \u001b[39m\u001b[90m\t * Creating a new task\u001b[39m\n \u001b[90m 14 | \u001b[39m\u001b[90m\t */\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 15 | \u001b[39m\t[types\u001b[33m.\u001b[39m\u001b[33mCREATE_TASK\u001b[39m](state\u001b[33m,\u001b[39m task) {\n \u001b[90m    | \u001b[39m\t\u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 16 | \u001b[39m\t\tstate\u001b[33m.\u001b[39mitems \u001b[33m=\u001b[39m [task]\u001b[33m.\u001b[39mconcat(state\u001b[33m.\u001b[39mitems)\n \u001b[90m 17 | \u001b[39m\t}\u001b[33m,\u001b[39m\n \u001b[90m 18 | \u001b[39m\u001b[0m\n");
+
+/***/ }),
+/* 439 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+var getters = {
+	getAllTAsks: function getAllTAsks(state) {
+		return state.tasks;
+	},
+	getSingleTask: function getSingleTask(state) {
+		return state.task;
+	}
+};
+
+exports.default = getters;
 
 /***/ })
 /******/ ]);
