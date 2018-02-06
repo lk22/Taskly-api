@@ -59,9 +59,9 @@ use Illuminate\Http\Request;
 			 ->uses('TaskController@create');
 
 		// update priority
-		Route::patch('/tasks/{slug}/set-priority')
-			 ->name('task.priority.api')
-			 ->uses('TaskController@setPriority');
+		// Route::patch('/tasks/{slug}/set-priority')
+		// 	 ->name('task.priority.api')
+		// 	 ->uses('TaskController@setPriority');
 
 		// update work hours
 		Route::patch('/tasks/{slug}/set-workhour')
@@ -84,9 +84,9 @@ use Illuminate\Http\Request;
 			 ->uses('TaskController@uncheckALlTasks');
 
 		// update the task
-		Route::put('/tasks/{slug}/update-task')
-			 ->name('task.update.api')
-			 ->uses('TaskController@update');
+		// Route::put('/tasks/{slug}/update-task')
+		// 	 ->name('task.update.api')
+		// 	 ->uses('TaskController@update');
 
 		// delete the task
 		Route::delete('/tasks/{slug}/delete-task')

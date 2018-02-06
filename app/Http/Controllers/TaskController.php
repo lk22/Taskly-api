@@ -158,8 +158,8 @@ class TaskController extends Controller
 
         $this->task->create([
             //'name' => preg_match("/^[a-zA-Z0-9ÆØÅæøå]+$/i^", $request->get('name')),
-            'name' => $request->get('name'),
-            'slug' => str_replace('-', ' ', strtolower($request->get('name'))),
+            'location' => $request->get('location'),
+            'slug' => str_replace('-', ' ', strtolower($request->get('location'))),
             'user_id' => $this->authenticated->id,
             'priority' => $request->get('priority'),
             'work_hours' => $request->get('work_hours')
