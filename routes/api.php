@@ -56,8 +56,7 @@ use Illuminate\Http\Request;
 		// create a task
 		Route::post('/create-task')
 			 ->name('task.create.api')
-			 ->uses('TaskController@create')
-			 ->middleware('scopes:create-task');
+			 ->uses('TaskController@create');
 
 		// update priority
 		Route::patch('/tasks/{slug}/set-priority')

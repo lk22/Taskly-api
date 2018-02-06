@@ -1,6 +1,6 @@
 const getters = {
 	getAllTasks: state => {
-		return state.tasks
+		return state.items
 	},
 	getSingleTask: state => {
 		return state.task

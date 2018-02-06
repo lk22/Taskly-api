@@ -20,7 +20,7 @@ const request = axios.create({
  */
 request.interceptors.request.use((config) => {
 	config.headers.common = {
-		Authorization: `Bearer ` + store.state.auth.authenticated.auth.token,
+		Authorization: `Bearer ` + store.state.auth.authenticated.token,
 		Accept: 'application/json'
 	}
 	

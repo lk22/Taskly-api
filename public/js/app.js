@@ -16377,7 +16377,7 @@ var request = _axios2.default.create({
  */
 request.interceptors.request.use(function (config) {
   config.headers.common = {
-    Authorization: 'Bearer ' + _store2.default.state.auth.authenticated.auth.token,
+    Authorization: 'Bearer ' + _store2.default.state.auth.authenticated.token,
     Accept: 'application/json'
   };
 
@@ -18675,6 +18675,7 @@ var task = {
 	state: _state2.default,
 	mutations: _mutations2.default,
 	getters: _getters2.default,
+	actions: _actions2.default,
 	namespaced: true
 };
 
@@ -18691,9 +18692,9 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _axios = __webpack_require__(46);
+var _Request = __webpack_require__(151);
 
-var _axios2 = _interopRequireDefault(_axios);
+var _Request2 = _interopRequireDefault(_Request);
 
 var _types = __webpack_require__(72);
 
@@ -18707,7 +18708,7 @@ var actions = {
   * get all the tasks
   */
 	getTasks: function getTasks(context) {
-		_axios2.default.get('/api/v1/tasks').then(function (response) {
+		_Request2.default.get('/api/v1/tasks').then(function (response) {
 			// do something with the response here
 			console.log(response);
 
@@ -18743,7 +18744,7 @@ var actions = {
 		    weekend = _ref.weekend,
 		    comment = _ref.comment;
 
-		_axios2.default.post('/api/v1/create-task', {
+		_Request2.default.post('/api/v1/create-task', {
 			work_hours: work_hours,
 			weekday: weekday,
 			week: week,
@@ -18755,24 +18756,24 @@ var actions = {
 
 			console.log(response);
 
-			// do further actions here
-			var work_hours = work_hours;
-			var weekday = weekday;
-			var week = week;
-			var location = location;
-			var supplier = supplier;
-			var weekend = weekend;
-			var comment = comment;
+			// // do further actions here
+			// const work_hours = work_hours
+			// const weekday = weekday
+			// const week = week
+			// const location = location
+			// const supplier = supplier
+			// const weekend = weekend
+			// const comment = comment
 
-			context.commit(_types2.default.CREATE_TASK, {
-				work_hours: work_hours,
-				weekday: weekday,
-				week: week,
-				location: location,
-				supplier: supplier,
-				weekend: weekend,
-				comment: comment
-			});
+			// context.commit(types.CREATE_TASK, {
+			// 	work_hours,
+			// 	weekday,
+			// 	week,
+			// 	location,
+			// 	supplier,
+			// 	weekend,
+			// 	comment
+			// })
 
 			// extend Promise call
 			return Promise.resolve();
@@ -18785,7 +18786,7 @@ var actions = {
 		    priority = _ref2.priority;
 
 
-		_axios2.default.patch('/api/v1/tasks/' + id + '/set-priority', {
+		axios.patch('/api/v1/tasks/' + id + '/set-priority', {
 			priority: priority
 		}).then(function (response) {
 
@@ -18811,7 +18812,7 @@ var actions = {
 		    work_hours = _ref3.work_hours;
 
 
-		_axios2.default.patch('/api/v1/tasks/' + id + '/set-workhour', {
+		axios.patch('/api/v1/tasks/' + id + '/set-workhour', {
 			work_hours: work_hours
 		}).then(function (response) {
 
@@ -18859,7 +18860,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * Mutations for a task
  * @type {Object}
  */
-var mutations = (_mutations = {}, _defineProperty(_mutations, _types2.default.GET_ALL_TASKS, function (state, payload) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, _types2.default.GET_TASKS, function (state, payload) {
 	state.items = payload;
 }), _defineProperty(_mutations, _types2.default.CREATE_TASK, function (state, task) {
 	state.items = [task].concat(state.items);
@@ -18911,7 +18912,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 var getters = {
 	getAllTasks: function getAllTasks(state) {
-		return state.tasks;
+		return state.items;
 	},
 	getSingleTask: function getSingleTask(state) {
 		return state.task;
@@ -24139,13 +24140,19 @@ exports.default = {
         }
     },
 
+    mounted: function mounted() {
+        this.$store.dispatch('task/getTasks');
+    },
+
+
     computed: {
         tasks: function tasks() {
             return this.$store.getters['task/getAllTasks'];
-            console.log(this.$store.getters['task/getAllTasks']);
         }
     }
 }; //
+//
+//
 //
 //
 //
@@ -24210,7 +24217,11 @@ var render = function() {
         : _vm._e(),
       _vm._v(" "),
       _vm._l(_vm.tasks, function(task) {
-        return _c("div", [_vm._v("\n        " + _vm._s(task.id) + "\n    ")])
+        return _c("div", { staticClass: "task-container" }, [
+          _c("div", { staticClass: "task-container__name" }, [
+            _vm._v("\n            " + _vm._s(task.name) + "\n        ")
+          ])
+        ])
       })
     ],
     2
@@ -59762,12 +59773,24 @@ exports.default = {
 			// }
 		},
 		createTask: function createTask(e) {
+			var _this2 = this;
+
 			e.preventDefault();
 
 			this.validateTask();
 
 			if (!this.error) {
-				console.log("Creating task");
+				this.$store.dispatch('task/createTask', {
+					work_hours: this.work_hours,
+					week_day: this.week_day,
+					week: this.week,
+					location: this.location,
+					supplier: this.supplier,
+					weekend: this.weekend,
+					comment: this.comment
+				}).then(function () {
+					_this2.creating = false;
+				});
 			}
 		}
 	},

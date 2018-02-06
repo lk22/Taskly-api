@@ -29,7 +29,7 @@ class TaskController extends Controller
     public function __construct(Task $task)
     {
         $this->task = $task;
-        
+
         $this->authenticated = \Auth::guard('api')->user();
     }
 
@@ -40,7 +40,9 @@ class TaskController extends Controller
      */
     public function index()
     {
+
         $tasks = $this->task->where('id', $this->authenticated->id)->get();
+
 
         if (count($tasks) >= 0) {
             return fractal($tasks, new TaskTransformer())->toArray();
@@ -149,7 +151,7 @@ class TaskController extends Controller
     public function create(Request $request)
     {
         API::validate($request, [
-            'name' => 'required',
+            
             'priority' => '',
             'work_hours' => 'required'
         ]);

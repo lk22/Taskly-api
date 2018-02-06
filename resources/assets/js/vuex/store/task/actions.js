@@ -1,4 +1,4 @@
-import axios from 'axios'
+import request from './../../../helpers/Request'
 import types from './types'
 
 const actions = {
@@ -7,7 +7,7 @@ const actions = {
 	 * get all the tasks
 	 */	
 	getTasks(context) {
-		axios.get('/api/v1/tasks').then((response) => {
+		request.get('/api/v1/tasks').then((response) => {
 			// do something with the response here
 			console.log(response)
 			
@@ -42,7 +42,7 @@ const actions = {
 		weekend,
 		comment
 	}) {
-		axios.post('/api/v1/create-task', {
+		request.post('/api/v1/create-task', {
 			work_hours: 	work_hours,
 			weekday: 		weekday,
 			week: 			week,
@@ -54,24 +54,24 @@ const actions = {
 
 			console.log(response)
 
-			// do further actions here
-			const work_hours = work_hours
-			const weekday = weekday
-			const week = week
-			const location = location
-			const supplier = supplier
-			const weekend = weekend
-			const comment = comment
+			// // do further actions here
+			// const work_hours = work_hours
+			// const weekday = weekday
+			// const week = week
+			// const location = location
+			// const supplier = supplier
+			// const weekend = weekend
+			// const comment = comment
 			
-			context.commit(types.CREATE_TASK, {
-				work_hours,
-				weekday,
-				week,
-				location,
-				supplier,
-				weekend,
-				comment
-			})
+			// context.commit(types.CREATE_TASK, {
+			// 	work_hours,
+			// 	weekday,
+			// 	week,
+			// 	location,
+			// 	supplier,
+			// 	weekend,
+			// 	comment
+			// })
 
 			// extend Promise call
 			return Promise.resolve()

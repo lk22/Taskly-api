@@ -181,7 +181,17 @@
 				this.validateTask()
 
 				if( !this.error ) {
-					console.log("Creating task")
+					this.$store.dispatch('task/createTask', {
+						work_hours: 	this.work_hours,
+						week_day: 		this.week_day,
+						week: 			this.week,
+						location: 		this.location,
+						supplier: 		this.supplier,
+						weekend: 		this.weekend,
+						comment: 		this.comment
+					}).then(() => {
+						this.creating = false
+					})
 				}
 			}
 		},

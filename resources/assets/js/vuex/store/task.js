@@ -9,6 +9,7 @@ const task = {
 	state,
 	mutations,
 	getters,
+	actions,
 	namespaced: true
 }
 

@@ -16,8 +16,10 @@
         </div>
 
         <!-- users tasks list -->
-        <div v-for="task in tasks">
-            {{ task.id }}
+        <div class="task-container" v-for="task in tasks">
+            <div class="task-container__name">
+                {{ task.name }}
+            </div>
         </div>
     </div>
 </template>
@@ -45,11 +47,13 @@
             }
         },
 
+        mounted() {
+            this.$store.dispatch('task/getTasks') 
+        },
 
         computed: {
             tasks() {
                 return this.$store.getters['task/getAllTasks']
-                console.log(this.$store.getters['task/getAllTasks'])
             }
         }
     }
