@@ -18910,7 +18910,7 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 var getters = {
-	getAllTAsks: function getAllTAsks(state) {
+	getAllTasks: function getAllTasks(state) {
 		return state.tasks;
 	},
 	getSingleTask: function getSingleTask(state) {
@@ -23868,7 +23868,7 @@ exports = module.exports = __webpack_require__(29)(undefined);
 
 
 // module
-exports.push([module.i, "\n#app-head {\n  font-family: 'Raleway';\n  height: 100px;\n  width: 100%;\n  margin-left: -30px;\n}\n#app-head .head__inner {\n    padding-top: 3rem;\n    border-bottom: 1px solid #eee;\n    padding-left: 15px;\n    padding-right: 15px;\n    height: 70px;\n}\n#app-head .head__inner .inner--content .content__row .row--heading {\n      color: #00b0eb;\n}\n#app-head .head__inner .inner--content .content__row .row--create-button .btn {\n      border: none;\n      background: transparent;\n      color: #00b0eb;\n      margin-top: -10px;\n}\n", ""]);
+exports.push([module.i, "\n#app-head {\n  font-family: 'Raleway';\n  height: 100px;\n  width: 100%;\n  margin-left: -30px;\n}\n#app-head .head__inner {\n    padding-top: 3rem;\n    border-bottom: 1px solid #eee;\n    padding-left: 15px;\n    padding-right: 15px;\n    height: 70px;\n}\n#app-head .head__inner .inner--content .content__row .row--heading {\n      color: #00b0eb;\n}\n#app-head .head__inner .inner--content .content__row .row--create-button .btn {\n      border: none;\n      background: transparent;\n      color: #00b0eb;\n      margin-top: -10px;\n      font-size: 20px;\n}\n#app-head .head__inner .inner--content .content__row .row--create-button .btn:active {\n        border: none;\n}\n", ""]);
 
 // exports
 
@@ -24090,7 +24090,7 @@ exports = module.exports = __webpack_require__(29)(undefined);
 
 
 // module
-exports.push([module.i, "\n.tasks__create--container {\n  -webkit-transition: ease-in-out 0.2s all;\n  transition: ease-in-out 0.2s all;\n  min-height: 150px;\n  width: auto;\n}\n.tasks__create--container .create-task-form {\n    height: 100%;\n    width: 100%;\n}\n.tasks__create--container .create-task-form .form__field--group .work_hours-field label, .tasks__create--container .create-task-form .form__field--group .location-field label, .tasks__create--container .create-task-form .form__field--group .supplier-field label, .tasks__create--container .create-task-form .form__field--group .weekend_evening--check-field label, .tasks__create--container .create-task-form .form__field--group .comment-field label {\n      font-size: 10px;\n      color: #eee;\n}\n.tasks__create--container .create-task-form .form__field--group .work_hours-field .form-control, .tasks__create--container .create-task-form .form__field--group .location-field .form-control, .tasks__create--container .create-task-form .form__field--group .supplier-field .form-control, .tasks__create--container .create-task-form .form__field--group .weekend_evening--check-field .form-control, .tasks__create--container .create-task-form .form__field--group .comment-field .form-control {\n      border: 1px solid #00b0eb;\n      color: #00b0eb;\n      border-radius: 2px;\n}\n.tasks__create--container .create-task-form .form__field--group .work_hours-field .form-control::-webkit-input-placeholder, .tasks__create--container .create-task-form .form__field--group .location-field .form-control::-webkit-input-placeholder, .tasks__create--container .create-task-form .form__field--group .supplier-field .form-control::-webkit-input-placeholder, .tasks__create--container .create-task-form .form__field--group .weekend_evening--check-field .form-control::-webkit-input-placeholder, .tasks__create--container .create-task-form .form__field--group .comment-field .form-control::-webkit-input-placeholder {\n        font-size: 10px;\n}\n.tasks__create--container .create-task-form .form__field--group .work_hours-field .form-control:-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .location-field .form-control:-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .supplier-field .form-control:-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .weekend_evening--check-field .form-control:-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .comment-field .form-control:-ms-input-placeholder {\n        font-size: 10px;\n}\n.tasks__create--container .create-task-form .form__field--group .work_hours-field .form-control::-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .location-field .form-control::-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .supplier-field .form-control::-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .weekend_evening--check-field .form-control::-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .comment-field .form-control::-ms-input-placeholder {\n        font-size: 10px;\n}\n.tasks__create--container .create-task-form .form__field--group .work_hours-field .form-control::placeholder, .tasks__create--container .create-task-form .form__field--group .location-field .form-control::placeholder, .tasks__create--container .create-task-form .form__field--group .supplier-field .form-control::placeholder, .tasks__create--container .create-task-form .form__field--group .weekend_evening--check-field .form-control::placeholder, .tasks__create--container .create-task-form .form__field--group .comment-field .form-control::placeholder {\n        font-size: 10px;\n}\n.tasks__create--container .create-task-form .form__field--group .week-details .weekday label, .tasks__create--container .create-task-form .form__field--group .week-details .week label {\n      font-size: 10px;\n      color: #eee;\n}\n.tasks__create--container .create-task-form .form__field--group .week-details .weekday .form-control, .tasks__create--container .create-task-form .form__field--group .week-details .week .form-control {\n      border: 1px solid #00b0eb;\n      color: #00b0eb;\n      border-radius: 2px;\n}\n.tasks__create--container .create-task-form .form__field--group .week-details .weekday .form-control::-webkit-input-placeholder, .tasks__create--container .create-task-form .form__field--group .week-details .week .form-control::-webkit-input-placeholder {\n        font-size: 10px;\n}\n.tasks__create--container .create-task-form .form__field--group .week-details .weekday .form-control:-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .week-details .week .form-control:-ms-input-placeholder {\n        font-size: 10px;\n}\n.tasks__create--container .create-task-form .form__field--group .week-details .weekday .form-control::-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .week-details .week .form-control::-ms-input-placeholder {\n        font-size: 10px;\n}\n.tasks__create--container .create-task-form .form__field--group .week-details .weekday .form-control::placeholder, .tasks__create--container .create-task-form .form__field--group .week-details .week .form-control::placeholder {\n        font-size: 10px;\n}\n.tasks__create--container .create-task-form .form__field--group .submit .btn {\n      border: 1px solid #00b0eb;\n      background: transparent;\n      color: #00b0eb;\n      margin-left: 3rem;\n}\n", ""]);
+exports.push([module.i, "\n.tasks__create--container {\n  -webkit-transition: ease-in-out 0.2s all;\n  transition: ease-in-out 0.2s all;\n  min-height: 150px;\n  width: auto;\n}\n", ""]);
 
 // exports
 
@@ -24114,177 +24114,18 @@ var _Header = __webpack_require__(112);
 
 var _Header2 = _interopRequireDefault(_Header);
 
+var _CreateTaskForm = __webpack_require__(443);
+
+var _CreateTaskForm2 = _interopRequireDefault(_CreateTaskForm);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
 exports.default = {
-    components: { Sidebar: _Sidebar2.default, Header: _Header2.default },
+    components: { Sidebar: _Sidebar2.default, Header: _Header2.default, CreateTaskForm: _CreateTaskForm2.default },
     layout: 'app',
     data: function data() {
         return {
-            creating: true,
-            task: {
-                create: {
-                    creating: false, // if user wants to create a new tasks
-                    week_hours: '', // defining work hours
-                    week_day: '', // defining week day of the task
-                    week: '', // defining week number of the task
-                    location: '', // defining location for the task
-                    supplier: '', // defining supplier for the task
-                    weekend: false, // defining if the task is a weekend/evening job
-                    comment: '', // defining the comment
-                    validation: {
-                        error: false // if validation goes wrong 
-                    }
-                },
-                update: {
-                    updating: false,
-                    validation: {
-                        error: false // if patch validation fails
-                    }
-                }
-            },
+            creating: false,
             locations: [], // selecting all locations from database
             completed: false // if task is completed
         };
@@ -24296,8 +24137,38 @@ exports.default = {
             e.preventDefault();
             this.creating = !this.creating;
         }
+    },
+
+    computed: {
+        tasks: function tasks() {
+            return this.$store.getters['task/getAllTasks'];
+            console.log(this.$store.getters['task/getAllTasks']);
+        }
     }
-};
+}; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /***/ }),
 /* 221 */
@@ -24307,355 +24178,45 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { attrs: { id: "app-tasks" } }, [
-    _c(
-      "div",
-      { staticClass: "row" },
-      [
-        _c("Header", { attrs: { page: "tasks" } }, [
-          _c(
-            "button",
-            {
-              staticClass: "create-task-btn btn btn-primary",
-              on: { click: _vm.toggleCreate }
-            },
-            [_c("i", { staticClass: "fa fa-pencil" })]
-          )
-        ])
-      ],
-      1
-    ),
-    _vm._v(" "),
-    _vm.creating
-      ? _c(
-          "div",
-          { staticClass: "tasks__create--container hidden-xs hidden-sm" },
-          [
+  return _c(
+    "div",
+    { attrs: { id: "app-tasks" } },
+    [
+      _c(
+        "div",
+        { staticClass: "row" },
+        [
+          _c("Header", { attrs: { page: "tasks" } }, [
             _c(
-              "form",
+              "button",
               {
-                staticClass: "create-task-form",
-                attrs: { action: "#", method: "post" }
+                staticClass: "create-task-btn btn btn-primary",
+                on: { click: _vm.toggleCreate }
               },
-              [
-                _c("div", { staticClass: "form__field--group" }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "form-group work_hours-field col-md-1 col-lg-1"
-                    },
-                    [
-                      _c("label", { attrs: { for: "work_hours" } }, [
-                        _vm._v("Work hours")
-                      ]),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.task.create.work_hours,
-                            expression: "task.create.work_hours"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { type: "number", name: "work_hours" },
-                        domProps: { value: _vm.task.create.work_hours },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.task.create,
-                              "work_hours",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      })
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "week-details col-md-3 col-lg-3" }, [
-                    _c(
-                      "div",
-                      { staticClass: "form-group weekday col-md-6 col-lg-6" },
-                      [
-                        _c("label", { attrs: { for: "weekday" } }, [
-                          _vm._v("Week day")
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.task.create.week_day,
-                              expression: "task.create.week_day"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: {
-                            type: "text",
-                            name: "week_day",
-                            placeholder: "Enter weekday"
-                          },
-                          domProps: { value: _vm.task.create.week_day },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.task.create,
-                                "week_day",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "form-group week col-md-6 col-lg-6" },
-                      [
-                        _c("label", { attrs: { for: "week" } }, [
-                          _vm._v("Week")
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          directives: [
-                            {
-                              name: "model",
-                              rawName: "v-model",
-                              value: _vm.task.create.week,
-                              expression: "task.create.week"
-                            }
-                          ],
-                          staticClass: "form-control",
-                          attrs: { type: "number", name: "week" },
-                          domProps: { value: _vm.task.create.week },
-                          on: {
-                            input: function($event) {
-                              if ($event.target.composing) {
-                                return
-                              }
-                              _vm.$set(
-                                _vm.task.create,
-                                "week",
-                                $event.target.value
-                              )
-                            }
-                          }
-                        })
-                      ]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "form-group location-field col-md-2 col-lg-2"
-                    },
-                    [
-                      _c("label", { attrs: { for: "location" } }, [
-                        _vm._v("Location")
-                      ]),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.task.create.location,
-                            expression: "task.create.location"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: {
-                          type: "text",
-                          name: "location",
-                          placeholder: "Enter location"
-                        },
-                        domProps: { value: _vm.task.create.location },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.task.create,
-                              "location",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      })
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "form-group supplier-field col-md-2 col-lg-2"
-                    },
-                    [
-                      _c("label", { attrs: { for: "supplier" } }, [
-                        _vm._v("Supplier")
-                      ]),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.task.create.supplier,
-                            expression: "task.create.supplier"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: { type: "text", name: "supplier" },
-                        domProps: { value: _vm.task.create.supplier },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.task.create,
-                              "supplier",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      })
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "form-group weekend_evening--check-field col-md-1 col-lg-1"
-                    },
-                    [
-                      _c("label", { attrs: { for: "weekeend" } }, [
-                        _vm._v("Weekend / Evening")
-                      ]),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.task.create.weekend,
-                            expression: "task.create.weekend"
-                          }
-                        ],
-                        attrs: { type: "checkbox", name: "weekend" },
-                        domProps: {
-                          checked: Array.isArray(_vm.task.create.weekend)
-                            ? _vm._i(_vm.task.create.weekend, null) > -1
-                            : _vm.task.create.weekend
-                        },
-                        on: {
-                          change: function($event) {
-                            var $$a = _vm.task.create.weekend,
-                              $$el = $event.target,
-                              $$c = $$el.checked ? true : false
-                            if (Array.isArray($$a)) {
-                              var $$v = null,
-                                $$i = _vm._i($$a, $$v)
-                              if ($$el.checked) {
-                                $$i < 0 &&
-                                  (_vm.task.create.weekend = $$a.concat([$$v]))
-                              } else {
-                                $$i > -1 &&
-                                  (_vm.task.create.weekend = $$a
-                                    .slice(0, $$i)
-                                    .concat($$a.slice($$i + 1)))
-                              }
-                            } else {
-                              _vm.$set(_vm.task.create, "weekend", $$c)
-                            }
-                          }
-                        }
-                      })
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass: "form-group comment-field col-md-3 col-lg-3"
-                    },
-                    [
-                      _c("label", { attrs: { for: "comment" } }, [
-                        _vm._v("Comment")
-                      ]),
-                      _vm._v(" "),
-                      _c("textarea", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.task.create.comment,
-                            expression: "task.create.comment"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: {
-                          name: "comment",
-                          id: "comment",
-                          cols: "20",
-                          rows: "2",
-                          placeholder: "Give your task a comment"
-                        },
-                        domProps: { value: _vm.task.create.comment },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.task.create,
-                              "comment",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      })
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _vm._m(0)
-                ])
-              ]
+              [_c("i", { staticClass: "fa fa-edit" })]
             )
-          ]
-        )
-      : _vm._e()
-  ])
+          ])
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _vm.creating
+        ? _c(
+            "div",
+            { staticClass: "tasks__create--container" },
+            [_c("CreateTaskForm")],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm._l(_vm.tasks, function(task) {
+        return _c("div", [_vm._v("\n        " + _vm._s(task.id) + "\n    ")])
+      })
+    ],
+    2
+  )
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row submit" }, [
-      _c("div", { staticClass: "form-group" }, [
-        _c("button", { staticClass: "submit-task-btn btn btn-primary" }, [
-          _vm._v("\n                                Create "),
-          _c("i", { staticClass: "fa fa-pencil" })
-        ])
-      ])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -59917,6 +59478,616 @@ module.exports = function (regExp, replace) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 435 */,
+/* 436 */,
+/* 437 */,
+/* 438 */,
+/* 439 */,
+/* 440 */,
+/* 441 */,
+/* 442 */,
+/* 443 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(444)
+}
+var normalizeComponent = __webpack_require__(11)
+/* script */
+var __vue_script__ = __webpack_require__(446)
+/* template */
+var __vue_template__ = __webpack_require__(447)
+/* template functional */
+  var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/app/Create-task-form.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-017bcc62", Component.options)
+  } else {
+    hotAPI.reload("data-v-017bcc62", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 444 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(445);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(30)("156060b6", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-017bcc62\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./Create-task-form.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-017bcc62\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/sass-loader/lib/loader.js!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./Create-task-form.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 445 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(29)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n.tasks__create--container {\n  -webkit-transition: ease-in-out 0.2s all;\n  transition: ease-in-out 0.2s all;\n  min-height: 150px;\n  width: auto;\n}\n.tasks__create--container .create-task-form {\n    height: 100%;\n    width: 100%;\n}\n.tasks__create--container .create-task-form .form__field--group .work_hours-field label, .tasks__create--container .create-task-form .form__field--group .location-field label, .tasks__create--container .create-task-form .form__field--group .supplier-field label, .tasks__create--container .create-task-form .form__field--group .weekend_evening--check-field label, .tasks__create--container .create-task-form .form__field--group .comment-field label {\n      font-size: 10px;\n      color: #eee;\n}\n.tasks__create--container .create-task-form .form__field--group .work_hours-field .form-control, .tasks__create--container .create-task-form .form__field--group .location-field .form-control, .tasks__create--container .create-task-form .form__field--group .supplier-field .form-control, .tasks__create--container .create-task-form .form__field--group .weekend_evening--check-field .form-control, .tasks__create--container .create-task-form .form__field--group .comment-field .form-control {\n      border: 1px solid #00b0eb;\n      color: #00b0eb;\n      border-radius: 2px;\n}\n.tasks__create--container .create-task-form .form__field--group .work_hours-field .form-control::-webkit-input-placeholder, .tasks__create--container .create-task-form .form__field--group .location-field .form-control::-webkit-input-placeholder, .tasks__create--container .create-task-form .form__field--group .supplier-field .form-control::-webkit-input-placeholder, .tasks__create--container .create-task-form .form__field--group .weekend_evening--check-field .form-control::-webkit-input-placeholder, .tasks__create--container .create-task-form .form__field--group .comment-field .form-control::-webkit-input-placeholder {\n        font-size: 10px;\n}\n.tasks__create--container .create-task-form .form__field--group .work_hours-field .form-control:-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .location-field .form-control:-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .supplier-field .form-control:-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .weekend_evening--check-field .form-control:-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .comment-field .form-control:-ms-input-placeholder {\n        font-size: 10px;\n}\n.tasks__create--container .create-task-form .form__field--group .work_hours-field .form-control::-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .location-field .form-control::-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .supplier-field .form-control::-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .weekend_evening--check-field .form-control::-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .comment-field .form-control::-ms-input-placeholder {\n        font-size: 10px;\n}\n.tasks__create--container .create-task-form .form__field--group .work_hours-field .form-control::placeholder, .tasks__create--container .create-task-form .form__field--group .location-field .form-control::placeholder, .tasks__create--container .create-task-form .form__field--group .supplier-field .form-control::placeholder, .tasks__create--container .create-task-form .form__field--group .weekend_evening--check-field .form-control::placeholder, .tasks__create--container .create-task-form .form__field--group .comment-field .form-control::placeholder {\n        font-size: 10px;\n}\n.tasks__create--container .create-task-form .form__field--group .week-details .weekday label, .tasks__create--container .create-task-form .form__field--group .week-details .week label {\n      font-size: 10px;\n      color: #eee;\n}\n.tasks__create--container .create-task-form .form__field--group .week-details .weekday .form-control, .tasks__create--container .create-task-form .form__field--group .week-details .week .form-control {\n      border: 1px solid #00b0eb;\n      color: #00b0eb;\n      border-radius: 2px;\n}\n.tasks__create--container .create-task-form .form__field--group .week-details .weekday .form-control::-webkit-input-placeholder, .tasks__create--container .create-task-form .form__field--group .week-details .week .form-control::-webkit-input-placeholder {\n        font-size: 10px;\n}\n.tasks__create--container .create-task-form .form__field--group .week-details .weekday .form-control:-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .week-details .week .form-control:-ms-input-placeholder {\n        font-size: 10px;\n}\n.tasks__create--container .create-task-form .form__field--group .week-details .weekday .form-control::-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .week-details .week .form-control::-ms-input-placeholder {\n        font-size: 10px;\n}\n.tasks__create--container .create-task-form .form__field--group .week-details .weekday .form-control::placeholder, .tasks__create--container .create-task-form .form__field--group .week-details .week .form-control::placeholder {\n        font-size: 10px;\n}\n.tasks__create--container .create-task-form .form__field--group .submit .btn {\n      border: 1px solid #00b0eb;\n      background: transparent;\n      color: #00b0eb;\n      margin-left: 3rem;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 446 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+exports.default = {
+	data: function data() {
+		return {
+			work_hours: '',
+			week_day: '',
+			week: '',
+			location: '',
+			supplier: '',
+			weekend: false,
+			comment: '',
+			error: ''
+		};
+	},
+
+
+	methods: {
+		validateTask: function validateTask() {
+			var _this = this;
+
+			if (this.work_hours === '' || this.location === '' || this.supplier === '' || this.work_hours && this.location === '' && this.supplier === '' || this.work_hours && this.location && this.supplier === '') {
+				this.error = true;
+				var count = 2;
+
+				setInterval(function () {
+					count--;
+
+					if (count === 0) _this.error = false;
+					clearInterval();
+				}, 1000);
+			}
+
+			// if( this.error === true && this.work_hours && this.location && this.supplier ) {
+			// 	this.error = false
+			// }
+		},
+		createTask: function createTask(e) {
+			e.preventDefault();
+
+			this.validateTask();
+
+			if (!this.error) {
+				console.log("Creating task");
+			}
+		}
+	},
+
+	computed: {
+		msg: function msg() {
+			if (this.work_hours === '') {
+				return 'Your estimated work hours is required.';
+			}
+
+			if (this.location === '') {
+				return 'You need to define a location for your task';
+			}
+
+			if (this.supplier === '') {
+				return 'You need to define a supplier your doing this task for.';
+			}
+		}
+	}
+};
+
+/***/ }),
+/* 447 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "inner-create__form--container" }, [
+    _c(
+      "form",
+      {
+        staticClass: "create-task-form",
+        attrs: { action: "#", method: "post" }
+      },
+      [
+        _c("div", { staticClass: "form__field--group" }, [
+          _c(
+            "div",
+            { staticClass: "form-group work_hours-field col-md-1 col-lg-1" },
+            [
+              _c("label", { attrs: { for: "work_hours" } }, [
+                _vm._v("Work hours")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.work_hours,
+                    expression: "work_hours"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "number", name: "work_hours" },
+                domProps: { value: _vm.work_hours },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.work_hours = $event.target.value
+                  }
+                }
+              })
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "week-details col-md-3 col-lg-3" }, [
+            _c("div", { staticClass: "form-group weekday col-md-6 col-lg-6" }, [
+              _c("label", { attrs: { for: "weekday" } }, [_vm._v("Week day")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.week_day,
+                    expression: "week_day"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "text",
+                  name: "week_day",
+                  placeholder: "Enter weekday"
+                },
+                domProps: { value: _vm.week_day },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.week_day = $event.target.value
+                  }
+                }
+              })
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group week col-md-6 col-lg-6" }, [
+              _c("label", { attrs: { for: "week" } }, [_vm._v("Week")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.week,
+                    expression: "week"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: { type: "number", name: "week" },
+                domProps: { value: _vm.week },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.week = $event.target.value
+                  }
+                }
+              })
+            ])
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "form-group location-field col-md-2 col-lg-2" },
+            [
+              _c("label", { attrs: { for: "location" } }, [_vm._v("Location")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.location,
+                    expression: "location"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "text",
+                  name: "location",
+                  placeholder: "Enter location"
+                },
+                domProps: { value: _vm.location },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.location = $event.target.value
+                  }
+                }
+              })
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "form-group supplier-field col-md-2 col-lg-2" },
+            [
+              _c("label", { attrs: { for: "supplier" } }, [_vm._v("Supplier")]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.supplier,
+                    expression: "supplier"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  type: "text",
+                  name: "supplier",
+                  placeholder: "Enter supplier"
+                },
+                domProps: { value: _vm.supplier },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.supplier = $event.target.value
+                  }
+                }
+              })
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "form-group weekend_evening--check-field col-md-1 col-lg-1"
+            },
+            [
+              _c("label", { attrs: { for: "weekeend" } }, [
+                _vm._v("Weekend / Evening")
+              ]),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.weekend,
+                    expression: "weekend"
+                  }
+                ],
+                attrs: { type: "checkbox", name: "weekend" },
+                domProps: {
+                  checked: Array.isArray(_vm.weekend)
+                    ? _vm._i(_vm.weekend, null) > -1
+                    : _vm.weekend
+                },
+                on: {
+                  change: function($event) {
+                    var $$a = _vm.weekend,
+                      $$el = $event.target,
+                      $$c = $$el.checked ? true : false
+                    if (Array.isArray($$a)) {
+                      var $$v = null,
+                        $$i = _vm._i($$a, $$v)
+                      if ($$el.checked) {
+                        $$i < 0 && (_vm.weekend = $$a.concat([$$v]))
+                      } else {
+                        $$i > -1 &&
+                          (_vm.weekend = $$a
+                            .slice(0, $$i)
+                            .concat($$a.slice($$i + 1)))
+                      }
+                    } else {
+                      _vm.weekend = $$c
+                    }
+                  }
+                }
+              })
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "form-group comment-field col-md-3 col-lg-3" },
+            [
+              _c("label", { attrs: { for: "comment" } }, [_vm._v("Comment")]),
+              _vm._v(" "),
+              _c("textarea", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.comment,
+                    expression: "comment"
+                  }
+                ],
+                staticClass: "form-control",
+                attrs: {
+                  name: "comment",
+                  id: "comment",
+                  cols: "20",
+                  rows: "2",
+                  placeholder: "Give your task a comment"
+                },
+                domProps: { value: _vm.comment },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.comment = $event.target.value
+                  }
+                }
+              })
+            ]
+          ),
+          _vm._v(" "),
+          _c("div", { staticClass: "row submit" }, [
+            _c("div", { staticClass: "form-group" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "submit-task-btn btn btn-primary",
+                  on: { click: _vm.createTask }
+                },
+                [
+                  _vm._v("\n                            Create "),
+                  _c("i", { staticClass: "fa fa-pencil" })
+                ]
+              )
+            ])
+          ])
+        ])
+      ]
+    ),
+    _vm._v(" "),
+    _vm.error
+      ? _c("div", { staticClass: "create-task__error" }, [
+          _c("div", { staticClass: "alert alert-danger" }, [
+            _vm._v("\n        \t\t" + _vm._s(_vm.msg) + "\n        \t")
+          ])
+        ])
+      : _vm._e()
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-017bcc62", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

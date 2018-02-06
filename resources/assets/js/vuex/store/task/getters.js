@@ -1,5 +1,5 @@
 const getters = {
-	getAllTAsks: state => {
+	getAllTasks: state => {
 		return state.tasks
 	},
 	getSingleTask: state => {
