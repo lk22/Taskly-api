@@ -5,16 +5,18 @@ namespace Taskly;
 use Illuminate\Database\Eloquent\Model;
 
 use Taskly\User;
-use Taskly\Placement;
+use Taskly\Comment;
 
 class Task extends Model
 {
     /**
-     * column fields allowed to be fillable
-     * @var [type]
+     * |-------------------------------------------
+     * |
+     * |   the mass-assignable field to be filled
+     * |
+     * |-------------------------------------------
      */
     protected $fillable = [
-        'name',
         'slug',
         'user_id',
         'is_checked',
@@ -27,16 +29,22 @@ class Task extends Model
     ];
 
     /**
-     * fields to be hidden
-     * @var [type]
+     * |-------------------------------------------
+     * |
+     * |    fields to be hidden
+     * |
+     * |-------------------------------------------
      */
     protected $hidden = [
         'user_id',
     ];
 
-    /**
-     * define castable columns to be specific datatype in return
-     * @var [type]
+   /**
+     * |-------------------------------------------
+     * |
+     * |    Special casting property
+     * |
+     * |-------------------------------------------
      */
     protected $casts = [
         'is_checked' => 'boolean',
@@ -54,8 +62,11 @@ class Task extends Model
     // }
 
     /**
-     * task belongs to user
-     * @return [type] [description]
+     * |-------------------------------------------
+     * |
+     * |   Tasks belongs to a user
+     * |
+     * |-------------------------------------------
      */
     public function user()
     {
@@ -63,11 +74,14 @@ class Task extends Model
     }
 
     /**
-     * task
-     * @return [type] [description]
+     * |-------------------------------------------
+     * |
+     * |    Tasks has many comments
+     * |
+     * |-------------------------------------------
      */
-    public function placements()
+    public function comments()
     {
-        return $this->hasMany(Placement::class);
+        return $this->morphMany(Comment::class, 'commentable');
     }
 }
