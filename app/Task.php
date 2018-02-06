@@ -51,15 +51,20 @@ class Task extends Model
     ];
 
     /**
-     * Automatic boot function
+     * |-------------------------------------------
+     * |
+     * |    extending default behavior
+     * |
+     * |-------------------------------------------
      */
-    // protected static function boot() {
-    //     parent::boot();
+    protected static function boot() {
+        parent::boot();
 
-    //     static::deleting(function($task) {
-    //         return $task->placements()->delete();
-    //     });
-    // }
+        // while deleting model
+        static::deleting(function($task) {
+            return $task->comments()->delete();
+        });
+    }
 
     /**
      * |-------------------------------------------

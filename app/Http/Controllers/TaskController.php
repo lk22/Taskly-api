@@ -26,9 +26,10 @@ class TaskController extends Controller
      * |    Constructor
      * |------------------------------------------------------------------------
      */
-    public function __construct(Task $task)
+    public function __construct(Task $task, Comment $comment)
     {
-        $this->task = $task;
+        $this->task          = $task;
+        $this->comment       = $comment;
 
         $this->authenticated = \Auth::guard('api')->user();
     }
@@ -58,13 +59,15 @@ class TaskController extends Controller
      */
     public function task($slug)
     {
-        $task = $this->task->whereSlug($slug)->orWhere('id', $this->authenticated->id)->firstOrFail();
+        $task = $this->task->whereSlug($slug)
+                ->orWhere('id', $this->authenticated->id)
+                ->firstOrFail();
 
         if (!count($task) > 0) {
             API::throwResourceNotFoundException();
         }
 
-        return fractal($task, new TaskTransformer())->toArraY();
+        return fractal($task, new TaskTransformer())->toArray();
     }
 
     /**
@@ -74,17 +77,13 @@ class TaskController extends Controller
      */
     public function setPriority(Request $request, $slug)
     {
-        API::validate($request, [
-            'priority' => ''
-        ]);
+        API::validate($request, [ 'priority' => '' ]);
 
         if (!$request->get('priority')) {
             API::throwInputNotFoundException();
         }
 
-        $this->task->whereSlug($slug)->update([
-            'priority' => $request->get('priority')
-        ]);
+        $this->task->whereSlug($slug)->update([ 'priority' => $request->get('priority') ]);
     }
 
     /**
@@ -100,7 +99,7 @@ class TaskController extends Controller
             API::throwInputNotFoundException();
         }
 
-        $this->task->whereId($id)->update(['is_checked' => $request->get('check')]);
+        $this->task->whereId($id)->update([ 'is_checked' => $request->get('check') ]);
     }
 
     /**
@@ -110,17 +109,13 @@ class TaskController extends Controller
      */
     public function checkAllTasks(Request $request)
     {
-        API::validate($request,[
-            'check' => ''
-        ]);
+        API::validate($request,[ 'check' => '' ]);
 
         if (!$request->get('check')) {
             API::throwInputNotFoundException();
         }
 
-        $this->task->whereIsChecked(false)->update([
-            'is_checked' => $request->get('check')
-        ]);
+        $this->task->whereIsChecked(false)->update([ 'is_checked' => $request->get('check') ]);
     }
 
     /**
@@ -138,9 +133,7 @@ class TaskController extends Controller
             API::throwInputNotFoundException();
         }
 
-        $this->task->whereIsChecked(true)->update([
-            'is_checked' => $request->get('check')
-        ]);
+        $this->task->whereIsChecked(true)->update([ 'is_checked' => $request->get('check') ]);
     }
 
     /**
@@ -156,20 +149,22 @@ class TaskController extends Controller
             'supplier'      => 'required'
         ]);
 
-        $this->task->create([
-            'location' => preq_match("/^[a-zA-Z0-9æøå]+$/i^", $request->get('location')),
-            'slug' => str_replace('-', ' ', strtolower($request->get('location'))),
-            'user_id' => $this->authenticated->id,
-            'supplier' => $request->get('supplier'),
-            'work_hours' => $request->get('work_hours'),
+        $task = $this->task->create([
+            'location'      => preq_match("/^[a-zA-Z0-9æøå]+$/i^", $request->get('location')),
+            'slug'          => str_replace('-', ' ', strtolower($request->get('location'))),
+            'user_id'       => $this->authenticated->id,
+            'supplier'      => $request->get('supplier'),
+            'work_hours'    => $request->get('work_hours'),
         ]);
 
         if( $request->has('comment') ) {
+            $comment = new Comment(['body' => $request->get('comment')])
             /**
              * @todo create a comment for the created task
              *       use the id for the task instance that just got created
              *        
              */
+            $task->comments()->save($comment);
         }
     }
 
@@ -178,24 +173,24 @@ class TaskController extends Controller
      * |    Update existing task resource
      * |------------------------------------------------------------------------
      */
-    public function update(Request $request, $slug)
-    {
-        API::validate($request, [
-            'name' => 'required',
-            'priority' => '',
-            'work_hours' => 'required'
-        ]);
+    // public function update(Request $request, $slug)
+    // {
+    //     API::validate($request, [
+    //         'name' => 'required',
+    //         'priority' => '',
+    //         'work_hours' => 'required'
+    //     ]);
 
-        $task = $this->task->whereSlug($slug)->firstOrFail();
+    //     $task = $this->task->whereSlug($slug)->firstOrFail();
 
-        $task->update([
-            //'name' => preg_match("/^[a-zA-Z0-9ÆØÅæøå]+$/i^", $request->get('name')),
-            'name' => $request->get('name'),
-            'priority' => $request->get('priority'),
-            'slug' => str_replace('-', ' ', strtolower($request->get('name'))),
-            'work_hours' => $request->get('work_hours')
-        ]);
-    }
+    //     $task->update([
+    //         //'name' => preg_match("/^[a-zA-Z0-9ÆØÅæøå]+$/i^", $request->get('name')),
+    //         'name' => $request->get('name'),
+    //         'priority' => $request->get('priority'),
+    //         'slug' => str_replace('-', ' ', strtolower($request->get('name'))),
+    //         'work_hours' => $request->get('work_hours')
+    //     ]);
+    // }
 
     /**
      * |------------------------------------------------------------------------
