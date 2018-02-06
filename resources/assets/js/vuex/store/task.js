@@ -1,6 +1,6 @@
 
 import types from './task/types'
-// import the actions here
+import actions from './task/actions'
 import mutations from './task/mutations'
 import getters from './task/getters'
 import state from './task/state'

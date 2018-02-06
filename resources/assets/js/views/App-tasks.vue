@@ -4,13 +4,13 @@
             <Header page="tasks">
                 <button 
                     class="create-task-btn btn btn-primary" 
-                    @click="task.create.creating = true"
+                    @click="toggleCreate"
                 >
-                    Create new task
+                    <i class="fa fa-pencil"></i>
                 </button>
             </Header>
         </div>
-        <div class="tasks__create--container" v-if="task.create.creating === true">
+        <div class="tasks__create--container hidden-xs hidden-sm" v-if="creating">
                 
                 <!-- form component -->
                 <form 
@@ -35,7 +35,7 @@
                         </div>
 
                         <!-- week details -->
-                        <div class="week-details col-md-2 col-lg-2">
+                        <div class="week-details col-md-3 col-lg-3">
                             
                             <!-- week_day -->
                             <div class="form-group weekday col-md-6 col-lg-6">
@@ -46,6 +46,7 @@
                                     type="text" 
                                     name="week_day" 
                                     class="form-control"
+                                    placeholder="Enter weekday"
                                 >
                             </div>
     
@@ -76,6 +77,7 @@
                                 type="text"
                                 name="location"
                                 class="form-control"
+                                placeholder="Enter location"
                             >
                         </div>
 
@@ -92,19 +94,19 @@
                         </div>
 
                         <!-- weekend/evening job field -->
-                        <div class="form-group weekend_evening--check-field col-md-2 col-lg-2">
+                        <div class="form-group weekend_evening--check-field col-md-1 col-lg-1">
                             <label for="weekeend">Weekend / Evening</label>
 
                             <input 
                                 v-model="task.create.weekend"
                                 type="checkbox"
                                 name="weekend"
-                                class="form-control"
                             >
                         </div>
 
                         <!-- comment field -->
                         <div class="form-group comment-field col-md-3 col-lg-3">
+  
                             <label for="comment">Comment</label>
 
                             <textarea
@@ -112,8 +114,9 @@
                                 name="comment" 
                                 id="comment" 
                                 cols="20" 
-                                rows="5"
+                                rows="2"
                                 class="form-control"
+                                placeholder="Give your task a comment"
                             ></textarea>
                         </div>
 
@@ -124,7 +127,7 @@
                                 <button
                                     class="submit-task-btn btn btn-primary"
                                 >
-                                    Create
+                                    Create <i class="fa fa-pencil"></i>
                                 </button>
                             </div>
                         </div>
@@ -144,6 +147,7 @@
         layout: 'app',
         data() {
             return {
+                creating:               true,
                 task: {
                     create: {
                         creating:       false,  // if user wants to create a new tasks
@@ -165,9 +169,82 @@
                         }
                     }
                 },
-                locations:              [],     // selecting all locations from databse
+                locations:              [],     // selecting all locations from database
                 completed:              false   // if task is completed
+            }
+        },
+
+        methods: {
+            toggleCreate(e) {
+                e.preventDefault()
+                this.creating = !this.creating
             }
         },
     }
 </script>
+
+<style lang="scss">
+    
+
+    // desktop task create form
+    .tasks__create--container{
+        transition: ease-in-out 0.2s all;
+        min-height: 150px;
+        width: auto; 
+
+        // form
+        .create-task-form{
+            height: 100%;
+            width: 100%;
+            
+            .form__field--group{
+                .work_hours-field, .location-field, .supplier-field, .weekend_evening--check-field, .comment-field {
+                    label{
+                        font-size:10px;
+                        color: #eee; 
+                    }
+
+                    .form-control{
+                        border:1px solid #00b0eb;
+                        color: #00b0eb;
+                        border-radius:2px;
+
+                        &::placeholder{
+                            font-size:10px;
+                        }
+                    }
+                }
+
+                // week details
+                .week-details {
+                    .weekday, .week{
+                        label{
+                            font-size:10px;
+                            color: #eee;
+                        }
+
+                        .form-control{
+                            border: 1px solid #00b0eb;
+                            color: #00b0eb;
+                            border-radius:2px;
+
+                            &::placeholder{
+                                font-size:10px;
+                            }
+                        }
+                    }
+                }
+
+                .submit{
+                    .btn{
+                        border:1px solid #00b0eb;
+                        background: transparent;
+                        color: #00b0eb;
+                        margin-left: 3rem;
+                    }   
+                }
+            }
+        }
+    }
+
+</style>

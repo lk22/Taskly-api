@@ -1,3 +1,4 @@
+import types from './types'
 /**
  * Mutations for a task
  * @type {Object}
@@ -7,7 +8,7 @@ const mutations = {
 	/**
 	 * get all tasks
 	 */
-	[types.GET_TASKS]
+	
 
 	/** 
 	 * Creating a new task

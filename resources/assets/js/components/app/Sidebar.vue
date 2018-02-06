@@ -6,16 +6,8 @@
 					<router-link :to="{name: 'dashboard-tasks'}"><i class="fa fa-bars"></i></router-link>
 				</div>
 				<!-- <div class="sidebar__link">
-					<i class="fa fa-file-excel-o"></i>
-					<a href="/app/dashboard/?export=excel">Export excel</a>
-				</div>
-				<div class="sidebar__link">
-					<i class="fa fa-file-pdf-o"></i>
-					<a href="/app/dashboard/?export=pdf">Export pdf</a>
-				</div> -->
-				<div class="sidebar__link">
 					<router-link :to="{name: 'authenticated-user'}"><i class="fa fa-cog"></i></router-link>
-				</div>
+				</div> -->
 				<div class="bottom">
 					<i class="fa fa-user"></i>
 				</div>

@@ -7,7 +7,7 @@ const types = {
 	DELETE_TASK: 			'DELETE_TASK',
 	SET_PRIORITY: 			'SET_PRIORITY',
 	SET_DEADLINE: 			'SET_DEADLINE',
+	SET_WORK_HOURS: 		'SET_WORK_HOURS',
 	APPLY_COMMENT: 			'APPLY_COMMENT'
 }
-
 export default types

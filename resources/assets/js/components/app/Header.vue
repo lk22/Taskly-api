@@ -60,7 +60,7 @@
 
 					.row--create-button{
 						.btn {
-							border-color: #00b0eb; 
+							border:none;
 							background: transparent;
 							color: #00b0eb;
 							margin-top: -10px;
