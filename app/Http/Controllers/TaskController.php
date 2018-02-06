@@ -151,9 +151,9 @@ class TaskController extends Controller
     public function create(Request $request)
     {
         API::validate($request, [
-            
-            'priority' => '',
-            'work_hours' => 'required'
+            'work_hours'    => 'required',
+            'location'      => 'required',
+            'supplier'      => 'required'
         ]);
 
         $this->task->create([

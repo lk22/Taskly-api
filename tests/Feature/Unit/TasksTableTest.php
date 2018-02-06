@@ -70,6 +70,61 @@ class TasksTableTest extends TestCase
     }
 
     /**
+     * @description: tasks_table_has_work_hours_column
+     * @todo 
+     * @test
+     */
+    public function tasks_table_has_work_hours_column() {
+        $this->withoutExceptionHandling();
+        $tasksTableHasWorkHoursColumn = Schema::hasColumn('tasks', 'work_hours');
+        $this->assertTrue($tasksTableHasWorkHoursColumn);
+    }
+
+    /**
+     * @description: tasks_table_has_supplier_column
+     * @todo 
+     * @test
+     */
+    public function tasks_table_has_supplier_column() {
+        $this->withoutExceptionHandling();
+        $tasksTableHasSupplierColumn = Schema::hasColumn('tasks', 'supplier');
+        $this->assertTrue($tasksTableHasSupplierColumn);
+    }
+
+    /**
+     * @description: tasks_table_has_start_at_column
+     * @todo 
+     * @test
+     */
+    public function tasks_table_has_start_at_column() {
+        $this->withoutExceptionHandling();
+        $tasksTableHasStartAtColumn = Schema::hasColumn('tasks', 'start_at');
+        $this->assertTrue($tasksTableHasStartAtColumn);
+    }
+
+    /**
+     * @description: tasks_table_has_end_at_column
+     * @todo 
+     * @test
+     */
+    public function tasks_table_has_end_at_column() {
+        $this->withoutExceptionHandling();
+        $tasksTableHasEndAtColumn = Schema::hasColumn('tasks', 'end_at');
+        $this->assertTrue($tasksTableHasEndAtColumn);
+    }
+
+    /**
+     * @description: tasks_table_has_priority_column
+     * @todo 
+     * @test
+     */
+    public function tasks_table_has_priority_column() {
+        $this->withoutExceptionHandling();
+        $tasksTableHasPriorityColumn = Schema::hasColumn('tasks', 'priority');
+        $this->assertTrue($tasksTableHasPriorityColumn);
+    }
+
+    /**
      * @description: tasks_table_has_timestamps
      * @test
      */
