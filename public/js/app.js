@@ -16070,7 +16070,7 @@ __webpack_require__(232);
 // main store
 
 
-// enable Vue.JS Developer tools
+// enable Vue.js Developer tools
 _vue2.default.config.devtools = true;
 
 /**

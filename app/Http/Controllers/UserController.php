@@ -173,7 +173,7 @@ class UserController extends Controller
          * Creating new user from request input
          * @var [type]
          */
-        $user = User::create([
+        $user = $this->user->create([
           'firstname'       => $request->get('firstname'),
           'lastname'        => $request->get('lastname'),
           'name'            => $request->get('firstname') . ' ' . $request->get('lastname'),

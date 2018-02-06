@@ -23,7 +23,7 @@ import Register from './views/Register.vue'
 import store from './vuex/store'
 import router from './router'
 
-// enable Vue.JS Developer tools
+// enable Vue.js Developer tools
 Vue.config.devtools = true
 
 /**

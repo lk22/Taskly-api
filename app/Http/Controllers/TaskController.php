@@ -29,7 +29,7 @@ class TaskController extends Controller
     public function __construct(Task $task)
     {
         $this->task = $task;
-
+        
         $this->authenticated = \Auth::guard('api')->user();
     }
 
