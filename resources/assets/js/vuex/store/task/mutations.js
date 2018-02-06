@@ -8,7 +8,9 @@ const mutations = {
 	/**
 	 * get all tasks
 	 */
-	
+	[types.GET_ALL_TASKS](state, payload) {
+		state.items = payload
+	},
 
 	/** 
 	 * Creating a new task

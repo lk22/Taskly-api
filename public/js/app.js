@@ -18859,7 +18859,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
  * Mutations for a task
  * @type {Object}
  */
-var mutations = (_mutations = {}, _defineProperty(_mutations, _types2.default.CREATE_TASK, function (state, task) {
+var mutations = (_mutations = {}, _defineProperty(_mutations, _types2.default.GET_ALL_TASKS, function (state, payload) {
+	state.items = payload;
+}), _defineProperty(_mutations, _types2.default.CREATE_TASK, function (state, task) {
 	state.items = [task].concat(state.items);
 }), _defineProperty(_mutations, _types2.default.DELETE_TASK, function (state, task) {
 	state.items = state.items.filter(function (item) {
