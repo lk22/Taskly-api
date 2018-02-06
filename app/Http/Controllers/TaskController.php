@@ -157,13 +157,20 @@ class TaskController extends Controller
         ]);
 
         $this->task->create([
-            //'name' => preg_match("/^[a-zA-Z0-9ÆØÅæøå]+$/i^", $request->get('name')),
-            'location' => $request->get('location'),
+            'location' => preq_match("/^[a-zA-Z0-9æøå]+$/i^", $request->get('location')),
             'slug' => str_replace('-', ' ', strtolower($request->get('location'))),
             'user_id' => $this->authenticated->id,
-            'priority' => $request->get('priority'),
-            'work_hours' => $request->get('work_hours')
+            'supplier' => $request->get('supplier'),
+            'work_hours' => $request->get('work_hours'),
         ]);
+
+        if( $request->has('comment') ) {
+            /**
+             * @todo create a comment for the created task
+             *       use the id for the task instance that just got created
+             *        
+             */
+        }
     }
 
     /**
