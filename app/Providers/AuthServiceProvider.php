@@ -32,5 +32,12 @@ class AuthServiceProvider extends ServiceProvider
         Passport::tokensExpireIn(\Carbon\Carbon::now()->addDays(15));
 
         Passport::refreshTokensExpireIn(\Carbon\Carbon::now()->addDays(30));
+
+        Passport::tokensCan([
+            'update-task' => 'update the existing task',
+            'create-task' => 'creating new task ressource',
+            'update-work-hours' => 'update the working hours',
+            'update-deadline' => 'update the existing deadline'
+        ]);
     }
 }
