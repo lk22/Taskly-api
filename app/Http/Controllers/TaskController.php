@@ -30,7 +30,7 @@ class TaskController extends Controller
     {
         $this->task = $task;
 
-        $this->authenticated = \Auth::user();
+        $this->authenticated = \Auth::guard('api')->user();
     }
 
     /**
@@ -40,7 +40,7 @@ class TaskController extends Controller
      */
     public function index()
     {
-        $tasks = $this->task->all();
+        $tasks = $this->task->where('id', $this->authenticated->id)->get();
 
         if (count($tasks) >= 0) {
             return fractal($tasks, new TaskTransformer())->toArray();
@@ -56,7 +56,7 @@ class TaskController extends Controller
      */
     public function task($slug)
     {
-        $task = $this->task->whereSlug($slug)->firstOrFail();
+        $task = $this->task->whereSlug($slug)->orWhere('id', $this->authenticated->id)->firstOrFail();
 
         if (!count($task) > 0) {
             API::throwResourceNotFoundException();

@@ -16,13 +16,14 @@ class EnforeJson
     public function handle($request, Closure $next)
     {
         $acceptHeader = $request->header('Accept');
-        // if(\Auth::guard('auth:api')) {
-        //     if($acceptHeader != 'application/json') {
-        //         return response()->json([
-        //             'error' => 'Unauthenticated'   
-        //         ], 400);
-        //     }
-        // }
+        $token = $request->header('Authorization');
+        if(\Auth::guard('api')) {
+            if($acceptHeader != 'application/json' && !$token) {
+                return response()->json([
+                    'error' => 'Unauthenticated'   
+                ], 400);
+            }
+        }
         
         return $next($request);
     }
