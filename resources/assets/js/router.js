@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-
-import auth from './vuex/store/auth'
+import store from './vuex/store'
 
 Vue.use(VueRouter)
 
@@ -22,11 +21,11 @@ const router = new VueRouter({
 					path: '/auth', 
 					name: 'auth', 
 					component: require('./views/Authenticate'),
-					// beforeEnter(to, from, next) {
-					// 	if(window.localStorage.getItem('access_token')){
-					// 		next('/app/dashboard/tasks')
-					// 	}
-					// }
+					beforeEnter(to, from, next) {
+						if(store.state.auth.authenticated.token){
+							next('/app/dashboard/tasks')
+						}
+					}
 				},
 
 				/**
@@ -36,11 +35,11 @@ const router = new VueRouter({
 					path: '/signup', 
 					name: 'signup', 
 					component: require('./views/Register'),
-					// beforeRouteEnter(to, from, next) {
-					// 	if(window.localStorage.getItem('access_token')){
-					// 		next('/app/dashboard/tasks')
-					// 	}
-					// } 
+					beforeRouteEnter(to, from, next) {
+						if(store.state.auth.authenticated.token){
+							next('/app/dashboard/tasks')
+						}
+					} 
 				},
 			], 
 		},
@@ -82,7 +81,7 @@ const router = new VueRouter({
 				}
 			],
 			beforeEnter(to, from, next) {
-				if(window.localStorage.getItem('access_token')) {
+				if(store.state.auth.authenticated.token) {
 					next()
 				} else {
 					next('/auth')

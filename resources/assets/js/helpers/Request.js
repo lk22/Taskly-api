@@ -1,8 +1,6 @@
 import axios from 'axios'
 import store from './../vuex/store'
 
-console.log(store.state.auth)
-
 /**
  * |-------------------------------------------
  * |	Create Request instance
@@ -22,7 +20,7 @@ const request = axios.create({
  */
 request.interceptors.request.use((config) => {
 	config.headers.common = {
-		Authorization: `Bearer ` + window.localStorage('access_token'),
+		Authorization: `Bearer ` + store.state.auth.authenticated.token,
 		Accept: 'application/json'
 	}
 	

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Route;
 use GuzzleHttp\Client;
 
 use Taskly\User;
+use Taskly\Company;
 
 class UserController extends Controller
 {
@@ -47,12 +48,12 @@ class UserController extends Controller
          * add a request to save within other api requests
          */
         $request->request->add([
-            'username' => $request->username,
-            'password' => $request->password,
-            'grant_type' => 'password',
-            'client_id' => env('PASSPORT_CLIENT_ID', 1),
-            'client_secret' => env('PASSPORT_CLIENT_SECRET', ''),
-            'scope' => '*'
+            'username'          => $request->username,
+            'password'          => $request->password,
+            'grant_type'        => 'password',
+            'client_id'         => env('PASSPORT_CLIENT_ID', 1),
+            'client_secret'     => env('PASSPORT_CLIENT_SECRET', ''),
+            'scope'             => '*'
         ]);
 
         /**
@@ -135,36 +136,34 @@ class UserController extends Controller
      */
     public function register(Request $request)
     {
+
+        // dd($request->all());
+
         /**
          * Validating request input
          * @var [type]
          */
         $validator = $request->validate([
-            'firstname'     => 'required',
-            'lastname'      => 'required',
-            'email'         => 'required|email|unique:users',
-            'password'      => 'required',
-            'c_password'    => 'required|same:password',
-            'has_company'   => '',
+            'firstname'         => 'required',
+            'lastname'          => 'required',
+            'email'             => 'required|email|unique:users',
+            'password'          => 'required',
+            'confirm_password'  => 'required|same:password',
+            'has_company'       => ''
         ]);
 
-        if($request->get('has_company')) {
+        if($request->input('has_company')) {
             $company_validation = $request->validate([
                 'company_name'              => 'required',
                 'company_type'              => 'required',
                 'company_address'           => '',
-                'company_registration_nr'   => 'required',
-                'company_phone_nr'          => '',
             ]);
         }
 
         /**
          * check for failing request
          */
-        if ( 
-            $validator->fails() || 
-            $company_validation->falis()
-        ) {
+        if ($validator->fails() || $company_validation->falis()) {
             return response()->json([
                 'error' => 'Something went wrong with your request'
             ]);
@@ -174,27 +173,36 @@ class UserController extends Controller
          * Creating new user from request input
          * @var [type]
          */
-        $user = User::create([
-          'firstname' => $request->get('firstname'),
-          'lastname' => $request->get('lastname'),
-          'name' => $request->get('firstname') . ' ' . $request->get('lastname'),
-          'slug' => strtolower($request->get('firstname')) . '-' . strtolower($request->get('lastname')),
-          'email' => $request->input('email'),
-          'password' => bcrypt($request->get('password'))
+        $user = $this->user->create([
+          'firstname'       => $request->get('firstname'),
+          'lastname'        => $request->get('lastname'),
+          'name'            => $request->get('firstname') . ' ' . $request->get('lastname'),
+          'slug'            => strtolower($request->get('firstname')) . '-' . strtolower($request->get('lastname')),
+          'email'           => $request->input('email'),
+          'password'        => bcrypt($request->get('password')),
+          'has_company'     => $request->get('has_company')
         ]);
+
+        if($user->has_company = true) {
+            Company::create([
+                'company_name'      => $request->get('company_name'),
+                'company_type'      => $request->get('company_type'),
+                'company_address'   => $request->get('company_address')
+            ]);
+        }
 
         // Sign the user in
         $http = new GuzzleHttp\Client;
 
         // sending the requesting information to passport token endpoint
         $response = $http->post(URL::to('/oauth/token'), [
-          'form_params' => [
-            'grant_type' => 'password',
-            'client_id' => env('PASSPORT_CLIENT_ID', 1),
-            'client_secret' => env('PASSPORT_CLIENT_SECRET', ''),
-            'username' => $request->input('email'),
-            'password' => $request->input('password'),
-            'scope' => '*'
+          'form_params'         => [
+            'grant_type'        => 'password',
+            'client_id'         => env('PASSPORT_CLIENT_ID', 1),
+            'client_secret'     => env('PASSPORT_CLIENT_SECRET', ''),
+            'username'          => $request->input('email'),
+            'password'          => $request->input('password'),
+            'scope'             => '*'
           ]
         ]);
 

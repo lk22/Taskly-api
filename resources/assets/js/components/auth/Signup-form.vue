@@ -32,6 +32,7 @@
 								placeholder="Enter your firstname here"
 								class="form-control"
 								name="firstname"
+								v-model="firstname"
 							>
 
 						</div> <!-- firstname field end -->
@@ -48,6 +49,7 @@
 								placeholder="Enter your lastname here"
 								class="form-control"
 								name="lastname"
+								v-model="lastname"
 							>
 
 						</div>
@@ -67,6 +69,7 @@
 							placeholder="Enter your email here"
 							class="form-control"
 							name="email"
+							v-model="email"
 						>
 					</div> <!-- email field end -->
 
@@ -83,6 +86,7 @@
 							placeholder="Enter your password here"
 							class="form-control"
 							name="password"
+							v-model="password"
 						>
 					</div> <!-- password field end-->
 
@@ -98,9 +102,60 @@
 							type="password"
 							placeholder="Confirm above password"
 							class="form-control"
-							name="password_confirm"
+							name="confirm_password"
+							v-model="confirm_password"
 						>
 					</div><!-- password confirm field end -->
+
+					<div class="row has-company-row">
+						<!-- has company field -->
+						<div class="form-group col-md-2 col-lg-2 has-company-field">
+							<label for="has_company">Has comapany</label>
+
+							<input 
+								type="checkbox"
+								v-model="has_company"
+								class="form-control"
+								name="has_company"
+							>
+						</div>
+					</div>
+
+					<div class="row company-row" v-if="has_company">
+						<div class="form-group col-md-6 company-name-field">
+							<label for="company_name">Company name:</label>
+
+							<input 
+								type="text" 
+								placeholder="Enter company name here." 
+								class="form-control"
+								name="company_name"
+								v-model="company_name"
+							>
+						</div>
+
+						<div class="form-group col-md-6 company-type-field">
+							<label for="company_name">Company type:</label>
+
+							<select name="company_type" class="form-control" v-model="company_type">
+								<option value="enkeltmand">enkeltmand</option>
+								<option value="ivs">IVS</option>
+								<option value="aps">ApS</option>
+							</select>
+						</div>
+
+						<div class="form-group col-md-12 company-address-field">
+							<label for="company_name">Company address:</label>
+
+							<input 
+								type="text" 
+								placeholder="Enter company name here." 
+								class="form-control"
+								name="company_address"
+								v-model="company_address"
+							>
+						</div>
+					</div>
 
 					<!-- signup button field -->
 					<div class="form-group signup">
@@ -128,16 +183,18 @@
 	export default {
 		data(){
 			return {
-				error: false,
-				name: {
-					firstname: '',
-					lastname: '',
-				},
-				email: '',
-				see_password: false, // add button to see text instead of * in password fields
-				password: '',
-				confirm_password: '',
-				password_confirmed: null
+				error: 				false,
+				firstname: 			'',
+				lastname: 			'',
+				email: 				'',
+				see_password: 		false, // add button to see text instead of * in password fields
+				password: 			'',
+				confirm_password: 	'',
+				password_confirmed: null,
+				has_company: 		false,
+				company_name: 		'',
+				company_type: 		'',
+				company_address: 	'',
 			}
 		},
 
@@ -146,22 +203,30 @@
 		},
 
 		methods:{
+
+			/**
+			 * |-----------------------------------------------------
+			 * |	Register the user 
+			 * |-----------------------------------------------------
+			 */
 			register(e) {
 				e.preventDefault()
 
 				// check if the credentials is correctly
 				if(
-				   this.name.firstname === '' || 
-				   this.name.lastname === '' ||
-				   this.name.firstname && this.name.firstname < 1 && this.name.lastname === '' && this.name.lastname < 1 ||
-				   this.name.firstname && this.name.lastname && this.email === '' ||
-				   this.name.firstname && this.name.lastname && this.email && this.password === '' ||
-				   this.name.firstname && this.name.lastname && this.email && this.password && this.password < 8
+				   this.firstname === '' || 
+				   this.lastname === '' ||
+				   this.firstname && this.firstname < 1 && this.lastname === '' && this.lastname < 1 ||
+				   this.firstname && this.lastname && this.email === '' ||
+				   this.firstname && this.lastname && this.email && this.password === '' ||
+				   this.firstname && this.lastname && this.email && this.password && this.password < 8
 				) {
 					this.error = true
 
+				} else {
 					// if the confirmed passsword is the same as the password
 					if(this.confirm_password === this.password){
+						console.log("password confirmed")
 						this.password_confirmed = true
 					}
 
@@ -169,13 +234,61 @@
 					if(!this.confirm_password === this.password) {
 						this.password_confirmed = false
 					}
-				} 
+
+				}
+
+				// if the user in the proccess has a company
+				if( this.has_company ) {
+					console.log("company registered")
+					// validate the users company 
+					this.confirmCompany()
+				}
 
 				// if the password is confirmed
 				if(this.password_confirmed) {
-					// make api call
-					console.log('Registration confirmed!')
+
+					// make register request
+					this.$store.dispatch('auth/register', {
+						firstname: 			this.firstname,
+						lastname:  			this.lastname,
+						email: 				this.email,
+						password: 			this.password,
+						confirm_password: 	this.confirm_password,
+						has_company: 		this.has_company,
+						company_name: 		this.company_name,
+						company_type: 		this.company_type,
+						company_address: 	this.company_address
+					}).then(() => {
+						// when the request succeeds 
+						
+						console.log("request success")
+					})
 				}
+			},
+
+			/**
+			 * |--------------------------------------------------------
+			 * |
+			 * |	Validate the company fields
+			 * |
+			 * |--------------------------------------------------------
+			 */	
+			confirmompany(){
+				if(
+					this.company_name === '' ||
+					this.company_type === '' ||
+					this.company_address === '' ||
+					this.company_name && this.company_type === '' ||
+					this.company_name && this.company_type && this.company_address === ''
+				) {
+					this.error = true
+				}
+			}
+		},
+
+		watch: {
+			has_comapny(val) {
+				this.has_comapny !== val
 			}
 		},
 
@@ -197,7 +310,7 @@
 <style lang="scss">
 	// signup container
 	.signup__container{
-		height: 100%;
+		min-height: 600px;
 		width: 80%;
 		margin:0 auto;
 		
@@ -209,12 +322,16 @@
 			.signup-form{
 				margin-left: 10%;
 				margin-right: 10%;
+				min-height:100%;
 				// field group wrapper
 				.field-group{
 					// firstname & lastname group
 					.name-group{
 						// firstname field
 						.firstname-field, .lastname-field{
+							label{
+								font-size:10px;
+							}
 							// input
 							.form-control{
 								border-radius: 0px;
@@ -257,6 +374,9 @@
 					.email-field, 
 					.password-field, 
 					.password-confirm-field{
+						label{
+							font-size:10px;
+						}
 						.form-control{
 							border-radius: 0px;
 							background: transparent;
@@ -289,6 +409,23 @@
 									-ms-transition: ease-in-out 0.2s all; 
 									-o-transition: ease-in-out 0.2s all; 
 									transition: ease-in-out 0.2s all; 
+							}
+						}
+					}
+
+					.has-company-row{
+						.has-company-field{
+							margin-top:-0.5rem;
+							label{
+								font-size:10px;
+							}
+						}
+					}
+
+					.company-row{
+						.company-name-field, .company-type-field, .company-address-field{
+							label{
+								font-size:10px;
 							}
 						}
 					}
