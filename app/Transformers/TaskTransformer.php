@@ -26,14 +26,16 @@ class TaskTransformer extends TransformerAbstract
     public function transform(Task $task)
     {
         return [
-            'id'                => (int) $task->id,
-            'location'          => (string) $task->location,
-            'slug'              => (string) $task->slug,
-            'is_checked'        => (boolean) $task->is_checked,
-            'priority'          => (string) $task->priority,
-            'work_hours'        => (string) $task->work_hours,
-            'start_at'          => (string) $task->start_at,
-            'end_at'            => (string) $task->end_at,
+            'id'            => (int)        $task->id,
+            'location'      => (string)     $task->name,
+            'slug'          => (string)     $task->slug,
+            'is_checked'    => (boolean)    $task->is_checked,
+            'priority'      => (string)     $task->priority,
+            'work_hours'    => (string)     $task->work_hours,
+            'week_day'      => (string)     $task->week_day,
+            'week'          +> (integer)    $task->week
+            'start_at'      => (string)     $task->start_at,
+            'end_at'        => (string)     $task->end_at,
         ];
     }
 
