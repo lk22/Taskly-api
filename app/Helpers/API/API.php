@@ -67,7 +67,7 @@ class API
     public static function throwActionFailedException($exception)
     {
         return Response::json([
-            'response' => $exception
+            'response' => 'Action: ' . $exception . ' failed.'
         ], 422);
     }
 

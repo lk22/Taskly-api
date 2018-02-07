@@ -94,13 +94,22 @@ class TaskController extends Controller
      */
     public function setComment(Request $request, $slug)
     {
-        API::validate($request, [ 'comment', 'required' ]);
+        // validate request params
+        API::validate($request, [ 'body', 'required' ]);
 
-        if( !$request->get('comment') ){
+        // check if comment body exists in param bag
+        if( !$request->has('body') ){
             return API::throwInputNotFoundException();
         }
 
+        // fetch the task to comment
+        $task = $this->task->whereSlug($slug)->firstOrFail();
 
+        // create the comment instance with the given body from request
+        $comment = new Comment(['body' => $request->get('comment')]);
+
+        // save the comment
+        $task->comments()->save($comment);
     }
 
     /**
