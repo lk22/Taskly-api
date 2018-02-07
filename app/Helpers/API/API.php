@@ -13,21 +13,27 @@ use Exception;
 class API
 {
 
-    /**
-     * only return raw query string but only works in development environmet
-     * @param  [type] $query [description]
-     * @return [type]        [description]
-     */
+   /**
+    * |------------------------------------------------------
+    * |
+    * | Show dumped query string if the environment is local
+    * |
+    * |------------------------------------------------------
+    */
     public static function queryString($query)
     {
-        if (app()->environment() === 'local') {
+        if (app()->environment() === 'environment') {
             return $query->toSql();
         }
     }
 
     /**
-     * validation helper for requests
-     */
+    * |------------------------------------------------------
+    * |
+    * | Validation helper for api requests
+    * |
+    * |------------------------------------------------------
+    */
     public static function validate($request, $rules = [])
     {
         if($request instanceOF Request){
@@ -37,6 +43,13 @@ class API
         return new Exception('Could not validate request', 1);
     }
 
+    /**
+    * |------------------------------------------------------
+    * |
+    * | Throw action success response 
+    * |
+    * |------------------------------------------------------
+    */
     public static function throwActionSuccessResponse($response)
     {
         return Response::json([
@@ -44,6 +57,13 @@ class API
         ]);
     }
 
+    /**
+    * |------------------------------------------------------
+    * |
+    * | throw an 422 exception 
+    * |
+    * |------------------------------------------------------
+    */
     public static function throwActionFailedException($exception)
     {
         return Response::json([
@@ -52,8 +72,12 @@ class API
     }
 
     /**
-     * if a resource is not found
-     */
+    * |------------------------------------------------------
+    * |
+    * | throw 404 exception if the resource not exists
+    * |
+    * |------------------------------------------------------
+    */
     public static function throwResourceNotFoundException()
     {
         return Response::json([
@@ -62,8 +86,12 @@ class API
     }
 
     /**
-     * if the request dont have any data
-     */
+    * |------------------------------------------------------
+    * |
+    * | throw request not found exception
+    * |
+    * |------------------------------------------------------
+    */
     public static function throwRequestNotFoundException()
     {
         return Response::json([
@@ -72,8 +100,12 @@ class API
     }
 
     /**
-     * if a input is not found
-     */
+    * |------------------------------------------------------
+    * |
+    * | throw input not found exception
+    * |
+    * |------------------------------------------------------
+    */
     public static function throwInputNotFoundException()
     {
         return Response::json([

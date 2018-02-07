@@ -58,11 +58,6 @@ use Illuminate\Http\Request;
 			 ->name('task.create.api')
 			 ->uses('TaskController@create');
 
-		// update priority
-		// Route::patch('/tasks/{slug}/set-priority')
-		// 	 ->name('task.priority.api')
-		// 	 ->uses('TaskController@setPriority');
-
 		// update work hours
 		Route::patch('/tasks/{slug}/set-workhour')
 			 ->name('task.workhour.api')
@@ -82,6 +77,11 @@ use Illuminate\Http\Request;
 		Route::patch('/tasks/uncheck-all')
 			 ->name('task.uncheckAll.api')
 			 ->uses('TaskController@uncheckALlTasks');
+
+		// set new comment 
+		Route::patch('/task/{slug}/set-comment')
+			 ->name('task.set-comment.api')
+			 ->uses('TaskController@setComment');
 
 		// update the task
 		// Route::put('/tasks/{slug}/update-task')

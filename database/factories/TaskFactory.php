@@ -10,7 +10,13 @@ $factory->define(\Taskly\Task::class, function (Faker $faker) {
                 return factory(\Taskly\User::class)->create()->id;
             }
         ]),
-        'name' => $faker->word(3),
+        'location' => $faker->randomElement([
+            'Bilka Hundige', 
+            'Bilka Ishøj',
+            'Foetex Ishøj',
+            'Netto Svanemøllen',
+            'Netto Amagerbro',
+        ]),
         'slug' => strtolower($faker->word(3)),
         'is_checked' => $faker->randomElement([
             false,
@@ -37,9 +43,10 @@ $factory->define(\Taskly\Task::class, function (Faker $faker) {
         'start_at' => \Carbon\Carbon::now()->addHours(1),
         'end_at' => \Carbon\Carbon::now()->addHours(3),
         'supplier' => $faker->randomElement([
-            'Bilka',
-            'Netto',
-            'Foetex'
+            'Toms',
+            'Løgismose',
+            'Øgo',
+            'Galle & Jessen'
         ])
     ];
 });

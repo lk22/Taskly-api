@@ -13,6 +13,7 @@ use Taskly\Transformers\TaskTransformer;
  * Eloquent models
 */
 use Taskly\Task;
+use Taskly\Comment;
 
 /**
  * App helper classes
@@ -64,7 +65,7 @@ class TaskController extends Controller
                 ->firstOrFail();
 
         if (!count($task) > 0) {
-            API::throwResourceNotFoundException();
+            return API::throwResourceNotFoundException();
         }
 
         return fractal($task, new TaskTransformer())->toArray();
@@ -80,10 +81,26 @@ class TaskController extends Controller
         API::validate($request, [ 'priority' => '' ]);
 
         if (!$request->get('priority')) {
-            API::throwInputNotFoundException();
+            return API::throwInputNotFoundException();
         }
 
         $this->task->whereSlug($slug)->update([ 'priority' => $request->get('priority') ]);
+    }
+
+    /**
+     * |------------------------------------------------------------------------
+     * |    Set new custom comment to a specifc task
+     * |------------------------------------------------------------------------
+     */
+    public function setComment(Request $request, $slug)
+    {
+        API::validate($request, [ 'comment', 'required' ]);
+
+        if( !$request->get('comment') ){
+            return API::throwInputNotFoundException();
+        }
+
+
     }
 
     /**
@@ -96,7 +113,7 @@ class TaskController extends Controller
         API::validate($request, [ 'check' => '' ]);
 
         if (!$request->get('check')) {
-            API::throwInputNotFoundException();
+            return API::throwInputNotFoundException();
         }
 
         $this->task->whereId($id)->update([ 'is_checked' => $request->get('check') ]);
@@ -112,7 +129,7 @@ class TaskController extends Controller
         API::validate($request,[ 'check' => '' ]);
 
         if (!$request->get('check')) {
-            API::throwInputNotFoundException();
+            return API::throwInputNotFoundException();
         }
 
         $this->task->whereIsChecked(false)->update([ 'is_checked' => $request->get('check') ]);
@@ -125,12 +142,10 @@ class TaskController extends Controller
      */
     public function uncheckAllTasks(Request $request)
     {
-        API::validate($request ,[
-            'check' => ''
-        ]);
+        API::validate($request ,[ 'check' => '' ]);
 
         if (!$request->get('check')) {
-            API::throwInputNotFoundException();
+            return API::throwInputNotFoundException();
         }
 
         $this->task->whereIsChecked(true)->update([ 'is_checked' => $request->get('check') ]);
@@ -150,7 +165,7 @@ class TaskController extends Controller
         ]);
 
         $task = $this->task->create([
-            'location'      => preq_match("/^[a-zA-Z0-9æøå]+$/i^", $request->get('location')),
+            'location'      => preg_match("/[a-zA-Z0-9æøå]+$/i", $request->get('location')),
             'slug'          => str_replace('-', ' ', strtolower($request->get('location'))),
             'user_id'       => $this->authenticated->id,
             'supplier'      => $request->get('supplier'),
@@ -158,7 +173,7 @@ class TaskController extends Controller
         ]);
 
         if( $request->has('comment') ) {
-            $comment = new Comment(['body' => $request->get('comment')])
+            $comment = new Comment(['body' => $request->get('comment')]);
             /**
              * @todo create a comment for the created task
              *       use the id for the task instance that just got created
