@@ -73,22 +73,6 @@ class TaskController extends Controller
 
     /**
      * |------------------------------------------------------------------------
-     * |    Set custom priority to a task
-     * |------------------------------------------------------------------------
-     */
-    public function setPriority(Request $request, $slug)
-    {
-        API::validate($request, [ 'priority' => '' ]);
-
-        if (!$request->get('priority')) {
-            return API::throwInputNotFoundException();
-        }
-
-        $this->task->whereSlug($slug)->update([ 'priority' => $request->get('priority') ]);
-    }
-
-    /**
-     * |------------------------------------------------------------------------
      * |    Set new custom comment to a specifc task
      * |------------------------------------------------------------------------
      */
