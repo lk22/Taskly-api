@@ -42,14 +42,15 @@ class TaskController extends Controller
      */
     public function index()
     {
-
+        // fetch all users tasks
         $tasks = $this->task->where('user_id', $this->authenticated->id)->get();
 
-
+        // get all the taskss
         if (count($tasks) >= 0) {
             return fractal($tasks, new TaskTransformer())->toArray();
         }
 
+        // throw exception
         return API::throwResourceNotFoundException();
     }
 
@@ -60,14 +61,17 @@ class TaskController extends Controller
      */
     public function task($slug)
     {
+        // fetch single task 
         $task = $this->task->whereSlug($slug)
                 ->orWhere('user_id', $this->authenticated->id)
                 ->firstOrFail();
 
+        // if the task not is found
         if (!count($task) > 0) {
             return API::throwResourceNotFoundException();
         }
 
+        // return task
         return fractal($task, new TaskTransformer())->toArray();
     }
 
@@ -103,12 +107,15 @@ class TaskController extends Controller
      */
     public function toggleTaskCheck(Request $request, $id)
     {
+        // validate request
         API::validate($request, [ 'check' => '' ]);
 
+        // if check param not exists throw exception
         if (!$request->get('check')) {
             return API::throwInputNotFoundException();
         }
 
+        // update task with request value
         $this->task->whereId($id)->update([ 'is_checked' => $request->get('check') ]);
     }
 
@@ -119,12 +126,15 @@ class TaskController extends Controller
      */
     public function checkAllTasks(Request $request)
     {
+        // validate request
         API::validate($request,[ 'check' => '' ]);
 
+        // if the check param not exists
         if (!$request->get('check')) {
             return API::throwInputNotFoundException();
         }
 
+        // update task with the request param
         $this->task->whereIsChecked(false)->update([ 'is_checked' => $request->get('check') ]);
     }
 
@@ -135,12 +145,15 @@ class TaskController extends Controller
      */
     public function uncheckAllTasks(Request $request)
     {
+        // validate request
         API::validate($request ,[ 'check' => '' ]);
 
+        // if the request not has the check param throw exception
         if (!$request->get('check')) {
             return API::throwInputNotFoundException();
         }
 
+        // else then update the tasks to be checked
         $this->task->whereIsChecked(true)->update([ 'is_checked' => $request->get('check') ]);
     }
 
@@ -151,7 +164,7 @@ class TaskController extends Controller
      */
     public function create(Request $request)
     {
-
+        // validate request
         API::validate($request, [
             'work_hours'    => 'required',
             'location'      => 'required',
@@ -160,6 +173,7 @@ class TaskController extends Controller
             'week'          => 'required'
         ]);
 
+        // create the resource to the database
         $task = $this->task->create([
             'location'      => $request->get('location'),
             'slug'          => str_replace(' ', '-', strtolower($request->get('location'))),
@@ -170,10 +184,12 @@ class TaskController extends Controller
             'work_hours'    => $request->get('work_hours') . ($request->get('work_hours') === '1') ? 'time' : 'timer',
         ]);
 
+        // if the task is stored successfully throw back response
         if($task) {
-            return API::throwActionSuccessResponse('Task created successfully');
+            return API::throwResourceCreatedResponse($task->slug);
         }
 
+        // if the request has comment in param bag save the comment 
         if( $request->get('comment') ) {
             $comment = new Comment(['body' => $request->get('comment')]);
 

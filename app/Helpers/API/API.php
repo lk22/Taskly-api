@@ -36,7 +36,7 @@ class API
     */
     public static function validate($request, $rules = [])
     {
-        if($request instanceOF Request){
+        if($request instanceOf Request){
              $request->validate($rules);
         }
 
@@ -55,6 +55,25 @@ class API
         return Response::json([
             'response' => $response
         ]);
+    }
+
+    /**
+    * |------------------------------------------------------
+    * |
+    * | Throw Resource created response
+    * |
+    * |------------------------------------------------------
+    */
+    public static function throwResourceCreatedResponse($resource)
+    {
+
+        if(!$resource) {
+            return static::throwResourceNotFoundException();
+        }
+
+        return Response::json([
+            'response' => 'Resource ' . $resource .' created successfully'
+        ], 201);
     }
 
     /**
