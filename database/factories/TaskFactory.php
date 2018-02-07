@@ -40,6 +40,16 @@ $factory->define(\Taskly\Task::class, function (Faker $faker) {
             '9 timer',
             '10 timer'
         ]),
+        'week_day' => $faker->randomElement([
+            'Monday',
+            'Tuesday',
+            'Wednesday',
+            'Tuesday',
+            'Friday',
+            'Saturday',
+            'Sunday'
+        ]),
+        'week' => rand(1, 52),
         'start_at' => \Carbon\Carbon::now()->addHours(1),
         'end_at' => \Carbon\Carbon::now()->addHours(3),
         'supplier' => $faker->randomElement([
