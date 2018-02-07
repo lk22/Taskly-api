@@ -155,7 +155,9 @@ class TaskController extends Controller
         API::validate($request, [
             'work_hours'    => 'required',
             'location'      => 'required',
-            'supplier'      => 'required'
+            'supplier'      => 'required',
+            'week_day'      => 'required',
+            'week'          => 'required'
         ]);
 
         $task = $this->task->create([
