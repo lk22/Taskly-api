@@ -18845,35 +18845,9 @@ var actions = {
 			return Promise.reject();
 		});
 	},
-	setPriority: function setPriority(context, _ref2) {
+	setWorkhours: function setWorkhours(context, _ref2) {
 		var id = _ref2.id,
-		    priority = _ref2.priority;
-
-
-		_Request2.default.patch('/api/v1/tasks/' + id + '/set-priority', {
-			priority: priority
-		}).then(function (response) {
-
-			// debug response
-			console.log(response);
-
-			var id = id;
-			var priority = priority;
-
-			// commit action
-			context.commit(_types2.default.SET_PRIORITY, {
-				id: id,
-				priority: priority
-			});
-
-			return Promise.resolve();
-		}).catch(function (error) {
-			return Promise.reject();
-		});
-	},
-	setWorkhours: function setWorkhours(context, _ref3) {
-		var id = _ref3.id,
-		    work_hours = _ref3.work_hours;
+		    work_hours = _ref2.work_hours;
 
 
 		_Request2.default.patch('/api/v1/tasks/' + id + '/set-workhour', {
