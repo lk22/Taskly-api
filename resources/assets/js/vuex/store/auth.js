@@ -62,25 +62,6 @@ const auth = {
 	actions: {
 
 		/**
-		 * fetch auth
-		 */
-		getAuth(context) {
-
-			Axios.get('/api/v1/auth').then((auth) => {
-				console.log(auth.data)
-
-				const user = auth.data
-
-				context.commit(types.FETCH_AUTH, {
-					...user
-				});
-			}).catch((exception) => {
-
-			})
-
-		},
-
-		/**
 		 * Authenticate the user
 		 */
 		login(context, {
@@ -108,13 +89,6 @@ const auth = {
 					auth,
 					token
 				})
-
-				// if(!window.localStorage.getItem('access_token' && !window.localStorage.getItem('authenticated'))){
-				// 	window.localStorage.setItem('access_token', token)
-				// 	window.localStorage.setItem('authenticated', auth)
-				// }
-
-				// console.log(window.localStorage)
 
 				// extend call
 				return Promise.resolve();

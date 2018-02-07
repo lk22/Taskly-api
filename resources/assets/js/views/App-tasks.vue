@@ -24,16 +24,36 @@
                         <div class="col-md-2 col-lg-2">Date</div>
                         <div class="col-md-2 col-lg-2">Location</div>
                         <div class="col-md-2 col-lg-2">Supplier</div>
-                        <div class="col-md-2 col-lg-2">Weekend / Evening</div>
-                        <div class="col-md-2 col-lg-2">Comments</div>
+                        <!-- <div class="col-md-2 col-lg-2">Weekend / Evening</div> -->
+                        <!-- <div class="col-md-2 col-lg-2">Comments</div> -->
                     </div class="row">
                 </div>
                 <div class="task__container--item">
                     <div class="item__inner">
                         <div class="row task">
                             <div class="task__location col-md-2 col-lg-2">
+                                {{ task.work_hours }}
+                            </div>
+
+                            <div class="task__weekday col-md-2 col-lg-2">
+                                {{ task.week_day }}
+                            </div>
+
+                            <div class="task__location col-md-2 col-lg-2">
                                 {{ task.location }}
                             </div>
+
+                            <div class="task__supplier col-md-2 col-lg-2">
+                                {{ task.supplier }}
+                            </div>
+
+                            <!-- <div class="task-comment-count col-md-2 col-lg-2">
+                                {{ task.comments_count }} comments
+                            </div> -->
+
+                            <!-- <div class="task-is_weekend col-md-1 col-md-1">
+                                {{ task.is_weekend }}
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -78,6 +98,23 @@
 </script>
 
 <style lang="scss">
+
+    .tasks__container{
+        height: auto;
+        width: auto;
+        margin-left: -45px;
+        
+        .task__container--items{
+            .task__container--item{
+                margin-top: 2rem;
+                .item__inner{
+                    background: #00b0eb;
+                    padding: 1rem;
+                    color: #fff;
+                }
+            }
+        } 
+    }
     
 
     // desktop task create form

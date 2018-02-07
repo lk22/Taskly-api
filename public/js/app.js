@@ -18547,8 +18547,6 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
 var _mutations;
 
 var _axios = __webpack_require__(51);
@@ -18609,21 +18607,6 @@ var auth = {
 	actions: {
 
 		/**
-   * fetch auth
-   */
-		getAuth: function getAuth(context) {
-
-			Axios.get('/api/v1/auth').then(function (auth) {
-				console.log(auth.data);
-
-				var user = auth.data;
-
-				context.commit(types.FETCH_AUTH, _extends({}, user));
-			}).catch(function (exception) {});
-		},
-
-
-		/**
    * Authenticate the user
    */
 		login: function login(context, _ref) {
@@ -18651,13 +18634,6 @@ var auth = {
 					auth: auth,
 					token: token
 				});
-
-				// if(!window.localStorage.getItem('access_token' && !window.localStorage.getItem('authenticated'))){
-				// 	window.localStorage.setItem('access_token', token)
-				// 	window.localStorage.setItem('authenticated', auth)
-				// }
-
-				// console.log(window.localStorage)
 
 				// extend call
 				return Promise.resolve();
@@ -24174,7 +24150,7 @@ exports = module.exports = __webpack_require__(23)(undefined);
 
 
 // module
-exports.push([module.i, "\n.tasks__create--container {\n  -webkit-transition: ease-in-out 0.2s all;\n  transition: ease-in-out 0.2s all;\n  min-height: 150px;\n  width: auto;\n}\n", ""]);
+exports.push([module.i, "\n.tasks__container {\n  height: auto;\n  width: auto;\n  margin-left: -45px;\n}\n.tasks__container .task__container--items .task__container--item {\n    margin-top: 2rem;\n}\n.tasks__container .task__container--items .task__container--item .item__inner {\n      background: #00b0eb;\n      padding: 1rem;\n      color: #fff;\n}\n.tasks__create--container {\n  -webkit-transition: ease-in-out 0.2s all;\n  transition: ease-in-out 0.2s all;\n  min-height: 150px;\n  width: auto;\n}\n", ""]);
 
 // exports
 
@@ -24234,6 +24210,26 @@ exports.default = {
         }
     }
 }; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -24941,7 +24937,31 @@ var render = function() {
                 _c("div", { staticClass: "task__location col-md-2 col-lg-2" }, [
                   _vm._v(
                     "\n                            " +
+                      _vm._s(task.work_hours) +
+                      "\n                        "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "task__weekday col-md-2 col-lg-2" }, [
+                  _vm._v(
+                    "\n                            " +
+                      _vm._s(task.week_day) +
+                      "\n                        "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "task__location col-md-2 col-lg-2" }, [
+                  _vm._v(
+                    "\n                            " +
                       _vm._s(task.location) +
+                      "\n                        "
+                  )
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "task__supplier col-md-2 col-lg-2" }, [
+                  _vm._v(
+                    "\n                            " +
+                      _vm._s(task.supplier) +
                       "\n                        "
                   )
                 ])
@@ -24966,13 +24986,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("div", { staticClass: "col-md-2 col-lg-2" }, [_vm._v("Location")]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-2 col-lg-2" }, [_vm._v("Supplier")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-2 col-lg-2" }, [
-          _vm._v("Weekend / Evening")
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-2 col-lg-2" }, [_vm._v("Comments")])
+        _c("div", { staticClass: "col-md-2 col-lg-2" }, [_vm._v("Supplier")])
       ])
     ])
   }
