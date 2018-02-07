@@ -109,12 +109,12 @@ const auth = {
 					token
 				})
 
-				if(!window.localStorage.getItem('access_token' && !window.localStorage.getItem('authenticated'))){
-					window.localStorage.setItem('access_token', token)
-					window.localStorage.setItem('authenticated', auth)
-				}
+				// if(!window.localStorage.getItem('access_token' && !window.localStorage.getItem('authenticated'))){
+				// 	window.localStorage.setItem('access_token', token)
+				// 	window.localStorage.setItem('authenticated', auth)
+				// }
 
-				console.log(window.localStorage)
+				// console.log(window.localStorage)
 
 				// extend call
 				return Promise.resolve();

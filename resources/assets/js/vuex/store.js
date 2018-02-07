@@ -15,17 +15,17 @@ Vue.use(Vuex)
 
 const debug = process.env.NODE_ENV !== 'production'
 
-const superstore = new Superstore()
+// const superstore = new Superstore()
 
 const store = new Vuex.Store({
 
 	// different Vuex state modules
-	modules: superstore.load({
+	modules: {
 		auth,
 		task
-	}),
+	},
 	plugins: [
-		[superstore.save],
+	// superstore.save()
 
 		createPersistedState({
 			key: 'taskly',

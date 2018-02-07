@@ -16,9 +16,27 @@
         </div>
 
         <!-- users tasks list -->
-        <div class="task-container" v-for="task in tasks">
-            <div class="task-container__name">
-                {{ task.name }}
+        <div class="tasks__container container-fluid">
+            <div class="task__container--items" v-for="task in tasks">
+                <div class="item__head">
+                    <div class="row">
+                        <div class="col-md-2 col-lg-2">Work hours</div>
+                        <div class="col-md-2 col-lg-2">Date</div>
+                        <div class="col-md-2 col-lg-2">Location</div>
+                        <div class="col-md-2 col-lg-2">Supplier</div>
+                        <div class="col-md-2 col-lg-2">Weekend / Evening</div>
+                        <div class="col-md-2 col-lg-2">Comments</div>
+                    </div class="row">
+                </div>
+                <div class="task__container--item">
+                    <div class="item__inner">
+                        <div class="row task">
+                            <div class="task__location col-md-2 col-lg-2">
+                                {{ task.location }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
