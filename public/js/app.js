@@ -13282,6 +13282,10 @@ var _vuexPersistedstate = __webpack_require__(171);
 
 var _vuexPersistedstate2 = _interopRequireDefault(_vuexPersistedstate);
 
+var _vuexSuperstore = __webpack_require__(448);
+
+var _vuexSuperstore2 = _interopRequireDefault(_vuexSuperstore);
+
 var _jsCookie = __webpack_require__(172);
 
 var Cookies = _interopRequireWildcard(_jsCookie);
@@ -13299,21 +13303,23 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 // vuex store modules
-// packages
-var plugins = [];
+var plugins = []; // packages
+
 
 _vue2.default.use(_vuex2.default);
 
 var debug = "development" !== 'production';
 
+var superstore = new _vuexSuperstore2.default();
+
 var store = new _vuex2.default.Store({
 
 	// different Vuex state modules
-	modules: {
+	modules: superstore.load({
 		auth: _auth2.default,
 		task: _task2.default
-	},
-	plugins: [(0, _vuexPersistedstate2.default)({
+	}),
+	plugins: [[superstore.save], (0, _vuexPersistedstate2.default)({
 		key: 'taskly',
 		paths: ['auth', 'task']
 	})]
@@ -18630,6 +18636,12 @@ var auth = {
 		}
 	},
 
+	hydrate: function hydrate(state) {
+		if (state.authenticated.token) {
+			state.authenticated.token = state.authenticated.token;
+		}
+	},
+
 	/**
   * namespacing
   */
@@ -18676,7 +18688,8 @@ var task = {
 	mutations: _mutations2.default,
 	getters: _getters2.default,
 	actions: _actions2.default,
-	namespaced: true
+	namespaced: true,
+	hydrate: function hydrate(state) {}
 };
 
 exports.default = task;
@@ -60103,6 +60116,81 @@ module.exports = function (regExp, replace) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 440 */,
+/* 441 */,
+/* 442 */,
+/* 443 */,
+/* 444 */,
+/* 445 */,
+/* 446 */,
+/* 447 */,
+/* 448 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+const storage = window.localStorage
+
+function load (key) {
+  return JSON.parse(storage.getItem(key) || '{}')
+}
+
+/**
+ * Vuex plugin to hydrate, sync and clear state to/from local storage
+ *
+ * @param   {string}  key   An optional local storage item name
+ */
+function Superstore (key = 'vuex') {
+
+  Object.assign(this, {
+
+    /**
+     * Load data from local storage and hydrate module states
+     *
+     * @param   {Object}  modules   The hash of module definitions
+     * @returns {Object}            The updated modules
+     */
+    load (modules) {
+      const states = load(key)
+      Object
+        .keys(modules)
+        .forEach(name => {
+          const module = modules[name]
+          let state = states[name]
+          if (module.state && state) {
+            if (module.hydrate instanceof Function) {
+              module.hydrate(state)
+            }
+            Object.assign(module.state, state)
+          }
+        })
+      return modules
+    },
+
+    /**
+     * Vuex mutation handler; assign to Store plugins array
+     *
+     * @param   {Object}  store     The store to save to local storage
+     */
+    save (store) {
+      store.subscribe((mutation, state) => {
+        storage.setItem(key, JSON.stringify(state))
+      })
+    },
+
+    /**
+     * Clear stored data
+     */
+    clear () {
+      storage.removeItem(key)
+    },
+  })
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Superstore);
+
 
 /***/ })
 /******/ ]);

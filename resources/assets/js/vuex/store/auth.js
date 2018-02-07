@@ -163,6 +163,12 @@ const auth = {
 		}
 	},
 
+	hydrate: (state) => {
+		if(state.authenticated.token) {
+			state.authenticated.token = state.authenticated.token
+		}
+	},
+
 	/**
 	 * namespacing
 	 */

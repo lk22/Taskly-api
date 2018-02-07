@@ -2,6 +2,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
+import Superstore from 'vuex-superstore'
 import * as Cookies from 'js-cookie'
 
 // vuex store modules
@@ -14,14 +15,18 @@ Vue.use(Vuex)
 
 const debug = process.env.NODE_ENV !== 'production'
 
+const superstore = new Superstore()
+
 const store = new Vuex.Store({
 
 	// different Vuex state modules
-	modules: {
+	modules: superstore.load({
 		auth,
 		task
-	},
+	}),
 	plugins: [
+		[superstore.save],
+
 		createPersistedState({
 			key: 'taskly',
 			paths: [

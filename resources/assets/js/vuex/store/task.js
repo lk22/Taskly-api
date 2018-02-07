@@ -10,7 +10,10 @@ const task = {
 	mutations,
 	getters,
 	actions,
-	namespaced: true
+	namespaced: true,
+	hydrate: (state) => {
+		
+	}
 }
 
 export default task
