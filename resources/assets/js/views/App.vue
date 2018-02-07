@@ -1,6 +1,6 @@
 <template>
     <div id="app" class="dashboard">
-		<div class="col-md-1 app-sidebar">
+		<div class="col-sm-2 col-md-1 app-sidebar">
             <Sidebar />
         </div>
         <div class="col-md-9 dashboard__content">
@@ -13,7 +13,6 @@
 <script>
 	import Sidebar from './../components/app/Sidebar'
     import Header from './../components/app/Header'
-    import axios from 'axios'
     
     export default {
     	components: { Sidebar, Header },

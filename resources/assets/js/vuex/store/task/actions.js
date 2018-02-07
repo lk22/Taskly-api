@@ -35,16 +35,27 @@ const actions = {
 	 */
 	createTask(context, {
 		work_hours,
-		weekday,
+		week_day,
 		week,
 		location,
 		supplier,
 		weekend,
 		comment
 	}) {
+		
+		// context.commit(types.CREATE_TASK, {
+		// 	work_hours: work_hours,
+		// 	week_day: week_day,
+		// 	week: week,
+		// 	location: location,
+		// 	supplier: supplier,
+		// 	weekend: weekend,
+		// 	comment: comment
+		// })
+
 		request.post('/api/v1/create-task', {
 			work_hours: 	work_hours,
-			weekday: 		weekday,
+			week_day: 		week_day,
 			week: 			week,
 			location: 		location,
 			supplier: 		supplier,
@@ -54,24 +65,24 @@ const actions = {
 
 			console.log(response)
 
-			// // do further actions here
-			// const work_hours = work_hours
-			// const weekday = weekday
-			// const week = week
-			// const location = location
-			// const supplier = supplier
-			// const weekend = weekend
-			// const comment = comment
+			// do further actions here
+			const work_hours = work_hours
+			const weekday = weekday
+			const week = week
+			const location = location
+			const supplier = supplier
+			const weekend = weekend
+			const comment = comment
 			
-			// context.commit(types.CREATE_TASK, {
-			// 	work_hours,
-			// 	weekday,
-			// 	week,
-			// 	location,
-			// 	supplier,
-			// 	weekend,
-			// 	comment
-			// })
+			context.commit(types.CREATE_TASK, {
+				work_hours,
+				weekday,
+				week,
+				location,
+				supplier,
+				weekend,
+				comment
+			})
 
 			// extend Promise call
 			return Promise.resolve()
@@ -86,7 +97,7 @@ const actions = {
 		priority
 	}) {
 
-		axios.patch('/api/v1/tasks/' + id + '/set-priority', {
+		request.patch('/api/v1/tasks/' + id + '/set-priority', {
 			priority: priority
 		}).then((response) => {
 
@@ -115,7 +126,7 @@ const actions = {
 		work_hours
 	}) {
 
-		axios.patch('/api/v1/tasks/' + id + '/set-workhour', {
+		request.patch('/api/v1/tasks/' + id + '/set-workhour', {
 			work_hours: work_hours
 		}).then((response) => {
 

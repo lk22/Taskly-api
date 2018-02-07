@@ -17,6 +17,8 @@ const mutations = {
 	 */
 	[types.CREATE_TASK](state, task) {
 		state.items = [task].concat(state.items)
+
+		state.latestTask = task
 	},
 
 	/**

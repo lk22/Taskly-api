@@ -189,8 +189,6 @@
 						supplier: 		this.supplier,
 						weekend: 		this.weekend,
 						comment: 		this.comment
-					}).then(() => {
-						this.creating = false
 					})
 				}
 			}
@@ -220,7 +218,14 @@
     .tasks__create--container{
         transition: ease-in-out 0.2s all;
         min-height: 150px;
-        width: auto; 
+        width: 104%; 
+        border-bottom: 1px solid #00b0eb;
+        margin-left: -45px;
+        
+        @media screen and(max-width: 400px) {
+            width:100%;
+            margin-left:0px;
+        }
 
         // form
         .create-task-form{
@@ -271,6 +276,11 @@
                         background: transparent;
                         color: #00b0eb;
                         margin-left: 3rem;
+                        
+                        @media screen and(max-width: 400px) {
+                        margin-left: 0px;
+                            width: 100%; 
+                        }
                     }   
                 }
             }

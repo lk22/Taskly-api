@@ -3,15 +3,15 @@
 		<div class="head__inner">
 			<div class="inner--content">
 				<div class="content__row row">
-					<div class="row--heading col-xs-9 col-sm-6 col-md-3 col-lg-3">
+					<div class="row--heading col-xs-9 col-sm-6 col-md-11 col-lg-11">
 						{{ name }} - {{ page }}
 					</div>
 
-					<div class="row--searchBar hidden-xs hidden-sm col-md-6 col-lg-6">
+					<!-- <div class="row--searchBar hidden-xs hidden-sm col-md-6 col-lg-6">
 						<!-- search bar component here <SearchBar></SearchBar> -->
-					</div>
+					<!-- </div> -->
 
-					<div class="row--create-button col-xs-3 col-md-3 col-lg-3">
+					<div class="row--create-button col-xs-3 col-md-1 col-lg-1">
 						<slot></slot>
 					</div>
 				</div>

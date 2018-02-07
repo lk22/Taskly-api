@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div id="sidebar" class="sidebar">
-			<div class="sidebar__inner--desktop hidden-xs hidden-sm">
+			<div class="sidebar__inner--desktop hidden-xs">
 				<div class="sidebar__link">
 					<router-link :to="{name: 'dashboard-tasks'}"><i class="fa fa-bars"></i></router-link>
 				</div>

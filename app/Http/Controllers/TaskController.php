@@ -43,7 +43,7 @@ class TaskController extends Controller
     public function index()
     {
 
-        $tasks = $this->task->where('id', $this->authenticated->id)->get();
+        $tasks = $this->task->where('user_id', $this->authenticated->id)->get();
 
 
         if (count($tasks) >= 0) {
@@ -61,7 +61,7 @@ class TaskController extends Controller
     public function task($slug)
     {
         $task = $this->task->whereSlug($slug)
-                ->orWhere('id', $this->authenticated->id)
+                ->orWhere('user_id', $this->authenticated->id)
                 ->firstOrFail();
 
         if (!count($task) > 0) {
@@ -151,6 +151,7 @@ class TaskController extends Controller
      */
     public function create(Request $request)
     {
+
         API::validate($request, [
             'work_hours'    => 'required',
             'location'      => 'required',
@@ -158,20 +159,22 @@ class TaskController extends Controller
         ]);
 
         $task = $this->task->create([
-            'location'      => preg_match("/[a-zA-Z0-9æøå]+$/i", $request->get('location')),
-            'slug'          => str_replace('-', ' ', strtolower($request->get('location'))),
+            'location'      => $request->get('location'),
+            'slug'          => str_replace(' ', '-', strtolower($request->get('location'))),
+            'week_day'      => $request->get('week_day'),
+            'week'          => $request->get('week'),
             'user_id'       => $this->authenticated->id,
             'supplier'      => $request->get('supplier'),
-            'work_hours'    => $request->get('work_hours'),
+            'work_hours'    => $request->get('work_hours') . ($request->get('work_hours') === '1') ? 'time' : 'timer',
         ]);
 
-        if( $request->has('comment') ) {
+        if($task) {
+            return API::throwActionSuccessResponse('Task created successfully');
+        }
+
+        if( $request->get('comment') ) {
             $comment = new Comment(['body' => $request->get('comment')]);
-            /**
-             * @todo create a comment for the created task
-             *       use the id for the task instance that just got created
-             *        
-             */
+
             $task->comments()->save($comment);
         }
     }

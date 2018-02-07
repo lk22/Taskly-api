@@ -25,7 +25,9 @@ class Task extends Model
         'start_at',
         'end_at',
         'supplier',
-        'location'
+        'location',
+        'week_day',
+        'week'
     ];
 
     /**

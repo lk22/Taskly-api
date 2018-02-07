@@ -16,7 +16,7 @@
         </div>
         <!-- users tasks list -->
         <div class="tasks__container container-fluid">
-            <div class="task__container--items" v-for="task in tasks">
+            <div class="task__container--items" >
                 <div class="item__head">
                     <div class="row">
                         <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2">Work hours</div>
@@ -27,7 +27,7 @@
                         <!-- <div class="col-md-2 col-lg-2">Comments</div> -->
                     </div>
                 </div>
-                <div class="task__container--item">
+                <div class="task__container--item" v-for="task in tasks">
                     <div class="item__inner">
                         <div class="row task">
                             <div class="task__location col-xs-3 col-sm-2 col-md-2 col-lg-2">
@@ -85,7 +85,7 @@
             }
         },
 
-        mounted() {
+        beforeMount() {
             this.$store.dispatch('task/getTasks') 
         },
 
@@ -102,6 +102,7 @@
     .tasks__container{
         height: auto;
         margin-left: -45px;
+        margin-top:2rem;
         
         
         @media screen and(max-width: 400px){
@@ -122,6 +123,7 @@
             }
 
             .task__container--item{
+                cursor: pointer;
 
                 margin-top: 2rem;
                 .item__inner{
@@ -143,7 +145,6 @@
     .tasks__create--container{
         transition: ease-in-out 0.2s all;
         min-height: 150px;
-        width: auto; 
     }
 
 </style>

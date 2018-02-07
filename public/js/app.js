@@ -18790,16 +18790,27 @@ var actions = {
   */
 	createTask: function createTask(context, _ref) {
 		var work_hours = _ref.work_hours,
-		    weekday = _ref.weekday,
+		    week_day = _ref.week_day,
 		    week = _ref.week,
 		    location = _ref.location,
 		    supplier = _ref.supplier,
 		    weekend = _ref.weekend,
 		    comment = _ref.comment;
 
+
+		// context.commit(types.CREATE_TASK, {
+		// 	work_hours: work_hours,
+		// 	week_day: week_day,
+		// 	week: week,
+		// 	location: location,
+		// 	supplier: supplier,
+		// 	weekend: weekend,
+		// 	comment: comment
+		// })
+
 		_Request2.default.post('/api/v1/create-task', {
 			work_hours: work_hours,
-			weekday: weekday,
+			week_day: week_day,
 			week: week,
 			location: location,
 			supplier: supplier,
@@ -18809,24 +18820,24 @@ var actions = {
 
 			console.log(response);
 
-			// // do further actions here
-			// const work_hours = work_hours
-			// const weekday = weekday
-			// const week = week
-			// const location = location
-			// const supplier = supplier
-			// const weekend = weekend
-			// const comment = comment
+			// do further actions here
+			var work_hours = work_hours;
+			var weekday = weekday;
+			var week = week;
+			var location = location;
+			var supplier = supplier;
+			var weekend = weekend;
+			var comment = comment;
 
-			// context.commit(types.CREATE_TASK, {
-			// 	work_hours,
-			// 	weekday,
-			// 	week,
-			// 	location,
-			// 	supplier,
-			// 	weekend,
-			// 	comment
-			// })
+			context.commit(_types2.default.CREATE_TASK, {
+				work_hours: work_hours,
+				weekday: weekday,
+				week: week,
+				location: location,
+				supplier: supplier,
+				weekend: weekend,
+				comment: comment
+			});
 
 			// extend Promise call
 			return Promise.resolve();
@@ -18839,7 +18850,7 @@ var actions = {
 		    priority = _ref2.priority;
 
 
-		axios.patch('/api/v1/tasks/' + id + '/set-priority', {
+		_Request2.default.patch('/api/v1/tasks/' + id + '/set-priority', {
 			priority: priority
 		}).then(function (response) {
 
@@ -18865,7 +18876,7 @@ var actions = {
 		    work_hours = _ref3.work_hours;
 
 
-		axios.patch('/api/v1/tasks/' + id + '/set-workhour', {
+		_Request2.default.patch('/api/v1/tasks/' + id + '/set-workhour', {
 			work_hours: work_hours
 		}).then(function (response) {
 
@@ -18917,6 +18928,8 @@ var mutations = (_mutations = {}, _defineProperty(_mutations, _types2.default.GE
 	state.items = payload;
 }), _defineProperty(_mutations, _types2.default.CREATE_TASK, function (state, task) {
 	state.items = [task].concat(state.items);
+
+	state.latestTask = task;
 }), _defineProperty(_mutations, _types2.default.DELETE_TASK, function (state, task) {
 	state.items = state.items.filter(function (item) {
 		return item.id !== task.id;
@@ -23780,26 +23793,24 @@ var _Header = __webpack_require__(113);
 
 var _Header2 = _interopRequireDefault(_Header);
 
-var _axios = __webpack_require__(51);
-
-var _axios2 = _interopRequireDefault(_axios);
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 exports.default = {
    components: { Sidebar: _Sidebar2.default, Header: _Header2.default }
-}; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+};
 
 /***/ }),
 /* 210 */
@@ -23851,26 +23862,20 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", [
     _c("div", { staticClass: "sidebar", attrs: { id: "sidebar" } }, [
-      _c(
-        "div",
-        { staticClass: "sidebar__inner--desktop hidden-xs hidden-sm" },
-        [
-          _c(
-            "div",
-            { staticClass: "sidebar__link" },
-            [
-              _c(
-                "router-link",
-                { attrs: { to: { name: "dashboard-tasks" } } },
-                [_c("i", { staticClass: "fa fa-bars" })]
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _vm._m(0)
-        ]
-      ),
+      _c("div", { staticClass: "sidebar__inner--desktop hidden-xs" }, [
+        _c(
+          "div",
+          { staticClass: "sidebar__link" },
+          [
+            _c("router-link", { attrs: { to: { name: "dashboard-tasks" } } }, [
+              _c("i", { staticClass: "fa fa-bars" })
+            ])
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _vm._m(0)
+      ]),
       _vm._v(" "),
       _c("div", { staticClass: "sidebar__inner--mobile hidden-md hidden-lg" }, [
         _c("div", { staticClass: "row" }, [
@@ -24024,7 +24029,9 @@ var render = function() {
         _c("div", { staticClass: "content__row row" }, [
           _c(
             "div",
-            { staticClass: "row--heading col-xs-9 col-sm-6 col-md-3 col-lg-3" },
+            {
+              staticClass: "row--heading col-xs-9 col-sm-6 col-md-11 col-lg-11"
+            },
             [
               _vm._v(
                 "\n\t\t\t\t\t" +
@@ -24036,13 +24043,9 @@ var render = function() {
             ]
           ),
           _vm._v(" "),
-          _c("div", {
-            staticClass: "row--searchBar hidden-xs hidden-sm col-md-6 col-lg-6"
-          }),
-          _vm._v(" "),
           _c(
             "div",
-            { staticClass: "row--create-button col-xs-3 col-md-3 col-lg-3" },
+            { staticClass: "row--create-button col-xs-3 col-md-1 col-lg-1" },
             [_vm._t("default")],
             2
           )
@@ -24070,7 +24073,12 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "dashboard", attrs: { id: "app" } }, [
-    _c("div", { staticClass: "col-md-1 app-sidebar" }, [_c("Sidebar")], 1),
+    _c(
+      "div",
+      { staticClass: "col-sm-2 col-md-1 app-sidebar" },
+      [_c("Sidebar")],
+      1
+    ),
     _vm._v(" "),
     _c("div", { staticClass: "col-md-9 dashboard__content" }, [
       _c(
@@ -24179,7 +24187,7 @@ exports = module.exports = __webpack_require__(23)(undefined);
 
 
 // module
-exports.push([module.i, "\n.tasks__container {\n  height: auto;\n  margin-left: -45px;\n}\n@media screen and (max-width: 400px) {\n.tasks__container {\n      margin: 0px;\n      width: 100%;\n      padding-left: 0px;\n      padding-right: 0px;\n}\n}\n@media screen and (max-width: 400px) {\n.tasks__container .task__container--items .item__head {\n      font-size: 11px;\n}\n}\n.tasks__container .task__container--items .task__container--item {\n    margin-top: 2rem;\n}\n.tasks__container .task__container--items .task__container--item .item__inner {\n      background: #00b0eb;\n      padding: 1.5rem;\n      color: #fff;\n      height: 50px;\n}\n@media screen and (max-width: 400px) {\n.tasks__container .task__container--items .task__container--item .item__inner {\n          font-size: 11px;\n}\n}\n.tasks__create--container {\n  -webkit-transition: ease-in-out 0.2s all;\n  transition: ease-in-out 0.2s all;\n  min-height: 150px;\n  width: auto;\n}\n", ""]);
+exports.push([module.i, "\n.tasks__container {\n  height: auto;\n  margin-left: -45px;\n  margin-top: 2rem;\n}\n@media screen and (max-width: 400px) {\n.tasks__container {\n      margin: 0px;\n      width: 100%;\n      padding-left: 0px;\n      padding-right: 0px;\n}\n}\n@media screen and (max-width: 400px) {\n.tasks__container .task__container--items .item__head {\n      font-size: 11px;\n}\n}\n.tasks__container .task__container--items .task__container--item {\n    cursor: pointer;\n    margin-top: 2rem;\n}\n.tasks__container .task__container--items .task__container--item .item__inner {\n      background: #00b0eb;\n      padding: 1.5rem;\n      color: #fff;\n      height: 50px;\n}\n@media screen and (max-width: 400px) {\n.tasks__container .task__container--items .task__container--item .item__inner {\n          font-size: 11px;\n}\n}\n.tasks__create--container {\n  -webkit-transition: ease-in-out 0.2s all;\n  transition: ease-in-out 0.2s all;\n  min-height: 150px;\n}\n", ""]);
 
 // exports
 
@@ -24296,7 +24304,7 @@ exports.default = {
         }
     },
 
-    mounted: function mounted() {
+    beforeMount: function beforeMount() {
         this.$store.dispatch('task/getTasks');
     },
 
@@ -24395,7 +24403,7 @@ exports = module.exports = __webpack_require__(23)(undefined);
 
 
 // module
-exports.push([module.i, "\n.tasks__create--container {\n  -webkit-transition: ease-in-out 0.2s all;\n  transition: ease-in-out 0.2s all;\n  min-height: 150px;\n  width: auto;\n}\n.tasks__create--container .create-task-form {\n    height: 100%;\n    width: 100%;\n}\n.tasks__create--container .create-task-form .form__field--group .work_hours-field label, .tasks__create--container .create-task-form .form__field--group .location-field label, .tasks__create--container .create-task-form .form__field--group .supplier-field label, .tasks__create--container .create-task-form .form__field--group .weekend_evening--check-field label, .tasks__create--container .create-task-form .form__field--group .comment-field label {\n      font-size: 10px;\n      color: #eee;\n}\n.tasks__create--container .create-task-form .form__field--group .work_hours-field .form-control, .tasks__create--container .create-task-form .form__field--group .location-field .form-control, .tasks__create--container .create-task-form .form__field--group .supplier-field .form-control, .tasks__create--container .create-task-form .form__field--group .weekend_evening--check-field .form-control, .tasks__create--container .create-task-form .form__field--group .comment-field .form-control {\n      border: 1px solid #00b0eb;\n      color: #00b0eb;\n      border-radius: 2px;\n}\n.tasks__create--container .create-task-form .form__field--group .work_hours-field .form-control::-webkit-input-placeholder, .tasks__create--container .create-task-form .form__field--group .location-field .form-control::-webkit-input-placeholder, .tasks__create--container .create-task-form .form__field--group .supplier-field .form-control::-webkit-input-placeholder, .tasks__create--container .create-task-form .form__field--group .weekend_evening--check-field .form-control::-webkit-input-placeholder, .tasks__create--container .create-task-form .form__field--group .comment-field .form-control::-webkit-input-placeholder {\n        font-size: 10px;\n}\n.tasks__create--container .create-task-form .form__field--group .work_hours-field .form-control:-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .location-field .form-control:-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .supplier-field .form-control:-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .weekend_evening--check-field .form-control:-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .comment-field .form-control:-ms-input-placeholder {\n        font-size: 10px;\n}\n.tasks__create--container .create-task-form .form__field--group .work_hours-field .form-control::-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .location-field .form-control::-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .supplier-field .form-control::-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .weekend_evening--check-field .form-control::-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .comment-field .form-control::-ms-input-placeholder {\n        font-size: 10px;\n}\n.tasks__create--container .create-task-form .form__field--group .work_hours-field .form-control::placeholder, .tasks__create--container .create-task-form .form__field--group .location-field .form-control::placeholder, .tasks__create--container .create-task-form .form__field--group .supplier-field .form-control::placeholder, .tasks__create--container .create-task-form .form__field--group .weekend_evening--check-field .form-control::placeholder, .tasks__create--container .create-task-form .form__field--group .comment-field .form-control::placeholder {\n        font-size: 10px;\n}\n.tasks__create--container .create-task-form .form__field--group .week-details .weekday label, .tasks__create--container .create-task-form .form__field--group .week-details .week label {\n      font-size: 10px;\n      color: #eee;\n}\n.tasks__create--container .create-task-form .form__field--group .week-details .weekday .form-control, .tasks__create--container .create-task-form .form__field--group .week-details .week .form-control {\n      border: 1px solid #00b0eb;\n      color: #00b0eb;\n      border-radius: 2px;\n}\n.tasks__create--container .create-task-form .form__field--group .week-details .weekday .form-control::-webkit-input-placeholder, .tasks__create--container .create-task-form .form__field--group .week-details .week .form-control::-webkit-input-placeholder {\n        font-size: 10px;\n}\n.tasks__create--container .create-task-form .form__field--group .week-details .weekday .form-control:-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .week-details .week .form-control:-ms-input-placeholder {\n        font-size: 10px;\n}\n.tasks__create--container .create-task-form .form__field--group .week-details .weekday .form-control::-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .week-details .week .form-control::-ms-input-placeholder {\n        font-size: 10px;\n}\n.tasks__create--container .create-task-form .form__field--group .week-details .weekday .form-control::placeholder, .tasks__create--container .create-task-form .form__field--group .week-details .week .form-control::placeholder {\n        font-size: 10px;\n}\n.tasks__create--container .create-task-form .form__field--group .submit .btn {\n      border: 1px solid #00b0eb;\n      background: transparent;\n      color: #00b0eb;\n      margin-left: 3rem;\n}\n", ""]);
+exports.push([module.i, "\n.tasks__create--container {\n  -webkit-transition: ease-in-out 0.2s all;\n  transition: ease-in-out 0.2s all;\n  min-height: 150px;\n  width: 104%;\n  border-bottom: 1px solid #00b0eb;\n  margin-left: -45px;\n}\n@media screen and (max-width: 400px) {\n.tasks__create--container {\n      width: 100%;\n      margin-left: 0px;\n}\n}\n.tasks__create--container .create-task-form {\n    height: 100%;\n    width: 100%;\n}\n.tasks__create--container .create-task-form .form__field--group .work_hours-field label, .tasks__create--container .create-task-form .form__field--group .location-field label, .tasks__create--container .create-task-form .form__field--group .supplier-field label, .tasks__create--container .create-task-form .form__field--group .weekend_evening--check-field label, .tasks__create--container .create-task-form .form__field--group .comment-field label {\n      font-size: 10px;\n      color: #eee;\n}\n.tasks__create--container .create-task-form .form__field--group .work_hours-field .form-control, .tasks__create--container .create-task-form .form__field--group .location-field .form-control, .tasks__create--container .create-task-form .form__field--group .supplier-field .form-control, .tasks__create--container .create-task-form .form__field--group .weekend_evening--check-field .form-control, .tasks__create--container .create-task-form .form__field--group .comment-field .form-control {\n      border: 1px solid #00b0eb;\n      color: #00b0eb;\n      border-radius: 2px;\n}\n.tasks__create--container .create-task-form .form__field--group .work_hours-field .form-control::-webkit-input-placeholder, .tasks__create--container .create-task-form .form__field--group .location-field .form-control::-webkit-input-placeholder, .tasks__create--container .create-task-form .form__field--group .supplier-field .form-control::-webkit-input-placeholder, .tasks__create--container .create-task-form .form__field--group .weekend_evening--check-field .form-control::-webkit-input-placeholder, .tasks__create--container .create-task-form .form__field--group .comment-field .form-control::-webkit-input-placeholder {\n        font-size: 10px;\n}\n.tasks__create--container .create-task-form .form__field--group .work_hours-field .form-control:-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .location-field .form-control:-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .supplier-field .form-control:-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .weekend_evening--check-field .form-control:-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .comment-field .form-control:-ms-input-placeholder {\n        font-size: 10px;\n}\n.tasks__create--container .create-task-form .form__field--group .work_hours-field .form-control::-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .location-field .form-control::-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .supplier-field .form-control::-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .weekend_evening--check-field .form-control::-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .comment-field .form-control::-ms-input-placeholder {\n        font-size: 10px;\n}\n.tasks__create--container .create-task-form .form__field--group .work_hours-field .form-control::placeholder, .tasks__create--container .create-task-form .form__field--group .location-field .form-control::placeholder, .tasks__create--container .create-task-form .form__field--group .supplier-field .form-control::placeholder, .tasks__create--container .create-task-form .form__field--group .weekend_evening--check-field .form-control::placeholder, .tasks__create--container .create-task-form .form__field--group .comment-field .form-control::placeholder {\n        font-size: 10px;\n}\n.tasks__create--container .create-task-form .form__field--group .week-details .weekday label, .tasks__create--container .create-task-form .form__field--group .week-details .week label {\n      font-size: 10px;\n      color: #eee;\n}\n.tasks__create--container .create-task-form .form__field--group .week-details .weekday .form-control, .tasks__create--container .create-task-form .form__field--group .week-details .week .form-control {\n      border: 1px solid #00b0eb;\n      color: #00b0eb;\n      border-radius: 2px;\n}\n.tasks__create--container .create-task-form .form__field--group .week-details .weekday .form-control::-webkit-input-placeholder, .tasks__create--container .create-task-form .form__field--group .week-details .week .form-control::-webkit-input-placeholder {\n        font-size: 10px;\n}\n.tasks__create--container .create-task-form .form__field--group .week-details .weekday .form-control:-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .week-details .week .form-control:-ms-input-placeholder {\n        font-size: 10px;\n}\n.tasks__create--container .create-task-form .form__field--group .week-details .weekday .form-control::-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .week-details .week .form-control::-ms-input-placeholder {\n        font-size: 10px;\n}\n.tasks__create--container .create-task-form .form__field--group .week-details .weekday .form-control::placeholder, .tasks__create--container .create-task-form .form__field--group .week-details .week .form-control::placeholder {\n        font-size: 10px;\n}\n.tasks__create--container .create-task-form .form__field--group .submit .btn {\n      border: 1px solid #00b0eb;\n      background: transparent;\n      color: #00b0eb;\n      margin-left: 3rem;\n}\n@media screen and (max-width: 400px) {\n.tasks__create--container .create-task-form .form__field--group .submit .btn {\n          margin-left: 0px;\n          width: 100%;\n}\n}\n", ""]);
 
 // exports
 
@@ -24583,8 +24591,6 @@ exports.default = {
 			// }
 		},
 		createTask: function createTask(e) {
-			var _this2 = this;
-
 			e.preventDefault();
 
 			this.validateTask();
@@ -24598,8 +24604,6 @@ exports.default = {
 					supplier: this.supplier,
 					weekend: this.weekend,
 					comment: this.comment
-				}).then(function () {
-					_this2.creating = false;
 				});
 			}
 		}
@@ -25160,81 +25164,84 @@ var render = function() {
         )
       : _vm._e(),
     _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "tasks__container container-fluid" },
-      _vm._l(_vm.tasks, function(task) {
-        return _c("div", { staticClass: "task__container--items" }, [
-          _vm._m(0, true),
+    _c("div", { staticClass: "tasks__container container-fluid" }, [
+      _c(
+        "div",
+        { staticClass: "task__container--items" },
+        [
+          _vm._m(0),
           _vm._v(" "),
-          _c("div", { staticClass: "task__container--item" }, [
-            _c("div", { staticClass: "item__inner" }, [
-              _c("div", { staticClass: "row task" }, [
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "task__location col-xs-3 col-sm-2 col-md-2 col-lg-2"
-                  },
-                  [
-                    _vm._v(
-                      "\n                            " +
-                        _vm._s(task.work_hours) +
-                        "\n                        "
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "task__weekday col-xs-3 col-sm-2 col-md-2 col-lg-2"
-                  },
-                  [
-                    _vm._v(
-                      "\n                            " +
-                        _vm._s(task.week_day) +
-                        "\n                        "
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "task__location col-xs-3 col-sm-2 col-md-3 col-lg-3"
-                  },
-                  [
-                    _vm._v(
-                      "\n                            " +
-                        _vm._s(task.location) +
-                        "\n                        "
-                    )
-                  ]
-                ),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  {
-                    staticClass:
-                      "task__supplier col-xs-3 col-sm-2 col-md-2 col-lg-2"
-                  },
-                  [
-                    _vm._v(
-                      "\n                            " +
-                        _vm._s(task.supplier) +
-                        "\n                        "
-                    )
-                  ]
-                )
+          _vm._l(_vm.tasks, function(task) {
+            return _c("div", { staticClass: "task__container--item" }, [
+              _c("div", { staticClass: "item__inner" }, [
+                _c("div", { staticClass: "row task" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "task__location col-xs-3 col-sm-2 col-md-2 col-lg-2"
+                    },
+                    [
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(task.work_hours) +
+                          "\n                        "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "task__weekday col-xs-3 col-sm-2 col-md-2 col-lg-2"
+                    },
+                    [
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(task.week_day) +
+                          "\n                        "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "task__location col-xs-3 col-sm-2 col-md-3 col-lg-3"
+                    },
+                    [
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(task.location) +
+                          "\n                        "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "div",
+                    {
+                      staticClass:
+                        "task__supplier col-xs-3 col-sm-2 col-md-2 col-lg-2"
+                    },
+                    [
+                      _vm._v(
+                        "\n                            " +
+                          _vm._s(task.supplier) +
+                          "\n                        "
+                      )
+                    ]
+                  )
+                ])
               ])
             ])
-          ])
-        ])
-      })
-    )
+          })
+        ],
+        2
+      )
+    ])
   ])
 }
 var staticRenderFns = [
