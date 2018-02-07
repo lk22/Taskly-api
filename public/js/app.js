@@ -18682,12 +18682,6 @@ var auth = {
 		}
 	},
 
-	hydrate: function hydrate(state) {
-		if (state.authenticated.token) {
-			state.authenticated.token = state.authenticated.token;
-		}
-	},
-
 	/**
   * namespacing
   */
