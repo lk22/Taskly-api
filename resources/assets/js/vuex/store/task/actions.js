@@ -92,6 +92,35 @@ const actions = {
 		})
 	},
 
+	// setPriority(context, {
+	// 	id,
+	// 	priority
+	// }) {
+
+	// 	request.patch('/api/v1/tasks/' + id + '/set-priority', {
+	// 		priority: priority
+	// 	}).then((response) => {
+
+	// 		// debug response
+	// 		console.log(response)
+
+	// 		const id = id
+	// 		const priority = priority
+
+	// 		// commit action
+	// 		context.commit(types.SET_PRIORITY, {
+	// 			id,
+	// 			priority
+	// 		})
+
+	// 		return Promise.resolve()
+
+	// 	}).catch((error) => {
+	// 		return Promise.reject()
+	// 	})
+
+	// },
+
 	setWorkhours(context, {
 		id,
 		work_hours

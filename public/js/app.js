@@ -18845,6 +18845,37 @@ var actions = {
 			return Promise.reject();
 		});
 	},
+
+
+	// setPriority(context, {
+	// 	id,
+	// 	priority
+	// }) {
+
+	// 	request.patch('/api/v1/tasks/' + id + '/set-priority', {
+	// 		priority: priority
+	// 	}).then((response) => {
+
+	// 		// debug response
+	// 		console.log(response)
+
+	// 		const id = id
+	// 		const priority = priority
+
+	// 		// commit action
+	// 		context.commit(types.SET_PRIORITY, {
+	// 			id,
+	// 			priority
+	// 		})
+
+	// 		return Promise.resolve()
+
+	// 	}).catch((error) => {
+	// 		return Promise.reject()
+	// 	})
+
+	// },
+
 	setWorkhours: function setWorkhours(context, _ref2) {
 		var id = _ref2.id,
 		    work_hours = _ref2.work_hours;
@@ -18916,13 +18947,6 @@ var mutations = (_mutations = {}, _defineProperty(_mutations, _types2.default.GE
 	});
 }), _defineProperty(_mutations, _types2.default.UPDATE_TASK, function (state, payload) {
 	payload.task = Object.assign(payload.task, payload.update);
-}), _defineProperty(_mutations, _types2.default.SET_PRIORITY, function (state, task) {
-	var _payload = payload,
-	    priority = _payload.priority;
-
-	state.items.filter(function (item) {
-		return item.priority === task.priority;
-	});
 }), _defineProperty(_mutations, _types2.default.SET_WORK_HOURS, function (state, task) {
 	var work_hours = task.work_hours;
 
@@ -18930,8 +18954,8 @@ var mutations = (_mutations = {}, _defineProperty(_mutations, _types2.default.GE
 		return item.work_hours === task.work_hours;
 	});
 }), _defineProperty(_mutations, _types2.default.SET_DEADLINE, function (state, task) {
-	var _payload2 = payload,
-	    dealine = _payload2.dealine;
+	var _payload = payload,
+	    dealine = _payload.dealine;
 
 	state.items.filter(function (item) {
 		return item.deadline === task.deadline;

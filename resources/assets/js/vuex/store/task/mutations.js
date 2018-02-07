@@ -55,12 +55,12 @@ const mutations = {
 	/** 
 	 * Updating priority for a task
 	 */
-	[types.SET_PRIORITY](state, task) {
-		const { priority } = payload
-		state.items.filter(
-		    item => item.priority === task.priority
-		)
-	},
+	// [types.SET_PRIORITY](state, task) {
+	// 	const { priority } = payload
+	// 	state.items.filter(
+	// 	    item => item.priority === task.priority
+	// 	)
+	// },
 
 	/**
 	 * updating work hours on a task
