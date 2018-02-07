@@ -3,7 +3,7 @@
 		<div class="col-md-1 app-sidebar">
             <Sidebar />
         </div>
-        <div class="col-md-11 dashboard__content">
+        <div class="col-md-9 dashboard__content">
             <div class="container-fluid app-content">
             	<router-view></router-view>
             </div>

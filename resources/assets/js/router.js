@@ -21,11 +21,11 @@ const router = new VueRouter({
 					path: '/auth', 
 					name: 'auth', 
 					component: require('./views/Authenticate'),
-					// beforeEnter(to, from, next) {
-					// 	if(store.state.auth.authenticated.token){
-					// 		next('/app/dashboard/tasks')
-					// 	}
-					// }
+					beforeEnter(to, from, next) {
+						if(store.state.auth.authenticated.token){
+							next('/app/dashboard/tasks')
+						}
+					}
 				},
 
 				/**

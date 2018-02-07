@@ -3,15 +3,15 @@
 		<div class="head__inner">
 			<div class="inner--content">
 				<div class="content__row row">
-					<div class="row--heading hidden-xs hidden-sm col-md-3 col-lg-3">
+					<div class="row--heading col-xs-9 col-sm-6 col-md-3 col-lg-3">
 						{{ name }} - {{ page }}
 					</div>
 
-					<div class="row--searchBar col-md-6 col-lg-6">
+					<div class="row--searchBar hidden-xs hidden-sm col-md-6 col-lg-6">
 						<!-- search bar component here <SearchBar></SearchBar> -->
 					</div>
 
-					<div class="row--create-button col-md-3 col-lg-3">
+					<div class="row--create-button col-xs-3 col-md-3 col-lg-3">
 						<slot></slot>
 					</div>
 				</div>
@@ -44,7 +44,11 @@
 		height: 100px;
 		width: 100%;
 		margin-left: -30px;
-		
+	
+		@media screen and(max-width: 400px) {
+			margin-left: 0px; 
+		}
+
 		.head__inner{
 			padding-top: 3rem;
 			border-bottom: 1px solid #eee;

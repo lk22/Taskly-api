@@ -14,36 +14,35 @@
             <!-- creating task form -->
             <CreateTaskForm></CreateTaskForm>        
         </div>
-
         <!-- users tasks list -->
         <div class="tasks__container container-fluid">
             <div class="task__container--items" v-for="task in tasks">
                 <div class="item__head">
                     <div class="row">
-                        <div class="col-md-2 col-lg-2">Work hours</div>
-                        <div class="col-md-2 col-lg-2">Date</div>
-                        <div class="col-md-2 col-lg-2">Location</div>
-                        <div class="col-md-2 col-lg-2">Supplier</div>
+                        <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2">Work hours</div>
+                        <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2">Weekday</div>
+                        <div class="col-xs-3 col-sm-2 col-md-3 col-lg-3">Location</div>
+                        <div class="col-xs-3 col-sm-2 col-md-2 col-lg-2">Supplier</div>
                         <!-- <div class="col-md-2 col-lg-2">Weekend / Evening</div> -->
                         <!-- <div class="col-md-2 col-lg-2">Comments</div> -->
-                    </div class="row">
+                    </div>
                 </div>
                 <div class="task__container--item">
                     <div class="item__inner">
                         <div class="row task">
-                            <div class="task__location col-md-2 col-lg-2">
+                            <div class="task__location col-xs-3 col-sm-2 col-md-2 col-lg-2">
                                 {{ task.work_hours }}
                             </div>
 
-                            <div class="task__weekday col-md-2 col-lg-2">
+                            <div class="task__weekday col-xs-3 col-sm-2 col-md-2 col-lg-2">
                                 {{ task.week_day }}
                             </div>
 
-                            <div class="task__location col-md-2 col-lg-2">
+                            <div class="task__location col-xs-3 col-sm-2 col-md-3 col-lg-3">
                                 {{ task.location }}
                             </div>
 
-                            <div class="task__supplier col-md-2 col-lg-2">
+                            <div class="task__supplier col-xs-3 col-sm-2 col-md-2 col-lg-2">
                                 {{ task.supplier }}
                             </div>
 
@@ -66,9 +65,10 @@
 	import Sidebar from './../components/app/Sidebar'
     import Header from './../components/app/Header'
     import CreateTaskForm from './../components/app/Create-task-form'
+    import TaskList from './../components/app/TaskList'
 
     export default {
-    	components: { Sidebar, Header, CreateTaskForm},
+    	components: { Sidebar, Header, CreateTaskForm, TaskList},
         layout: 'app',
         data() {
             return {
@@ -101,19 +101,41 @@
 
     .tasks__container{
         height: auto;
-        width: auto;
         margin-left: -45px;
         
+        
+        @media screen and(max-width: 400px){
+            margin:0px;
+            width: 100%;
+            padding-left:0px;
+            padding-right:0px;
+        }
+        
         .task__container--items{
+
+            .item__head{
+                // on mobile version
+                @media screen and(max-width: 400px){
+                    font-size: 11px;
+                }
+
+            }
+
             .task__container--item{
+
                 margin-top: 2rem;
                 .item__inner{
                     background: #00b0eb;
-                    padding: 1rem;
+                    padding: 1.5rem;
                     color: #fff;
+                    height:50px;
+                    
+                    @media screen and(max-width: 400px) {
+                        font-size: 11px;
+                    }
                 }
             }
-        } 
+        }
     }
     
 
