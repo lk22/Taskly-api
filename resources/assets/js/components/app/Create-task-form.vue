@@ -230,7 +230,7 @@ import Notification from './wrappers/Notification'
     .tasks__create--container{
         transition: ease-in-out 0.2s all;
         min-height: 150px;
-        width: 104%; 
+        width: 100%; 
         margin-left: -45px;
         padding: 1rem;
         
@@ -251,6 +251,7 @@ import Notification from './wrappers/Notification'
             
             .form__field--group{
                 .work_hours-field, .location-field, .supplier-field, .weekend_evening--check-field, .comment-field {
+                    padding: 0px;
                     label{
                         font-size:13px;
                         color: #00b0eb; 

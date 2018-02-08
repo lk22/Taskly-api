@@ -35,7 +35,7 @@
 	#sidebar{
 		min-height: 800px;
 		width: 100%; 
-		border-right: 1px solid #809ed3;
+		border-right: 1px solid #00b0eb;
 		background: #fff;
 		
 		@media screen and(max-width: 400px) {

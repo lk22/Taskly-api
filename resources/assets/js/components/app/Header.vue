@@ -51,7 +51,7 @@
 
 		.head__inner{
 			padding-top: 3rem;
-			border-bottom: 1px solid #eee;
+			border-bottom: 1px solid #00b0eb;
 			padding-left:15px;
 			padding-right: 15px;
 			height:70px;
