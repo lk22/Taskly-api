@@ -1,33 +1,36 @@
 <template>
 	<div class="inner-create__form--container">
+        <h3 class="text-center text-primary">Create a new task</h3>
 		<!-- form component -->
         <form 
             action="#" 
             method="post"
-            class="create-task-form"
+            class="create-task-form center-block"
         >
 
             <!-- form field group -->
             <div class="form__field--group">
                 
                 <!-- work_hour -->
-                <div class="form-group work_hours-field col-md-1 col-lg-1">
-                    <label for="work_hours">Work hours</label>
+                <div class="form-group work_hours-field col-md-5">
+                    <label for="work_hours">Work hours <span class="text-danger">*</span></label>
 
                     <input
                         v-model="work_hours"
                         type="number" 
                         class="form-control" 
                         name="work_hours"
+                        placeholder="Enter your work hours"
                     >
+
                 </div>
 
                 <!-- week details -->
-                <div class="week-details col-md-3 col-lg-3">
+                <div class="week-details col-md-7 col-lg-7">
                     
                     <!-- week_day -->
                     <div class="form-group weekday col-md-6 col-lg-6">
-                        <label for="weekday">Week day</label>
+                        <label for="weekday">Week day <span class="text-danger">*</span></label>
 
                         <input 
                             v-model="week_day"
@@ -40,21 +43,22 @@
 
                     <!-- week count -->
                     <div class="form-group week col-md-6 col-lg-6">
-                        <label for="week">Week</label>
+                        <label for="week">Week <span class="text-danger">*</span></label>
 
                         <input 
                             v-model="week"
                             type="number"
                             name="week"
                             class="form-control"
+                            placeholder="Enther the week" 
                         >
                     </div>
 
                 </div>
 
                 <!-- location field -->
-                <div class="form-group location-field col-md-2 col-lg-2">
-                    <label for="location">Location</label>
+                <div class="form-group location-field">
+                    <label for="location">Location <span class="text-danger">*</span></label>
 
                     <!-- <select v-for="location in locations" name="location" id="location">
                         <option value="{{ location.id }}">{{ location.name }}</option>
@@ -67,11 +71,12 @@
                         class="form-control"
                         placeholder="Enter location"
                     >
+                    <small class="field-info text-info">Define the location you are doing this task at</small>
                 </div>
 
                 <!-- supplier field -->
-                <div class="form-group supplier-field col-md-2 col-lg-2">
-                    <label for="supplier">Supplier</label>
+                <div class="form-group supplier-field">
+                    <label for="supplier">Supplier <span class="text-danger">*</span></label>
 
                     <input 
                         v-model="supplier"
@@ -80,10 +85,11 @@
                         class="form-control"
                         placeholder="Enter supplier"
                     >
+                    <small class="field-info text-info">Define the supplier you are doing a task for</small>
                 </div>
 
                 <!-- weekend/evening job field -->
-                <div class="form-group weekend_evening--check-field col-md-1 col-lg-1">
+                <div class="form-group weekend_evening--check-field">
                     <label for="weekeend">Weekend / Evening</label>
 
                     <input 
@@ -91,10 +97,11 @@
                         type="checkbox"
                         name="weekend"
                     >
+                    <small class="field-info text-info">Control if this task is a weekend or a evening task</small>
                 </div>
 
                 <!-- comment field -->
-                <div class="form-group comment-field col-md-3 col-lg-3">
+                <div class="form-group comment-field">
 
                     <label for="comment">Comment</label>
 
@@ -107,6 +114,8 @@
                         class="form-control"
                         placeholder="Give your task a comment"
                     ></textarea>
+
+                    <small class="field-info text-info">Make a clearer note about what your task is about</small>
                 </div>
 
                 <div class="row submit">
@@ -124,18 +133,16 @@
             </div>
         </form>
 
-
-        <!-- error container-->
-        <div class="create-task__error" v-if="error">
-        	<div class="alert alert-danger">
-        		{{ msg }}
-        	</div>
-        </div>
+        <Notification v-if="error" status="critical">
+            {{ msg }}
+        </Notification>
 	</div>
 </template>
 
 <script>
+import Notification from './wrappers/Notification'
 	export default {
+        components: {Notification},
 		data() {
 			return {
 				work_hours: 	'',
@@ -145,9 +152,14 @@
 				supplier: 		'',
 				weekend: 		false,
 				comment: 		'',
-				error: 			'',
+				error: 			false,
+                success:        false
 			}
 		},
+
+        watch: {
+
+        },
 
 		methods: {
 			validateTask() {
@@ -159,7 +171,7 @@
 				   this.work_hours && this.location && this.supplier === ''
 				) {
 					this.error = true
-					let count = 2
+					let count = 5
 
 					setInterval(() => {
 						count--
@@ -219,8 +231,8 @@
         transition: ease-in-out 0.2s all;
         min-height: 150px;
         width: 104%; 
-        border-bottom: 1px solid #00b0eb;
         margin-left: -45px;
+        padding: 1rem;
         
         @media screen and(max-width: 400px) {
             width:100%;
@@ -231,12 +243,17 @@
         .create-task-form{
             height: 100%;
             width: 100%;
+            width: 80%; 
+            
+            @media screen and(max-width: 400px) {
+                width: 100%; 
+            }
             
             .form__field--group{
                 .work_hours-field, .location-field, .supplier-field, .weekend_evening--check-field, .comment-field {
                     label{
-                        font-size:10px;
-                        color: #eee; 
+                        font-size:13px;
+                        color: #00b0eb; 
                     }
 
                     .form-control{
@@ -245,7 +262,7 @@
                         border-radius:2px;
 
                         &::placeholder{
-                            font-size:10px;
+                            font-size:13px;
                         }
                     }
                 }
@@ -253,9 +270,14 @@
                 // week details
                 .week-details {
                     .weekday, .week{
+                        @media screen and(max-width: 400px) {
+                            width: 100%;
+                            padding-left: 0px;
+                            padding-right: 0px; 
+                        }
                         label{
-                            font-size:10px;
-                            color: #eee;
+                            font-size:13px;
+                            color: #00b0eb;
                         }
 
                         .form-control{
@@ -264,7 +286,7 @@
                             border-radius:2px;
 
                             &::placeholder{
-                                font-size:10px;
+                                font-size:13px;
                             }
                         }
                     }
@@ -275,7 +297,12 @@
                         border:1px solid #00b0eb;
                         background: transparent;
                         color: #00b0eb;
-                        margin-left: 3rem;
+                        margin-left: 1.5rem;
+                        
+                        &:hover{
+                            background: #00b0eb;
+                            color: #fff;
+                        }
                         
                         @media screen and(max-width: 400px) {
                         margin-left: 0px;

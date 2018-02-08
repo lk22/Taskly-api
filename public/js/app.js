@@ -749,7 +749,7 @@ module.exports = {
 /***/ (function(module, exports, __webpack_require__) {
 
 // to indexed object, toObject with fallback for non-array-like ES3 strings
-var IObject = __webpack_require__(52);
+var IObject = __webpack_require__(51);
 var defined = __webpack_require__(27);
 module.exports = function (it) {
   return IObject(defined(it));
@@ -760,7 +760,7 @@ module.exports = function (it) {
 /* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var pIE = __webpack_require__(53);
+var pIE = __webpack_require__(52);
 var createDesc = __webpack_require__(35);
 var toIObject = __webpack_require__(17);
 var toPrimitive = __webpack_require__(26);
@@ -1230,7 +1230,7 @@ module.exports = function (KEY, exec) {
 // 5 -> Array#find
 // 6 -> Array#findIndex
 var ctx = __webpack_require__(20);
-var IObject = __webpack_require__(52);
+var IObject = __webpack_require__(51);
 var toObject = __webpack_require__(9);
 var toLength = __webpack_require__(8);
 var asc = __webpack_require__(93);
@@ -1292,7 +1292,7 @@ if (__webpack_require__(6)) {
   var toAbsoluteIndex = __webpack_require__(39);
   var toPrimitive = __webpack_require__(26);
   var has = __webpack_require__(12);
-  var classof = __webpack_require__(54);
+  var classof = __webpack_require__(53);
   var isObject = __webpack_require__(4);
   var toObject = __webpack_require__(9);
   var isArrayIter = __webpack_require__(90);
@@ -2173,12 +2173,6 @@ module.exports = g;
 /* 51 */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(152);
-
-/***/ }),
-/* 52 */
-/***/ (function(module, exports, __webpack_require__) {
-
 // fallback for non-array-like ES3 and non-enumerable old V8 strings
 var cof = __webpack_require__(21);
 // eslint-disable-next-line no-prototype-builtins
@@ -2188,14 +2182,14 @@ module.exports = Object('z').propertyIsEnumerable(0) ? Object : function (it) {
 
 
 /***/ }),
-/* 53 */
+/* 52 */
 /***/ (function(module, exports) {
 
 exports.f = {}.propertyIsEnumerable;
 
 
 /***/ }),
-/* 54 */
+/* 53 */
 /***/ (function(module, exports, __webpack_require__) {
 
 // getting tag from 19.1.3.6 Object.prototype.toString()
@@ -2222,6 +2216,12 @@ module.exports = function (it) {
     : (B = cof(O)) == 'Object' && typeof O.callee == 'function' ? 'Arguments' : B;
 };
 
+
+/***/ }),
+/* 54 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(152);
 
 /***/ }),
 /* 55 */
@@ -13749,7 +13749,7 @@ module.exports = function (object, index, value) {
 /* 92 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var classof = __webpack_require__(54);
+var classof = __webpack_require__(53);
 var ITERATOR = __webpack_require__(5)('iterator');
 var Iterators = __webpack_require__(48);
 module.exports = __webpack_require__(25).getIteratorMethod = function (it) {
@@ -14507,7 +14507,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _axios = __webpack_require__(51);
+var _axios = __webpack_require__(54);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -15236,9 +15236,9 @@ module.exports.f = function getOwnPropertyNames(it) {
 // 19.1.2.1 Object.assign(target, source, ...)
 var getKeys = __webpack_require__(38);
 var gOPS = __webpack_require__(57);
-var pIE = __webpack_require__(53);
+var pIE = __webpack_require__(52);
 var toObject = __webpack_require__(9);
-var IObject = __webpack_require__(52);
+var IObject = __webpack_require__(51);
 var $assign = Object.assign;
 
 // should work with symbols and should have deterministic property order (V8 bug)
@@ -15437,7 +15437,7 @@ module.exports = function (iterator, fn, value, entries) {
 
 var aFunction = __webpack_require__(11);
 var toObject = __webpack_require__(9);
-var IObject = __webpack_require__(52);
+var IObject = __webpack_require__(51);
 var toLength = __webpack_require__(8);
 
 module.exports = function (that, callbackfn, aLen, memo, isRight) {
@@ -16011,7 +16011,7 @@ module.exports = function (that, maxLength, fillString, left) {
 
 var getKeys = __webpack_require__(38);
 var toIObject = __webpack_require__(17);
-var isEnum = __webpack_require__(53).f;
+var isEnum = __webpack_require__(52).f;
 module.exports = function (isEntries) {
   return function (it) {
     var O = toIObject(it);
@@ -16032,7 +16032,7 @@ module.exports = function (isEntries) {
 /***/ (function(module, exports, __webpack_require__) {
 
 // https://github.com/DavidBruant/Map-Set.prototype.toJSON
-var classof = __webpack_require__(54);
+var classof = __webpack_require__(53);
 var from = __webpack_require__(146);
 module.exports = function (NAME) {
   return function toJSON() {
@@ -18549,7 +18549,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _mutations;
 
-var _axios = __webpack_require__(51);
+var _axios = __webpack_require__(54);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -20109,7 +20109,7 @@ Object.defineProperty(exports, "__esModule", {
 	value: true
 });
 
-var _axios = __webpack_require__(51);
+var _axios = __webpack_require__(54);
 
 var _axios2 = _interopRequireDefault(_axios);
 
@@ -24073,19 +24073,23 @@ var render = function() {
   return _c("div", { staticClass: "dashboard", attrs: { id: "app" } }, [
     _c(
       "div",
-      { staticClass: "col-sm-2 col-md-1 app-sidebar" },
+      { staticClass: "col-sm-2 col-md-1 col-lg-1 app-sidebar" },
       [_c("Sidebar")],
       1
     ),
     _vm._v(" "),
-    _c("div", { staticClass: "col-md-9 dashboard__content" }, [
-      _c(
-        "div",
-        { staticClass: "container-fluid app-content" },
-        [_c("router-view")],
-        1
-      )
-    ])
+    _c(
+      "div",
+      { staticClass: " col-sm-10 col-md-11 col-lg-11 dashboard__content" },
+      [
+        _c(
+          "div",
+          { staticClass: "container-fluid app-content" },
+          [_c("router-view")],
+          1
+        )
+      ]
+    )
   ])
 }
 var staticRenderFns = []
@@ -24185,7 +24189,7 @@ exports = module.exports = __webpack_require__(23)(undefined);
 
 
 // module
-exports.push([module.i, "\n.tasks__container {\n  height: auto;\n  margin-left: -45px;\n  margin-top: 2rem;\n}\n@media screen and (max-width: 400px) {\n.tasks__container {\n      margin: 0px;\n      width: 100%;\n      padding-left: 0px;\n      padding-right: 0px;\n}\n}\n@media screen and (max-width: 400px) {\n.tasks__container .task__container--items .item__head {\n      font-size: 11px;\n}\n}\n.tasks__container .task__container--items .task__container--item {\n    cursor: pointer;\n    margin-top: 2rem;\n}\n.tasks__container .task__container--items .task__container--item .item__inner {\n      background: #00b0eb;\n      padding: 1.5rem;\n      color: #fff;\n      height: 50px;\n}\n@media screen and (max-width: 400px) {\n.tasks__container .task__container--items .task__container--item .item__inner {\n          font-size: 11px;\n}\n}\n.tasks__create--container {\n  -webkit-transition: ease-in-out 0.2s all;\n  transition: ease-in-out 0.2s all;\n  min-height: 150px;\n}\n", ""]);
+exports.push([module.i, "\n.tasks__container {\n  height: auto;\n  margin-left: -45px;\n  margin-top: 2rem;\n  -webkit-transition: ease-in-out 0.2s all;\n  transition: ease-in-out 0.2s all;\n}\n@media screen and (max-width: 400px) {\n.tasks__container {\n      margin: 0px;\n      width: 100%;\n      padding-left: 0px;\n      padding-right: 0px;\n}\n}\n@media screen and (max-width: 400px) {\n.tasks__container .task__container--items .item__head {\n      font-size: 11px;\n}\n}\n.tasks__container .task__container--items .task__container--item {\n    cursor: pointer;\n    margin-top: 2rem;\n}\n.tasks__container .task__container--items .task__container--item .item__inner {\n      background: #00b0eb;\n      padding: 1.5rem;\n      color: #fff;\n      height: 50px;\n      border-radius: 2px;\n}\n.tasks__container .task__container--items .task__container--item .item__inner:hover {\n        background: #fff;\n        color: #00b0eb;\n        border: 1px solid #00b0eb;\n}\n@media screen and (max-width: 400px) {\n.tasks__container .task__container--items .task__container--item .item__inner {\n          font-size: 11px;\n}\n}\n.tasks__create--container {\n  -webkit-transition: ease-in-out 0.2s all;\n  transition: ease-in-out 0.2s all;\n  min-height: 150px;\n}\n", ""]);
 
 // exports
 
@@ -24288,6 +24292,7 @@ exports.default = {
     layout: 'app',
     data: function data() {
         return {
+            hideTasks: false,
             creating: false,
             locations: [], // selecting all locations from database
             completed: false // if task is completed
@@ -24299,6 +24304,11 @@ exports.default = {
         toggleCreate: function toggleCreate(e) {
             e.preventDefault();
             this.creating = !this.creating;
+            if (this.creating === true) {
+                this.hideTasks = true;
+            } else {
+                this.hideTasks = false;
+            }
         }
     },
 
@@ -24401,7 +24411,7 @@ exports = module.exports = __webpack_require__(23)(undefined);
 
 
 // module
-exports.push([module.i, "\n.tasks__create--container {\n  -webkit-transition: ease-in-out 0.2s all;\n  transition: ease-in-out 0.2s all;\n  min-height: 150px;\n  width: 104%;\n  border-bottom: 1px solid #00b0eb;\n  margin-left: -45px;\n}\n@media screen and (max-width: 400px) {\n.tasks__create--container {\n      width: 100%;\n      margin-left: 0px;\n}\n}\n.tasks__create--container .create-task-form {\n    height: 100%;\n    width: 100%;\n}\n.tasks__create--container .create-task-form .form__field--group .work_hours-field label, .tasks__create--container .create-task-form .form__field--group .location-field label, .tasks__create--container .create-task-form .form__field--group .supplier-field label, .tasks__create--container .create-task-form .form__field--group .weekend_evening--check-field label, .tasks__create--container .create-task-form .form__field--group .comment-field label {\n      font-size: 10px;\n      color: #eee;\n}\n.tasks__create--container .create-task-form .form__field--group .work_hours-field .form-control, .tasks__create--container .create-task-form .form__field--group .location-field .form-control, .tasks__create--container .create-task-form .form__field--group .supplier-field .form-control, .tasks__create--container .create-task-form .form__field--group .weekend_evening--check-field .form-control, .tasks__create--container .create-task-form .form__field--group .comment-field .form-control {\n      border: 1px solid #00b0eb;\n      color: #00b0eb;\n      border-radius: 2px;\n}\n.tasks__create--container .create-task-form .form__field--group .work_hours-field .form-control::-webkit-input-placeholder, .tasks__create--container .create-task-form .form__field--group .location-field .form-control::-webkit-input-placeholder, .tasks__create--container .create-task-form .form__field--group .supplier-field .form-control::-webkit-input-placeholder, .tasks__create--container .create-task-form .form__field--group .weekend_evening--check-field .form-control::-webkit-input-placeholder, .tasks__create--container .create-task-form .form__field--group .comment-field .form-control::-webkit-input-placeholder {\n        font-size: 10px;\n}\n.tasks__create--container .create-task-form .form__field--group .work_hours-field .form-control:-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .location-field .form-control:-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .supplier-field .form-control:-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .weekend_evening--check-field .form-control:-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .comment-field .form-control:-ms-input-placeholder {\n        font-size: 10px;\n}\n.tasks__create--container .create-task-form .form__field--group .work_hours-field .form-control::-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .location-field .form-control::-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .supplier-field .form-control::-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .weekend_evening--check-field .form-control::-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .comment-field .form-control::-ms-input-placeholder {\n        font-size: 10px;\n}\n.tasks__create--container .create-task-form .form__field--group .work_hours-field .form-control::placeholder, .tasks__create--container .create-task-form .form__field--group .location-field .form-control::placeholder, .tasks__create--container .create-task-form .form__field--group .supplier-field .form-control::placeholder, .tasks__create--container .create-task-form .form__field--group .weekend_evening--check-field .form-control::placeholder, .tasks__create--container .create-task-form .form__field--group .comment-field .form-control::placeholder {\n        font-size: 10px;\n}\n.tasks__create--container .create-task-form .form__field--group .week-details .weekday label, .tasks__create--container .create-task-form .form__field--group .week-details .week label {\n      font-size: 10px;\n      color: #eee;\n}\n.tasks__create--container .create-task-form .form__field--group .week-details .weekday .form-control, .tasks__create--container .create-task-form .form__field--group .week-details .week .form-control {\n      border: 1px solid #00b0eb;\n      color: #00b0eb;\n      border-radius: 2px;\n}\n.tasks__create--container .create-task-form .form__field--group .week-details .weekday .form-control::-webkit-input-placeholder, .tasks__create--container .create-task-form .form__field--group .week-details .week .form-control::-webkit-input-placeholder {\n        font-size: 10px;\n}\n.tasks__create--container .create-task-form .form__field--group .week-details .weekday .form-control:-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .week-details .week .form-control:-ms-input-placeholder {\n        font-size: 10px;\n}\n.tasks__create--container .create-task-form .form__field--group .week-details .weekday .form-control::-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .week-details .week .form-control::-ms-input-placeholder {\n        font-size: 10px;\n}\n.tasks__create--container .create-task-form .form__field--group .week-details .weekday .form-control::placeholder, .tasks__create--container .create-task-form .form__field--group .week-details .week .form-control::placeholder {\n        font-size: 10px;\n}\n.tasks__create--container .create-task-form .form__field--group .submit .btn {\n      border: 1px solid #00b0eb;\n      background: transparent;\n      color: #00b0eb;\n      margin-left: 3rem;\n}\n@media screen and (max-width: 400px) {\n.tasks__create--container .create-task-form .form__field--group .submit .btn {\n          margin-left: 0px;\n          width: 100%;\n}\n}\n", ""]);
+exports.push([module.i, "\n.tasks__create--container {\n  -webkit-transition: ease-in-out 0.2s all;\n  transition: ease-in-out 0.2s all;\n  min-height: 150px;\n  width: 104%;\n  margin-left: -45px;\n  padding: 1rem;\n}\n@media screen and (max-width: 400px) {\n.tasks__create--container {\n      width: 100%;\n      margin-left: 0px;\n}\n}\n.tasks__create--container .create-task-form {\n    height: 100%;\n    width: 100%;\n    width: 80%;\n}\n@media screen and (max-width: 400px) {\n.tasks__create--container .create-task-form {\n        width: 100%;\n}\n}\n.tasks__create--container .create-task-form .form__field--group .work_hours-field label, .tasks__create--container .create-task-form .form__field--group .location-field label, .tasks__create--container .create-task-form .form__field--group .supplier-field label, .tasks__create--container .create-task-form .form__field--group .weekend_evening--check-field label, .tasks__create--container .create-task-form .form__field--group .comment-field label {\n      font-size: 13px;\n      color: #00b0eb;\n}\n.tasks__create--container .create-task-form .form__field--group .work_hours-field .form-control, .tasks__create--container .create-task-form .form__field--group .location-field .form-control, .tasks__create--container .create-task-form .form__field--group .supplier-field .form-control, .tasks__create--container .create-task-form .form__field--group .weekend_evening--check-field .form-control, .tasks__create--container .create-task-form .form__field--group .comment-field .form-control {\n      border: 1px solid #00b0eb;\n      color: #00b0eb;\n      border-radius: 2px;\n}\n.tasks__create--container .create-task-form .form__field--group .work_hours-field .form-control::-webkit-input-placeholder, .tasks__create--container .create-task-form .form__field--group .location-field .form-control::-webkit-input-placeholder, .tasks__create--container .create-task-form .form__field--group .supplier-field .form-control::-webkit-input-placeholder, .tasks__create--container .create-task-form .form__field--group .weekend_evening--check-field .form-control::-webkit-input-placeholder, .tasks__create--container .create-task-form .form__field--group .comment-field .form-control::-webkit-input-placeholder {\n        font-size: 13px;\n}\n.tasks__create--container .create-task-form .form__field--group .work_hours-field .form-control:-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .location-field .form-control:-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .supplier-field .form-control:-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .weekend_evening--check-field .form-control:-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .comment-field .form-control:-ms-input-placeholder {\n        font-size: 13px;\n}\n.tasks__create--container .create-task-form .form__field--group .work_hours-field .form-control::-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .location-field .form-control::-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .supplier-field .form-control::-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .weekend_evening--check-field .form-control::-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .comment-field .form-control::-ms-input-placeholder {\n        font-size: 13px;\n}\n.tasks__create--container .create-task-form .form__field--group .work_hours-field .form-control::placeholder, .tasks__create--container .create-task-form .form__field--group .location-field .form-control::placeholder, .tasks__create--container .create-task-form .form__field--group .supplier-field .form-control::placeholder, .tasks__create--container .create-task-form .form__field--group .weekend_evening--check-field .form-control::placeholder, .tasks__create--container .create-task-form .form__field--group .comment-field .form-control::placeholder {\n        font-size: 13px;\n}\n@media screen and (max-width: 400px) {\n.tasks__create--container .create-task-form .form__field--group .week-details .weekday, .tasks__create--container .create-task-form .form__field--group .week-details .week {\n        width: 100%;\n        padding-left: 0px;\n        padding-right: 0px;\n}\n}\n.tasks__create--container .create-task-form .form__field--group .week-details .weekday label, .tasks__create--container .create-task-form .form__field--group .week-details .week label {\n      font-size: 13px;\n      color: #00b0eb;\n}\n.tasks__create--container .create-task-form .form__field--group .week-details .weekday .form-control, .tasks__create--container .create-task-form .form__field--group .week-details .week .form-control {\n      border: 1px solid #00b0eb;\n      color: #00b0eb;\n      border-radius: 2px;\n}\n.tasks__create--container .create-task-form .form__field--group .week-details .weekday .form-control::-webkit-input-placeholder, .tasks__create--container .create-task-form .form__field--group .week-details .week .form-control::-webkit-input-placeholder {\n        font-size: 13px;\n}\n.tasks__create--container .create-task-form .form__field--group .week-details .weekday .form-control:-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .week-details .week .form-control:-ms-input-placeholder {\n        font-size: 13px;\n}\n.tasks__create--container .create-task-form .form__field--group .week-details .weekday .form-control::-ms-input-placeholder, .tasks__create--container .create-task-form .form__field--group .week-details .week .form-control::-ms-input-placeholder {\n        font-size: 13px;\n}\n.tasks__create--container .create-task-form .form__field--group .week-details .weekday .form-control::placeholder, .tasks__create--container .create-task-form .form__field--group .week-details .week .form-control::placeholder {\n        font-size: 13px;\n}\n.tasks__create--container .create-task-form .form__field--group .submit .btn {\n      border: 1px solid #00b0eb;\n      background: transparent;\n      color: #00b0eb;\n      margin-left: 1.5rem;\n}\n.tasks__create--container .create-task-form .form__field--group .submit .btn:hover {\n        background: #00b0eb;\n        color: #fff;\n}\n@media screen and (max-width: 400px) {\n.tasks__create--container .create-task-form .form__field--group .submit .btn {\n          margin-left: 0px;\n          width: 100%;\n}\n}\n", ""]);
 
 // exports
 
@@ -24416,144 +24426,15 @@ exports.push([module.i, "\n.tasks__create--container {\n  -webkit-transition: ea
 Object.defineProperty(exports, "__esModule", {
 	value: true
 });
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+var _Notification = __webpack_require__(452);
+
+var _Notification2 = _interopRequireDefault(_Notification);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = {
+	components: { Notification: _Notification2.default },
 	data: function data() {
 		return {
 			work_hours: '',
@@ -24563,10 +24444,13 @@ exports.default = {
 			supplier: '',
 			weekend: false,
 			comment: '',
-			error: ''
+			error: false,
+			success: false
 		};
 	},
 
+
+	watch: {},
 
 	methods: {
 		validateTask: function validateTask() {
@@ -24574,7 +24458,7 @@ exports.default = {
 
 			if (this.work_hours === '' || this.location === '' || this.supplier === '' || this.work_hours && this.location === '' && this.supplier === '' || this.work_hours && this.location && this.supplier === '') {
 				this.error = true;
-				var count = 2;
+				var count = 5;
 
 				setInterval(function () {
 					count--;
@@ -24622,7 +24506,147 @@ exports.default = {
 			}
 		}
 	}
-};
+}; //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /***/ }),
 /* 226 */
@@ -24632,22 +24656,24 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "inner-create__form--container" }, [
-    _c(
-      "form",
-      {
-        staticClass: "create-task-form",
-        attrs: { action: "#", method: "post" }
-      },
-      [
-        _c("div", { staticClass: "form__field--group" }, [
-          _c(
-            "div",
-            { staticClass: "form-group work_hours-field col-md-1 col-lg-1" },
-            [
-              _c("label", { attrs: { for: "work_hours" } }, [
-                _vm._v("Work hours")
-              ]),
+  return _c(
+    "div",
+    { staticClass: "inner-create__form--container" },
+    [
+      _c("h3", { staticClass: "text-center text-primary" }, [
+        _vm._v("Create a new task")
+      ]),
+      _vm._v(" "),
+      _c(
+        "form",
+        {
+          staticClass: "create-task-form center-block",
+          attrs: { action: "#", method: "post" }
+        },
+        [
+          _c("div", { staticClass: "form__field--group" }, [
+            _c("div", { staticClass: "form-group work_hours-field col-md-5" }, [
+              _vm._m(0),
               _vm._v(" "),
               _c("input", {
                 directives: [
@@ -24659,7 +24685,11 @@ var render = function() {
                   }
                 ],
                 staticClass: "form-control",
-                attrs: { type: "number", name: "work_hours" },
+                attrs: {
+                  type: "number",
+                  name: "work_hours",
+                  placeholder: "Enter your work hours"
+                },
                 domProps: { value: _vm.work_hours },
                 on: {
                   input: function($event) {
@@ -24670,72 +24700,76 @@ var render = function() {
                   }
                 }
               })
-            ]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "week-details col-md-3 col-lg-3" }, [
-            _c("div", { staticClass: "form-group weekday col-md-6 col-lg-6" }, [
-              _c("label", { attrs: { for: "weekday" } }, [_vm._v("Week day")]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.week_day,
-                    expression: "week_day"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: {
-                  type: "text",
-                  name: "week_day",
-                  placeholder: "Enter weekday"
-                },
-                domProps: { value: _vm.week_day },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.week_day = $event.target.value
-                  }
-                }
-              })
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "form-group week col-md-6 col-lg-6" }, [
-              _c("label", { attrs: { for: "week" } }, [_vm._v("Week")]),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.week,
-                    expression: "week"
-                  }
-                ],
-                staticClass: "form-control",
-                attrs: { type: "number", name: "week" },
-                domProps: { value: _vm.week },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
+            _c("div", { staticClass: "week-details col-md-7 col-lg-7" }, [
+              _c(
+                "div",
+                { staticClass: "form-group weekday col-md-6 col-lg-6" },
+                [
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.week_day,
+                        expression: "week_day"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      type: "text",
+                      name: "week_day",
+                      placeholder: "Enter weekday"
+                    },
+                    domProps: { value: _vm.week_day },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.week_day = $event.target.value
+                      }
                     }
-                    _vm.week = $event.target.value
+                  })
+                ]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "form-group week col-md-6 col-lg-6" }, [
+                _vm._m(2),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.week,
+                      expression: "week"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    type: "number",
+                    name: "week",
+                    placeholder: "Enther the week"
+                  },
+                  domProps: { value: _vm.week },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.week = $event.target.value
+                    }
                   }
-                }
-              })
-            ])
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "form-group location-field col-md-2 col-lg-2" },
-            [
-              _c("label", { attrs: { for: "location" } }, [_vm._v("Location")]),
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group location-field" }, [
+              _vm._m(3),
               _vm._v(" "),
               _c("input", {
                 directives: [
@@ -24761,15 +24795,15 @@ var render = function() {
                     _vm.location = $event.target.value
                   }
                 }
-              })
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "form-group supplier-field col-md-2 col-lg-2" },
-            [
-              _c("label", { attrs: { for: "supplier" } }, [_vm._v("Supplier")]),
+              }),
+              _vm._v(" "),
+              _c("small", { staticClass: "field-info text-info" }, [
+                _vm._v("Define the location you are doing this task at")
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group supplier-field" }, [
+              _vm._m(4),
               _vm._v(" "),
               _c("input", {
                 directives: [
@@ -24795,65 +24829,66 @@ var render = function() {
                     _vm.supplier = $event.target.value
                   }
                 }
-              })
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass:
-                "form-group weekend_evening--check-field col-md-1 col-lg-1"
-            },
-            [
-              _c("label", { attrs: { for: "weekeend" } }, [
-                _vm._v("Weekend / Evening")
-              ]),
+              }),
               _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.weekend,
-                    expression: "weekend"
-                  }
-                ],
-                attrs: { type: "checkbox", name: "weekend" },
-                domProps: {
-                  checked: Array.isArray(_vm.weekend)
-                    ? _vm._i(_vm.weekend, null) > -1
-                    : _vm.weekend
-                },
-                on: {
-                  change: function($event) {
-                    var $$a = _vm.weekend,
-                      $$el = $event.target,
-                      $$c = $$el.checked ? true : false
-                    if (Array.isArray($$a)) {
-                      var $$v = null,
-                        $$i = _vm._i($$a, $$v)
-                      if ($$el.checked) {
-                        $$i < 0 && (_vm.weekend = $$a.concat([$$v]))
+              _c("small", { staticClass: "field-info text-info" }, [
+                _vm._v("Define the supplier you are doing a task for")
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "form-group weekend_evening--check-field" },
+              [
+                _c("label", { attrs: { for: "weekeend" } }, [
+                  _vm._v("Weekend / Evening")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.weekend,
+                      expression: "weekend"
+                    }
+                  ],
+                  attrs: { type: "checkbox", name: "weekend" },
+                  domProps: {
+                    checked: Array.isArray(_vm.weekend)
+                      ? _vm._i(_vm.weekend, null) > -1
+                      : _vm.weekend
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$a = _vm.weekend,
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = null,
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 && (_vm.weekend = $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            (_vm.weekend = $$a
+                              .slice(0, $$i)
+                              .concat($$a.slice($$i + 1)))
+                        }
                       } else {
-                        $$i > -1 &&
-                          (_vm.weekend = $$a
-                            .slice(0, $$i)
-                            .concat($$a.slice($$i + 1)))
+                        _vm.weekend = $$c
                       }
-                    } else {
-                      _vm.weekend = $$c
                     }
                   }
-                }
-              })
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticClass: "form-group comment-field col-md-3 col-lg-3" },
-            [
+                }),
+                _vm._v(" "),
+                _c("small", { staticClass: "field-info text-info" }, [
+                  _vm._v("Control if this task is a weekend or a evening task")
+                ])
+              ]
+            ),
+            _vm._v(" "),
+            _c("div", { staticClass: "form-group comment-field" }, [
               _c("label", { attrs: { for: "comment" } }, [_vm._v("Comment")]),
               _vm._v(" "),
               _c("textarea", {
@@ -24882,39 +24917,88 @@ var render = function() {
                     _vm.comment = $event.target.value
                   }
                 }
-              })
-            ]
-          ),
-          _vm._v(" "),
-          _c("div", { staticClass: "row submit" }, [
-            _c("div", { staticClass: "form-group" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "submit-task-btn btn btn-primary",
-                  on: { click: _vm.createTask }
-                },
-                [
-                  _vm._v("\n                            Create "),
-                  _c("i", { staticClass: "fa fa-pencil" })
-                ]
-              )
+              }),
+              _vm._v(" "),
+              _c("small", { staticClass: "field-info text-info" }, [
+                _vm._v("Make a clearer note about what your task is about")
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row submit" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "submit-task-btn btn btn-primary",
+                    on: { click: _vm.createTask }
+                  },
+                  [
+                    _vm._v("\n                            Create "),
+                    _c("i", { staticClass: "fa fa-pencil" })
+                  ]
+                )
+              ])
             ])
           ])
-        ])
-      ]
-    ),
-    _vm._v(" "),
-    _vm.error
-      ? _c("div", { staticClass: "create-task__error" }, [
-          _c("div", { staticClass: "alert alert-danger" }, [
-            _vm._v("\n        \t\t" + _vm._s(_vm.msg) + "\n        \t")
+        ]
+      ),
+      _vm._v(" "),
+      _vm.error
+        ? _c("Notification", { attrs: { status: "critical" } }, [
+            _vm._v("\n            " + _vm._s(_vm.msg) + "\n        ")
           ])
-        ])
-      : _vm._e()
-  ])
+        : _vm._e()
+    ],
+    1
+  )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "work_hours" } }, [
+      _vm._v("Work hours "),
+      _c("span", { staticClass: "text-danger" }, [_vm._v("*")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "weekday" } }, [
+      _vm._v("Week day "),
+      _c("span", { staticClass: "text-danger" }, [_vm._v("*")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "week" } }, [
+      _vm._v("Week "),
+      _c("span", { staticClass: "text-danger" }, [_vm._v("*")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "location" } }, [
+      _vm._v("Location "),
+      _c("span", { staticClass: "text-danger" }, [_vm._v("*")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "supplier" } }, [
+      _vm._v("Supplier "),
+      _c("span", { staticClass: "text-danger" }, [_vm._v("*")])
+    ])
+  }
+]
 render._withStripped = true
 module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
@@ -25162,84 +25246,86 @@ var render = function() {
         )
       : _vm._e(),
     _vm._v(" "),
-    _c("div", { staticClass: "tasks__container container-fluid" }, [
-      _c(
-        "div",
-        { staticClass: "task__container--items" },
-        [
-          _vm._m(0),
-          _vm._v(" "),
-          _vm._l(_vm.tasks, function(task) {
-            return _c("div", { staticClass: "task__container--item" }, [
-              _c("div", { staticClass: "item__inner" }, [
-                _c("div", { staticClass: "row task" }, [
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "task__location col-xs-3 col-sm-2 col-md-2 col-lg-2"
-                    },
-                    [
-                      _vm._v(
-                        "\n                            " +
-                          _vm._s(task.work_hours) +
-                          "\n                        "
+    !_vm.hideTasks === true
+      ? _c("div", { staticClass: "tasks__container container-fluid" }, [
+          _c(
+            "div",
+            { staticClass: "task__container--items" },
+            [
+              _vm._m(0),
+              _vm._v(" "),
+              _vm._l(_vm.tasks, function(task) {
+                return _c("div", { staticClass: "task__container--item" }, [
+                  _c("div", { staticClass: "item__inner" }, [
+                    _c("div", { staticClass: "row task" }, [
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "task__location col-xs-3 col-sm-2 col-md-2 col-lg-2"
+                        },
+                        [
+                          _vm._v(
+                            "\n                            " +
+                              _vm._s(task.work_hours) +
+                              "\n                        "
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "task__weekday col-xs-3 col-sm-2 col-md-2 col-lg-2"
+                        },
+                        [
+                          _vm._v(
+                            "\n                            " +
+                              _vm._s(task.week_day) +
+                              "\n                        "
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "task__location col-xs-3 col-sm-2 col-md-3 col-lg-3"
+                        },
+                        [
+                          _vm._v(
+                            "\n                            " +
+                              _vm._s(task.location) +
+                              "\n                        "
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        {
+                          staticClass:
+                            "task__supplier col-xs-3 col-sm-2 col-md-2 col-lg-2"
+                        },
+                        [
+                          _vm._v(
+                            "\n                            " +
+                              _vm._s(task.supplier) +
+                              "\n                        "
+                          )
+                        ]
                       )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "task__weekday col-xs-3 col-sm-2 col-md-2 col-lg-2"
-                    },
-                    [
-                      _vm._v(
-                        "\n                            " +
-                          _vm._s(task.week_day) +
-                          "\n                        "
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "task__location col-xs-3 col-sm-2 col-md-3 col-lg-3"
-                    },
-                    [
-                      _vm._v(
-                        "\n                            " +
-                          _vm._s(task.location) +
-                          "\n                        "
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    {
-                      staticClass:
-                        "task__supplier col-xs-3 col-sm-2 col-md-2 col-lg-2"
-                    },
-                    [
-                      _vm._v(
-                        "\n                            " +
-                          _vm._s(task.supplier) +
-                          "\n                        "
-                      )
-                    ]
-                  )
+                    ])
+                  ])
                 ])
-              ])
-            ])
-          })
-        ],
-        2
-      )
-    ])
+              })
+            ],
+            2
+          )
+        ])
+      : _vm._e()
   ])
 }
 var staticRenderFns = [
@@ -25397,7 +25483,7 @@ try {
  * CSRF token as a header based on the value of the "XSRF" token cookie.
  */
 
-window.axios = __webpack_require__(51);
+window.axios = __webpack_require__(54);
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -55607,7 +55693,7 @@ if (!USE_NATIVE) {
   $GOPD.f = $getOwnPropertyDescriptor;
   $DP.f = $defineProperty;
   __webpack_require__(41).f = gOPNExt.f = $getOwnPropertyNames;
-  __webpack_require__(53).f = $propertyIsEnumerable;
+  __webpack_require__(52).f = $propertyIsEnumerable;
   __webpack_require__(57).f = $getOwnPropertySymbols;
 
   if (DESCRIPTORS && !__webpack_require__(37)) {
@@ -55701,7 +55787,7 @@ setToStringTag(global.JSON, 'JSON', true);
 // all enumerable object keys, includes symbols
 var getKeys = __webpack_require__(38);
 var gOPS = __webpack_require__(57);
-var pIE = __webpack_require__(53);
+var pIE = __webpack_require__(52);
 module.exports = function (it) {
   var result = getKeys(it);
   var getSymbols = gOPS.f;
@@ -55930,7 +56016,7 @@ $export($export.S, 'Object', { setPrototypeOf: __webpack_require__(79).set });
 "use strict";
 
 // 19.1.3.6 Object.prototype.toString()
-var classof = __webpack_require__(54);
+var classof = __webpack_require__(53);
 var test = {};
 test[__webpack_require__(5)('toStringTag')] = 'z';
 if (test + '' != '[object z]') {
@@ -57204,7 +57290,7 @@ var toIObject = __webpack_require__(17);
 var arrayJoin = [].join;
 
 // fallback for not array-like strings
-$export($export.P + $export.F * (__webpack_require__(52) != Object || !__webpack_require__(22)(arrayJoin)), 'Array', {
+$export($export.P + $export.F * (__webpack_require__(51) != Object || !__webpack_require__(22)(arrayJoin)), 'Array', {
   join: function join(separator) {
     return arrayJoin.call(toIObject(this), separator === undefined ? ',' : separator);
   }
@@ -57759,7 +57845,7 @@ __webpack_require__(62)('split', 2, function (defined, SPLIT, $split) {
 var LIBRARY = __webpack_require__(37);
 var global = __webpack_require__(2);
 var ctx = __webpack_require__(20);
-var classof = __webpack_require__(54);
+var classof = __webpack_require__(53);
 var $export = __webpack_require__(0);
 var isObject = __webpack_require__(4);
 var aFunction = __webpack_require__(11);
@@ -60529,6 +60615,159 @@ module.exports = function (regExp, replace) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 444 */,
+/* 445 */,
+/* 446 */,
+/* 447 */,
+/* 448 */,
+/* 449 */,
+/* 450 */,
+/* 451 */,
+/* 452 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(453)
+}
+var normalizeComponent = __webpack_require__(10)
+/* script */
+var __vue_script__ = __webpack_require__(455)
+/* template */
+var __vue_template__ = __webpack_require__(456)
+/* template functional */
+  var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/app/wrappers/Notification.vue"
+if (Component.esModule && Object.keys(Component.esModule).some(function (key) {  return key !== "default" && key.substr(0, 2) !== "__"})) {  console.error("named exports are not supported in *.vue files.")}
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-15907376", Component.options)
+  } else {
+    hotAPI.reload("data-v-15907376", Component.options)
+' + '  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 453 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(454);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(24)("58197f40", content, false);
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-15907376\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./Notification.vue", function() {
+     var newContent = require("!!../../../../../../node_modules/css-loader/index.js!../../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-15907376\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../../node_modules/sass-loader/lib/loader.js!../../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0&bustCache!./Notification.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 454 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(23)(undefined);
+// imports
+
+
+// module
+exports.push([module.i, "\n.notification__container {\n  text-align: center;\n  position: fixed;\n  bottom: 0px;\n  right: 0rem;\n  border-radius: 5px;\n  width: 100%;\n}\n.notification__container .inner {\n    background: #00b0eb;\n    color: #fff;\n    padding: 2rem;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 455 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+//
+//
+//
+//
+//
+//
+//
+//
+
+exports.default = {
+	props: ['status'],
+
+	watch: {
+		status: function status() {
+			if (this.$props.status === "critical") {
+				document.querySelector(".notification__container > .inner").style.backgroundColor = "#eb2f06";
+			}
+		}
+	}
+};
+
+/***/ }),
+/* 456 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "notification__container" }, [
+    _c("div", { staticClass: "inner" }, [_vm._t("default")], 2)
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-15907376", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

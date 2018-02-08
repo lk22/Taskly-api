@@ -164,6 +164,9 @@ class TaskController extends Controller
      */
     public function create(Request $request)
     {
+
+        // return $request->all();
+
         // validate request
         API::validate($request, [
             'work_hours'    => 'required',
@@ -181,7 +184,7 @@ class TaskController extends Controller
             'week'          => $request->get('week'),
             'user_id'       => $this->authenticated->id,
             'supplier'      => $request->get('supplier'),
-            'work_hours'    => $request->get('work_hours') . ($request->get('work_hours') === '1') ? 'time' : 'timer',
+            'work_hours'    => $request->get('work_hours') . ' timer'
         ]);
 
         // if the task is stored successfully throw back response

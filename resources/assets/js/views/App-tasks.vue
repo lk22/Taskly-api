@@ -15,7 +15,7 @@
             <CreateTaskForm></CreateTaskForm>        
         </div>
         <!-- users tasks list -->
-        <div class="tasks__container container-fluid">
+        <div class="tasks__container container-fluid" v-if="!hideTasks === true">
             <div class="task__container--items" >
                 <div class="item__head">
                     <div class="row">
@@ -62,16 +62,17 @@
 </template>
 
 <script>
-	import Sidebar from './../components/app/Sidebar'
-    import Header from './../components/app/Header'
-    import CreateTaskForm from './../components/app/Create-task-form'
-    import TaskList from './../components/app/TaskList'
+	import Sidebar          from './../components/app/Sidebar'
+    import Header           from './../components/app/Header'
+    import CreateTaskForm   from './../components/app/Create-task-form'
+    import TaskList         from './../components/app/TaskList'
 
     export default {
     	components: { Sidebar, Header, CreateTaskForm, TaskList},
         layout: 'app',
         data() {
             return {
+                hideTasks:              false,
                 creating:               false,
                 locations:              [],     // selecting all locations from database
                 completed:              false   // if task is completed
@@ -82,6 +83,11 @@
             toggleCreate(e) {
                 e.preventDefault()
                 this.creating = !this.creating
+                if(this.creating === true){
+                    this.hideTasks = true
+                } else {
+                    this.hideTasks = false
+                }
             }
         },
 
@@ -103,7 +109,11 @@
         height: auto;
         margin-left: -45px;
         margin-top:2rem;
-        
+        -webkit-transition: ease-in-out 0.2s all; 
+        -moz-transition: ease-in-out 0.2s all; 
+        -ms-transition: ease-in-out 0.2s all; 
+        -o-transition: ease-in-out 0.2s all; 
+        transition: ease-in-out 0.2s all; 
         
         @media screen and(max-width: 400px){
             margin:0px;
@@ -131,6 +141,13 @@
                     padding: 1.5rem;
                     color: #fff;
                     height:50px;
+                    border-radius:2px;
+                    
+                    &:hover{
+                        background: #fff;
+                        color: #00b0eb;
+                        border: 1px solid #00b0eb;
+                    }
                     
                     @media screen and(max-width: 400px) {
                         font-size: 11px;
