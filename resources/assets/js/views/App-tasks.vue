@@ -2,8 +2,8 @@
     <div id="app-tasks">
         <div class="row">
             <Header page="tasks">
-                <button 
-                    class="create-task-btn btn btn-primary" 
+                <button
+                    class="create-task-btn btn btn-primary"
                     @click="toggleCreate"
                 >
                     <i class="fa fa-edit"></i>
@@ -12,7 +12,7 @@
         </div>
         <div class="tasks__create--container" v-if="creating">
             <!-- creating task form -->
-            <CreateTaskForm></CreateTaskForm>        
+            <CreateTaskForm></CreateTaskForm>
         </div>
         <!-- users tasks list -->
         <div class="tasks__container container-fluid" v-if="!hideTasks === true">
@@ -65,10 +65,9 @@
 	import Sidebar          from './../components/app/Sidebar'
     import Header           from './../components/app/Header'
     import CreateTaskForm   from './../components/app/Create-task-form'
-    import TaskList         from './../components/app/TaskList'
 
     export default {
-    	components: { Sidebar, Header, CreateTaskForm, TaskList},
+    	components: { Sidebar, Header, CreateTaskForm},
         layout: 'app',
         data() {
             return {
@@ -80,7 +79,7 @@
         },
 
         methods: {
-            toggleCreate(e) {
+         toggleCreate(e) {
                 e.preventDefault()
                 this.creating = !this.creating
                 if(this.creating === true){
@@ -92,7 +91,7 @@
         },
 
         beforeMount() {
-            this.$store.dispatch('task/getTasks') 
+            this.$store.dispatch('task/getTasks')
         },
 
         computed: {
@@ -109,19 +108,19 @@
         height: auto;
         margin-left: -45px;
         margin-top:2rem;
-        -webkit-transition: ease-in-out 0.2s all; 
-        -moz-transition: ease-in-out 0.2s all; 
-        -ms-transition: ease-in-out 0.2s all; 
-        -o-transition: ease-in-out 0.2s all; 
-        transition: ease-in-out 0.2s all; 
-        
+        -webkit-transition: ease-in-out 0.2s all;
+        -moz-transition: ease-in-out 0.2s all;
+        -ms-transition: ease-in-out 0.2s all;
+        -o-transition: ease-in-out 0.2s all;
+        transition: ease-in-out 0.2s all;
+
         @media screen and(max-width: 400px){
             margin:0px;
             width: 100%;
             padding-left:0px;
             padding-right:0px;
         }
-        
+
         .task__container--items{
 
             .item__head{
@@ -142,13 +141,13 @@
                     color: #fff;
                     height:50px;
                     border-radius:2px;
-                    
+
                     &:hover{
                         background: #fff;
                         color: #00b0eb;
                         border: 1px solid #00b0eb;
                     }
-                    
+
                     @media screen and(max-width: 400px) {
                         font-size: 11px;
                     }
@@ -156,7 +155,7 @@
             }
         }
     }
-    
+
 
     // desktop task create form
     .tasks__create--container{
