@@ -27,7 +27,7 @@ use Illuminate\Http\Request;
 	 * users API Endpoints
 	 */
 
-		// all users 
+		// all users
 		Route::get('/user', function (Request $request) {
 	    	return $request->user();
 		});
@@ -38,6 +38,13 @@ use Illuminate\Http\Request;
 		Route::get('/auth')
 			 ->name('user.auth.api')
 			 ->uses('UserController@auth');
+
+		/**
+		 * Update user information
+		 */
+		Route::post('/user/{slug}/settings/update-user-information')
+			 ->name('user.settings.set-user-information')
+			 ->uses('UserController@updateUserInformation');
 
 	/**
 	 * Tasks API Endpoints
@@ -78,7 +85,7 @@ use Illuminate\Http\Request;
 			 ->name('task.uncheckAll.api')
 			 ->uses('TaskController@uncheckALlTasks');
 
-		// set new comment 
+		// set new comment
 		Route::patch('/task/{slug}/set-comment')
 			 ->name('task.set-comment.api')
 			 ->uses('TaskController@setComment');
