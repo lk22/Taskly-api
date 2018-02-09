@@ -46,7 +46,7 @@ class API
     /**
     * |------------------------------------------------------
     * |
-    * | Throw action success response 
+    * | Throw action success response
     * |
     * |------------------------------------------------------
     */
@@ -79,11 +79,11 @@ class API
     /**
     * |------------------------------------------------------
     * |
-    * | throw an 422 exception 
+    * | throw an 422 exception
     * |
     * |------------------------------------------------------
     */
-    public static function throwActionFailedException($exception)
+    public static function throwActionFailedException($action)
     {
         return Response::json([
             'response' => 'Action: ' . $exception . ' failed.'

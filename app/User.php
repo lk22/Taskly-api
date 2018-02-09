@@ -2,6 +2,8 @@
 
 namespace Taskly;
 
+use \Auth;
+
 use Laravel\Passport\HasApiTokens;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -14,32 +16,33 @@ class User extends Authenticatable
     use Notifiable, HasApiTokens;
 
     /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
+     * |-------------------------------------------------------
+     * |   mass assignable field to be assigned in new models
+     * |-------------------------------------------------------
      */
     protected $fillable = [
-        'name', 
-        'email', 
-        'password', 
-        'firstname', 
-        'lastname', 
-        'slug', 
+        'name',
+        'email',
+        'password',
+        'firstname',
+        'lastname',
+        'slug',
         'is_admin',
     ];
 
     /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
+     * |---------------------------------------------------
+     * |   Hide the fields from the request
+     * |---------------------------------------------------
      */
     protected $hidden = [
         'password', 'remember_token',
     ];
 
     /**
-     * defining columns to be casted as specific data type
-     * @var [type]
+     * |---------------------------------------------------
+     * |  specific columns to cast to specific data type
+     * |---------------------------------------------------
      */
     protected $casts = [
         'is_admin' => 'boolean',
@@ -47,8 +50,9 @@ class User extends Authenticatable
     ];
 
     /**
-     * user has many tasklists
-     * @return [type] [description]
+     * |---------------------------------------------------
+     * |  user has many tasks
+     * |---------------------------------------------------
      */
     public function tasks()
     {
@@ -56,11 +60,21 @@ class User extends Authenticatable
     }
 
     /**
-     * user has many companies
-     * @return [type] [description]
+     * |---------------------------------------------------
+     * |   user has many companies
+     * |---------------------------------------------------
      */
     public function companies()
     {
         return $this->hasMany(Company::class);
+    }
+
+    /**
+     * |---------------------------------------------------
+     * |   Get the authenticated user with specific guard
+     * |---------------------------------------------------
+     */
+    public function getAuthenticatedWithGuard($guard) {
+        return Auth::guard($guard);
     }
 }

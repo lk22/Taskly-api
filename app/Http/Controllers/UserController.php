@@ -27,6 +27,35 @@ class UserController extends Controller
     }
 
     /**
+     * |------------------------------------------------------------------------
+     * |    update Settings
+     * |------------------------------------------------------------------------
+     */
+    public function updateUserInformation(Request $request, $slug)
+    {
+        // validate the incomming request
+        API::validate($request, [
+            'password'  => '',
+            'email'     => '',
+        ]);
+
+        $auth = $this->user->getAuthenticatedWithGuard('api');
+
+        $user = $this->user->whereSlug($auth->slug)->firstOrFail();
+
+        $updateUSer = $user->update([
+            'email'     => $request->get('email'),
+            'password'  => $request->get('password')
+        ]);
+
+        if(!$updateUser) {
+            return API::throwActionFailedException('Update user info');
+        }
+
+        return API::throwActionSuccessResponse('Your user information is updated successfully');
+    }
+
+    /**
      * |--------------------------------------------------------------------
      * |    giver user access to API
      * |    @param  Request $request [description]
@@ -99,7 +128,7 @@ class UserController extends Controller
             $profile = fractal()->item($user, new UserTransformer());
 
             /**
-             * Define Success response to get in return 
+             * Define Success response to get in return
              * @var [type]
              */
             $successResponse = [
@@ -112,7 +141,7 @@ class UserController extends Controller
                   ]
                 ],
                 'user' => $profile
-            ];       
+            ];
 
             /**
              * give the success response bace in return

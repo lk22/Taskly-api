@@ -61,7 +61,7 @@ class TaskController extends Controller
      */
     public function task($slug)
     {
-        // fetch single task 
+        // fetch single task
         $task = $this->task->whereSlug($slug)
                 ->orWhere('user_id', $this->authenticated->id)
                 ->firstOrFail();
@@ -165,8 +165,6 @@ class TaskController extends Controller
     public function create(Request $request)
     {
 
-        // return $request->all();
-
         // validate request
         API::validate($request, [
             'work_hours'    => 'required',
@@ -192,7 +190,7 @@ class TaskController extends Controller
             return API::throwResourceCreatedResponse($task->slug);
         }
 
-        // if the request has comment in param bag save the comment 
+        // if the request has comment in param bag save the comment
         if( $request->get('comment') ) {
             $comment = new Comment(['body' => $request->get('comment')]);
 
