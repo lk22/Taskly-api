@@ -36,7 +36,8 @@ class TaskTransformer extends TransformerAbstract
             'week'              => (int)        $task->week,
             'start_at'          => (string)     $task->start_at,
             'end_at'            => (string)     $task->end_at,
-            'comments_counts'   => (int)        count($task->comments)
+            'comments_counts'   => (int)        count($task->comments),
+            'is_weekend'        => (int)        $task->is_weekend
         ];
     }
 
