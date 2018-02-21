@@ -13282,19 +13282,19 @@ var _vuexPersistedstate = __webpack_require__(171);
 
 var _vuexPersistedstate2 = _interopRequireDefault(_vuexPersistedstate);
 
-var _vuexSuperstore = __webpack_require__(459);
+var _vuexSuperstore = __webpack_require__(172);
 
 var _vuexSuperstore2 = _interopRequireDefault(_vuexSuperstore);
 
-var _jsCookie = __webpack_require__(172);
+var _jsCookie = __webpack_require__(173);
 
 var Cookies = _interopRequireWildcard(_jsCookie);
 
-var _auth = __webpack_require__(173);
+var _auth = __webpack_require__(174);
 
 var _auth2 = _interopRequireDefault(_auth);
 
-var _task = __webpack_require__(174);
+var _task = __webpack_require__(175);
 
 var _task2 = _interopRequireDefault(_task);
 
@@ -18296,6 +18296,73 @@ var index = function(options, storage, key) {
 
 /***/ }),
 /* 172 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+const storage = window.localStorage
+
+function load (key) {
+  return JSON.parse(storage.getItem(key) || '{}')
+}
+
+/**
+ * Vuex plugin to hydrate, sync and clear state to/from local storage
+ *
+ * @param   {string}  key   An optional local storage item name
+ */
+function Superstore (key = 'vuex') {
+
+  Object.assign(this, {
+
+    /**
+     * Load data from local storage and hydrate module states
+     *
+     * @param   {Object}  modules   The hash of module definitions
+     * @returns {Object}            The updated modules
+     */
+    load (modules) {
+      const states = load(key)
+      Object
+        .keys(modules)
+        .forEach(name => {
+          const module = modules[name]
+          let state = states[name]
+          if (module.state && state) {
+            if (module.hydrate instanceof Function) {
+              module.hydrate(state)
+            }
+            Object.assign(module.state, state)
+          }
+        })
+      return modules
+    },
+
+    /**
+     * Vuex mutation handler; assign to Store plugins array
+     *
+     * @param   {Object}  store     The store to save to local storage
+     */
+    save (store) {
+      store.subscribe((mutation, state) => {
+        storage.setItem(key, JSON.stringify(state))
+      })
+    },
+
+    /**
+     * Clear stored data
+     */
+    clear () {
+      storage.removeItem(key)
+    },
+  })
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Superstore);
+
+
+/***/ }),
+/* 173 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -18470,7 +18537,7 @@ var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 
 /***/ }),
-/* 173 */
+/* 174 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18624,7 +18691,7 @@ var auth = {
 exports.default = auth;
 
 /***/ }),
-/* 174 */
+/* 175 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18638,19 +18705,19 @@ var _types = __webpack_require__(72);
 
 var _types2 = _interopRequireDefault(_types);
 
-var _actions = __webpack_require__(175);
+var _actions = __webpack_require__(176);
 
 var _actions2 = _interopRequireDefault(_actions);
 
-var _mutations = __webpack_require__(176);
+var _mutations = __webpack_require__(177);
 
 var _mutations2 = _interopRequireDefault(_mutations);
 
-var _getters = __webpack_require__(177);
+var _getters = __webpack_require__(178);
 
 var _getters2 = _interopRequireDefault(_getters);
 
-var _state = __webpack_require__(178);
+var _state = __webpack_require__(179);
 
 var _state2 = _interopRequireDefault(_state);
 
@@ -18668,7 +18735,7 @@ var task = {
 exports.default = task;
 
 /***/ }),
-/* 175 */
+/* 176 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18838,7 +18905,7 @@ var actions = {
 exports.default = actions;
 
 /***/ }),
-/* 176 */
+/* 177 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18898,7 +18965,7 @@ var mutations = (_mutations = {}, _defineProperty(_mutations, _types2.default.GE
 exports.default = mutations;
 
 /***/ }),
-/* 177 */
+/* 178 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18919,7 +18986,7 @@ var getters = {
 exports.default = getters;
 
 /***/ }),
-/* 178 */
+/* 179 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -18937,7 +19004,6 @@ var state = {
 exports.default = state;
 
 /***/ }),
-/* 179 */,
 /* 180 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -60486,86 +60552,6 @@ module.exports = function (regExp, replace) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
-
-/***/ }),
-/* 446 */,
-/* 447 */,
-/* 448 */,
-/* 449 */,
-/* 450 */,
-/* 451 */,
-/* 452 */,
-/* 453 */,
-/* 454 */,
-/* 455 */,
-/* 456 */,
-/* 457 */,
-/* 458 */,
-/* 459 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-const storage = window.localStorage
-
-function load (key) {
-  return JSON.parse(storage.getItem(key) || '{}')
-}
-
-/**
- * Vuex plugin to hydrate, sync and clear state to/from local storage
- *
- * @param   {string}  key   An optional local storage item name
- */
-function Superstore (key = 'vuex') {
-
-  Object.assign(this, {
-
-    /**
-     * Load data from local storage and hydrate module states
-     *
-     * @param   {Object}  modules   The hash of module definitions
-     * @returns {Object}            The updated modules
-     */
-    load (modules) {
-      const states = load(key)
-      Object
-        .keys(modules)
-        .forEach(name => {
-          const module = modules[name]
-          let state = states[name]
-          if (module.state && state) {
-            if (module.hydrate instanceof Function) {
-              module.hydrate(state)
-            }
-            Object.assign(module.state, state)
-          }
-        })
-      return modules
-    },
-
-    /**
-     * Vuex mutation handler; assign to Store plugins array
-     *
-     * @param   {Object}  store     The store to save to local storage
-     */
-    save (store) {
-      store.subscribe((mutation, state) => {
-        storage.setItem(key, JSON.stringify(state))
-      })
-    },
-
-    /**
-     * Clear stored data
-     */
-    clear () {
-      storage.removeItem(key)
-    },
-  })
-}
-
-/* harmony default export */ __webpack_exports__["default"] = (Superstore);
-
 
 /***/ })
 /******/ ]);

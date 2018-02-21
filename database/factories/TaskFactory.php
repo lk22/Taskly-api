@@ -28,18 +28,20 @@ $factory->define(\Taskly\Task::class, function (Faker $faker) {
             'Medium priority',
             'High priority'
         ]),
-        'work_hours' => $faker->randomElement([
-            '1 time',
-            '2 timer',
-            '3 timer',
-            '4 timer',
-            '5 timer',
-            '6 timer',
-            '7 timer',
-            '8 timer',
-            '9 timer',
-            '10 timer'
-        ]),
+        // 'work_hours' => $faker->randomElement([
+        //     '1 time',
+        //     '2 timer',
+        //     '3 timer',
+        //     '4 timer',
+        //     '5 timer',
+        //     '6 timer',
+        //     '7 timer',
+        //     '8 timer',
+        //     '9 timer',
+        //     '10 timer'
+        // ]),
+
+        'work_hours' => str_plural('time', rand(1, 10)),
         'week_day' => $faker->randomElement([
             'Monday',
             'Tuesday',

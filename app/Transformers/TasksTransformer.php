@@ -21,7 +21,9 @@ class TasksTransformer extends TransformerAbstract
             'name'          => (string) $task->name,
             'slug'          => (string) $task->slug,
             'is_checked'    => (boolean) $task->is_checked,
-            'work_hours'    => (string) $task->work_hours,
+            // 'work_hours'    => (string)  $task->work_hours,
+            // convert to a plural string if the work hours is more than 1
+            'work_hours'    => (string)  str_plural('time', $task->work_hours),
             'priority'      => (string) $task->priority,
             'start_at'      => (string) $task->start_at,
             'end_at'        => (string) $task->end_at,
