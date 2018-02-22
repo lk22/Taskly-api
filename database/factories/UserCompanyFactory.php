@@ -15,7 +15,7 @@ $factory->define(Taskly\Company::class, function (Faker $faker) {
         	'A/S',
         ]),
         'company_address' => $faker->address,
-        'company_registration_nr' => '',
+        'company_registration_nr' => str_random(8),
         'company_phone_nr' => $faker->phoneNumber,
         // 'company_bank_account_nr' => $faker->creditCardDetails([
         // 	$faker->creditCardType,

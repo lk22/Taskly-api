@@ -214,9 +214,10 @@ class UserController extends Controller
 
         if($user->has_company = true) {
             Company::create([
-                'company_name'      => $request->get('company_name'),
-                'company_type'      => $request->get('company_type'),
-                'company_address'   => $request->get('company_address')
+                'company_name'          => $request->get('company_name'),
+                'company_type'          => $request->get('company_type'),
+                'company_address'       => $request->get('company_address'),
+                'company_registration'  => $request->get('company_registration')
             ]);
         }
 
