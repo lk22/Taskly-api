@@ -99,3 +99,11 @@ use Illuminate\Http\Request;
 		Route::delete('/tasks/{slug}/delete-task')
 			 ->name('task.delete.api')
 			 ->uses('TaskController@delete');
+
+	/**
+	 * Searching API Endpoints
+	 */
+	
+		Route::post('/search/tasks/?searchQuery={query}')
+			 ->name('search.string.get')
+			 ->uses('SearchController@filter');
