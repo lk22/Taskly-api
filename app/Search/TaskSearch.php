@@ -55,7 +55,6 @@ class TaskSearch
 		return return __NAMESPACE__ . '\\Filters\\' . str_replace(' ', '', ucwords(str_replace('_', ' ' $name)));
 	}
 
-
 	/**
      * |-------------------------------------------
      * |
@@ -79,7 +78,5 @@ class TaskSearch
 	{
 		return $query->get();
 	}
-
-	
 
 }
