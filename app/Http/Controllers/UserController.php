@@ -119,7 +119,8 @@ class UserController extends Controller
              * get user
              * @var [type]
              */
-            $user = $this->user->whereEmail($request->input('username'))->firstOrFail();
+            $user = $this->user->whereEmail($request->input('username'))
+                               ->firstOrFail();
 
             /**
              * transform the user
@@ -166,8 +167,6 @@ class UserController extends Controller
     public function register(Request $request)
     {
 
-        // dd($request->all());
-
         /**
          * Validating request input
          * @var [type]
@@ -186,6 +185,7 @@ class UserController extends Controller
                 'company_name'              => 'required',
                 'company_type'              => 'required',
                 'company_address'           => '',
+                'company_registration_nr'   => 'required'
             ]);
         }
 
@@ -214,6 +214,7 @@ class UserController extends Controller
 
         if($user->has_company = true) {
             Company::create([
+                'user_id'               => $user->id, 
                 'company_name'          => $request->get('company_name'),
                 'company_type'          => $request->get('company_type'),
                 'company_address'       => $request->get('company_address'),
@@ -237,7 +238,10 @@ class UserController extends Controller
         ]);
 
         // defining response
-        $jsonResponse = json_decode((string) $response->getBody(), true);
+        $jsonResponse = json_decode(
+            (string) $response->getBody(),
+            true
+        );
 
         // fetching user
         $profile = fractal()->item($user, new UserTransformer());
