@@ -104,6 +104,6 @@ use Illuminate\Http\Request;
 	 * Searching API Endpoints
 	 */
 	
-		Route::post('/search/tasks/?searchQuery={query}')
+		Route::post('/search')
 			 ->name('search.string.get')
 			 ->uses('SearchController@filter');
