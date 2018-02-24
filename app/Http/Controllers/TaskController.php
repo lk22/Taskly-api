@@ -64,7 +64,7 @@ class TaskController extends Controller
         // fetch single task
         $task = $this->task->whereSlug($slug)
                 ->orWhere('user_id', $this->authenticated->id)
-                ->firstOrFail();
+                ->comments()->firstOrFail();
 
         // if the task not is found
         if (!count($task) > 0) {
